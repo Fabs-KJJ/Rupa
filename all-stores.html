@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>All Stores — Rupa's Mall · Eldoret</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@600;700&family=Bebas+Neue&family=Josefin+Sans:wght@200;300;400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FFFFFF;
+    --cream-warm: #FAF4E8;
+    --cream-dark: #F0F0F0;
+    --gold: #D8B045;
+    --gold-light: #E5C55A;
+    --gold-pale: #F2E4A8;
+    --brown: #281d02;
+    --brown-light: #4d3a14;
+    --text-muted: #808080;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  html { scroll-behavior: smooth; }
+  body { background: #281d02; font-family: 'Montserrat', sans-serif; color: var(--brown); overflow-x: hidden; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cream-dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+  .page { background: var(--cream); border-radius: 24px; margin: 16px auto; max-width: 1600px; overflow: hidden; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
+
+  /* ── Staggered Menu ── */
+  .staggered-menu-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 200; pointer-events: none; overflow: hidden; --sm-accent: var(--gold); }
+  .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 24px 40px; pointer-events: none; z-index: 220; }
+  .staggered-menu-header > * { pointer-events: auto; }
+  .sm-logo { display: flex; align-items: center; user-select: none; }
+  .sm-logo-img { display: block; height: 40px; width: auto; object-fit: contain; }
+  .sm-toggle { position: relative; display: inline-flex; align-items: center; gap: 14px; background: var(--gold); border: none; cursor: pointer; color: var(--brown); font-weight: 700; line-height: 1; padding: 8px 18px 8px 14px; border-radius: 100px; font-family: 'Montserrat', sans-serif; font-size: 16px; letter-spacing: 0.02em; transition: background 200ms, color 200ms; }
+  .sm-toggle:hover { background: var(--gold-light); color: var(--brown); }
+  .sm-toggle-textWrap { position: relative; display: inline-block; height: 1em; overflow: hidden; white-space: nowrap; }
+  .sm-toggle-textInner { display: flex; flex-direction: column; line-height: 1; }
+  .sm-toggle-line { display: block; height: 1em; line-height: 1; }
+  .sm-icon { position: relative; width: 20px; height: 20px; flex: 0 0 20px; display: inline-flex; align-items: center; justify-content: center; will-change: transform; }
+  .sm-icon-line { position: absolute; left: 50%; top: 50%; width: 100%; height: 3px; background: currentColor; border-radius: 3px; transform: translate(-50%,-50%); will-change: transform; }
+  .staggered-menu-panel { position: absolute; top: 0; right: 0; width: clamp(280px, 38vw, 440px); height: 100%; background: #FAF4E8; display: flex; flex-direction: column; padding: 110px 48px 40px; overflow-y: auto; z-index: 210; pointer-events: auto; opacity: 0; }
+  .sm-prelayers { position: absolute; top: 0; right: 0; bottom: 0; width: clamp(280px, 38vw, 440px); pointer-events: none; z-index: 205; opacity: 0; }
+  .sm-prelayer { position: absolute; top: 0; right: 0; height: 100%; width: 100%; transform: translateX(0); opacity: 0; }
+  .sm-panel-inner { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+  .sm-panel-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .sm-panel-itemWrap { position: relative; overflow: hidden; line-height: 1; }
+  .sm-panel-item { position: relative; color: var(--brown); font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: clamp(40px, 5vw, 64px); cursor: pointer; line-height: 1; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.25s; display: inline-block; text-decoration: none; padding-right: 1.4em; }
+  .sm-panel-itemLabel { display: inline-block; will-change: transform; transform-origin: 50% 100%; }
+  .sm-panel-item:hover { color: var(--sm-accent); }
+  .sm-panel-list[data-numbering] { counter-reset: smItem; }
+  .sm-panel-list[data-numbering] .sm-panel-item::after { counter-increment: smItem; content: counter(smItem, decimal-leading-zero); position: absolute; top: 0.4em; right: 0.4em; font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 500; color: var(--sm-accent); letter-spacing: 0; pointer-events: none; user-select: none; opacity: var(--sm-num-opacity, 0); }
+  .sm-socials { margin-top: auto; padding-top: 32px; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(40,29,2,0.12); }
+  .sm-socials-title { margin: 0; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sm-accent); }
+  .sm-socials-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .sm-socials-link { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 500; color: var(--brown); text-decoration: none; transition: color 0.3s ease, opacity 0.3s ease; }
+  .sm-socials-list:hover .sm-socials-link:not(:hover) { opacity: 0.35; }
+  .sm-socials-link:hover { color: var(--sm-accent); }
+  @media (max-width: 768px) {
+    .staggered-menu-header { padding: 16px 24px; }
+    .sm-logo-img { height: 34px; }
+    .staggered-menu-panel { width: 100%; padding: 100px 32px 32px; }
+    .sm-prelayers { width: 100%; }
+    .sm-panel-item { font-size: clamp(36px, 9vw, 56px); }
+  }
+  /* ── Store hours ── */
+  .store-hours { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-top: 4px; }
+
+  /* ── HERO ── */
+  .hero { background: var(--brown); padding: 160px 60px 0; overflow: hidden; position: relative; }
+  .hero-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 40px; padding-bottom: 64px; }
+  .hero-left {}
+  .hero-eyebrow { font-family: 'Dancing Script', cursive; font-size: clamp(30px, 4vw, 52px); color: rgba(216,176,69,0.6); display: block; margin-bottom: 8px; }
+  .hero-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 900; font-size: clamp(80px, 17vw, 220px); line-height: 0.88; color: var(--gold); letter-spacing: -0.02em; }
+  .hero-sub { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 28px; line-height: 2; }
+  .hero-right { text-align: right; padding-bottom: 12px; }
+  .hero-stat { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: clamp(56px, 8vw, 110px); color: var(--gold); line-height: 0.9; }
+  .hero-stat-label { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.35); text-transform: uppercase; margin-top: 10px; }
+  .hero-wave { line-height: 0; margin-top: -2px; background: #FAF4E8; position: relative; z-index: 5; }
+  .hero-wave svg { display: block; width: 100%; }
+
+  /* ── FILTER BAR ── */
+  .filter-bar { position: sticky; top: 0; z-index: 50; background: rgba(250,244,232,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(200,131,10,0.15); }
+  .filter-inner { max-width: 1400px; margin: 0 auto; padding: 0 60px; display: flex; align-items: center; gap: 6px; padding-top: 14px; padding-bottom: 14px; overflow-x: auto; scrollbar-width: none; }
+  .filter-inner::-webkit-scrollbar { display: none; }
+  .filter-btn { font-family: 'Josefin Sans', sans-serif; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--brown-light); background: transparent; border: 1.5px solid rgba(200,131,10,0.22); border-radius: 100px; padding: 8px 18px; cursor: pointer; white-space: nowrap; transition: background 180ms var(--ease-out), color 180ms var(--ease-out), border-color 180ms var(--ease-out); }
+  .filter-btn.active { background: var(--gold); color: white; border-color: var(--gold); }
+  .filter-divider { width: 1px; height: 18px; background: rgba(200,131,10,0.2); flex-shrink: 0; margin: 0 4px; }
+  .filter-result { font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; margin-left: auto; white-space: nowrap; flex-shrink: 0; }
+  @media (hover: hover) { .filter-btn:not(.active):hover { background: rgba(216,176,69,0.12); border-color: var(--gold); color: var(--gold); } }
+
+  /* ── STORES SECTION ── */
+  .stores-section { background: var(--cream-warm); padding: 56px 0 100px; }
+  .stores-inner { max-width: 1400px; margin: 0 auto; padding: 0 60px; }
+  .floor-group { margin-bottom: 64px; }
+  .floor-label { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 5px; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 16px; }
+  .floor-label::after { content: ''; flex: 1; height: 1px; background: rgba(200,131,10,0.15); }
+  .stores-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .store-card { border-radius: 16px; overflow: hidden; position: relative; aspect-ratio: 3/4; cursor: pointer; }
+  .store-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 380ms var(--ease-out); }
+  .store-card-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, transparent 45%, rgba(40,29,2,0.86) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px 20px; }
+  .cat-tag { font-family: 'Josefin Sans', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: var(--gold); color: white; padding: 4px 10px; border-radius: 100px; display: inline-block; margin-bottom: 10px; width: fit-content; }
+  .store-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: white; line-height: 1.1; margin-bottom: 6px; }
+  .store-floor { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 5px; }
+  /* new badge */
+  .store-new { position: absolute; top: 14px; right: 14px; background: var(--gold); color: white; font-family: 'Josefin Sans', sans-serif; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
+  /* hidden state */
+  .store-card.is-hidden { display: none; }
+  @media (hover: hover) { .store-card:hover img { transform: scale(1.06); } }
+
+  /* ── BACK BANNER ── */
+  .back-banner { background: var(--brown); padding: 64px 60px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+  .back-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 56px); color: var(--gold); letter-spacing: 2px; }
+  .pill-btn { display: inline-flex; align-items: center; gap: 12px; border: 1.5px solid var(--gold); border-radius: 100px; padding: 10px 10px 10px 24px; font-family: 'Josefin Sans', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: white; text-decoration: none; cursor: pointer; background: transparent; transition: background 200ms var(--ease-out), color 200ms var(--ease-out); white-space: nowrap; }
+  .pill-icon { width: 36px; height: 36px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; flex-shrink: 0; }
+  @media (hover: hover) { .pill-btn:hover { background: var(--gold); } }
+
+  /* ── FOOTER ── */
+  footer { background: var(--cream-dark); padding: 48px 0 0; }
+  .footer-top { max-width: 1200px; margin: 0 auto; padding: 0 60px 48px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 40px; }
+  .footer-address { font-size: 10px; letter-spacing: 1.5px; line-height: 2; text-transform: uppercase; color: var(--text-muted); }
+  .footer-logo-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .back-to-top { width: 80px; height: 80px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; cursor: pointer; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: white; text-align: center; line-height: 1.4; text-decoration: none; transition: transform 200ms var(--ease-out); }
+  .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: var(--text-muted); text-align: right; line-height: 1.6; max-width: 260px; margin-left: auto; }
+  .footer-socials { max-width: 1200px; margin: 0 auto; padding: 24px 60px; border-top: 1px solid rgba(200,131,10,0.2); display: flex; justify-content: space-between; align-items: center; }
+  .social-link { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 200ms var(--ease-out); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 20px 60px; border-top: 1px solid rgba(200,131,10,0.15); display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; color: var(--gold); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
+  @media (hover: hover) { .back-to-top:hover { transform: translateY(-4px); } .social-link:hover { color: var(--gold); } }
+
+  /* ── REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out); }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1200px) {
+    .stores-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-right { text-align: left; }
+    .hero { padding: 140px 40px 0; }
+    .filter-inner { padding: 14px 40px; }
+    .stores-inner { padding: 0 40px; }
+    .stores-grid { grid-template-columns: repeat(2, 1fr); }
+    .back-banner { padding: 48px 40px; }
+    .footer-top { padding: 0 40px 40px; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 100px 20px 0; }
+    .hero-inner { gap: 20px; padding-bottom: 44px; }
+    .stores-section { padding: 36px 0 64px; }
+    .stores-inner { padding: 0 20px; }
+    .stores-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .floor-label { font-size: 11px; letter-spacing: 3px; margin-bottom: 16px; }
+    .store-name { font-size: 18px; }
+    .filter-inner { padding: 12px 20px; }
+    .filter-result { display: none; }
+    .back-banner { flex-direction: column; align-items: flex-start; padding: 40px 20px; }
+    .footer-top { padding: 0 20px 28px; grid-template-columns: 1fr auto; gap: 20px; }
+    .footer-tagline { display: none; }
+    .footer-socials { padding: 16px 20px; flex-wrap: wrap; gap: 14px; }
+    .footer-bottom { padding: 14px 20px; flex-wrap: wrap; gap: 8px; }
+    .page { margin: 0; border-radius: 0; }
+  }
+  @media (max-width: 380px) {
+    .stores-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<body>
+
+<!-- STAGGERED MENU -->
+<div class="staggered-menu-wrapper" data-position="right">
+  <div class="sm-prelayers" aria-hidden="true">
+    <div class="sm-prelayer" style="background: var(--gold);"></div>
+    <div class="sm-prelayer" style="background: var(--brown);"></div>
+  </div>
+  <header class="staggered-menu-header" aria-label="Main navigation">
+    <a href="rupa-mall.html" class="sm-logo" aria-label="Rupa's Mall">
+      <img src="Logos/assets/rupas-mall-logo-master.png" alt="Rupa's Mall" class="sm-logo-img" draggable="false" />
+    </a>
+    <button class="sm-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="staggered-menu-panel">
+      <span class="sm-toggle-textWrap" aria-hidden="true">
+        <span class="sm-toggle-textInner">
+          <span class="sm-toggle-line">Menu</span>
+        </span>
+      </span>
+      <span class="sm-icon" aria-hidden="true">
+        <span class="sm-icon-line"></span>
+        <span class="sm-icon-line sm-icon-line-v" style="transform:translate(-50%,-50%) rotate(90deg);"></span>
+      </span>
+    </button>
+  </header>
+  <aside id="staggered-menu-panel" class="staggered-menu-panel" aria-hidden="true">
+    <div class="sm-panel-inner">
+      <ul class="sm-panel-list" role="list" data-numbering>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="rupa-mall.html"><span class="sm-panel-itemLabel">Home</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="rupa-mall.html#about"><span class="sm-panel-itemLabel">Brands</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="rupa-mall.html#gallery"><span class="sm-panel-itemLabel">Gallery</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="rupa-mall.html#benefits"><span class="sm-panel-itemLabel">Offerings</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="rupa-mall.html#contact"><span class="sm-panel-itemLabel">Contact</span></a></li>
+      </ul>
+      <div class="sm-socials" aria-label="Social links">
+        <h3 class="sm-socials-title">Socials</h3>
+        <ul class="sm-socials-list" role="list">
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Instagram</a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Facebook</a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">TikTok</a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Twitter</a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="page">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <span class="hero-eyebrow">browse all our</span>
+      <h1 class="hero-title">STORES</h1>
+      <p class="hero-sub">Fashion &nbsp;·&nbsp; Dining &nbsp;·&nbsp; Electronics &nbsp;·&nbsp; Entertainment &nbsp;·&nbsp; Services<br>Uganda Road, Eldoret &nbsp;·&nbsp; Open Daily 08:00 – 21:00</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat" data-countup-to="45" data-countup-suffix="+">45+</div>
+      <div class="hero-stat-label">Stores &amp; Outlets<br>Across 3 Floors</div>
+    </div>
+  </div>
+</section>
+
+<div class="hero-wave">
+  <svg viewBox="0 0 1440 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,0 L0,62 C200,24 420,8 660,26 C880,42 1100,58 1300,38 C1370,28 1410,30 1440,52 L1440,0 Z" fill="#281d02"/>
+  </svg>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar" id="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <div class="filter-divider"></div>
+    <button class="filter-btn" data-filter="fashion">Fashion</button>
+    <button class="filter-btn" data-filter="food">Food &amp; Dining</button>
+    <button class="filter-btn" data-filter="electronics">Electronics</button>
+    <button class="filter-btn" data-filter="supermarket">Supermarkets</button>
+    <button class="filter-btn" data-filter="entertainment">Entertainment</button>
+    <button class="filter-btn" data-filter="beauty">Beauty</button>
+    <button class="filter-btn" data-filter="services">Services</button>
+    <span class="filter-result" id="filter-result">38 stores</span>
+  </div>
+</div>
+
+<!-- STORES GRID -->
+<section class="stores-section">
+  <div class="stores-inner">
+
+    <!-- GROUND FLOOR -->
+    <div class="floor-group reveal" id="floor-gf">
+      <div class="floor-label">Ground Floor</div>
+      <div class="stores-grid">
+
+        <div class="store-card" data-category="supermarket">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Naivas" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Supermarket</span>
+            <div class="store-name">Naivas</div>
+            <div class="store-floor">&#128205; Ground Floor · Main Entrance</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" alt="Java House" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Java House</div>
+            <div class="store-floor">&#128205; Ground Floor · Atrium</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" alt="Artcaffe" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Artcaffe</div>
+            <div class="store-floor">&#128205; Ground Floor · East Wing</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="electronics">
+          <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=600&q=80" alt="Safaricom" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Electronics</span>
+            <div class="store-name">Safaricom</div>
+            <div class="store-floor">&#128205; Ground Floor · Wing A</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="electronics">
+          <img src="https://images.unsplash.com/photo-1601972599720-36938d4ecd31?w=600&q=80" alt="Phone House" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Electronics</span>
+            <div class="store-name">Phone House</div>
+            <div class="store-floor">&#128205; Ground Floor · Wing B</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="services">
+          <img src="https://images.unsplash.com/photo-1601597111158-2fceff292cdc?w=600&q=80" alt="Equity Bank" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Services</span>
+            <div class="store-name">Equity Bank</div>
+            <div class="store-floor">&#128205; Ground Floor · South Wing</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="services">
+          <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=80" alt="KCB Bank" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Services</span>
+            <div class="store-name">KCB Bank</div>
+            <div class="store-floor">&#128205; Ground Floor · South Wing</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="services">
+          <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=600&q=80" alt="NCBA Bank" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Services</span>
+            <div class="store-name">NCBA Bank</div>
+            <div class="store-floor">&#128205; Ground Floor · South Wing</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="services">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" alt="Co-op Bank" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Services</span>
+            <div class="store-name">Co-op Bank</div>
+            <div class="store-floor">&#128205; Ground Floor · West Wing</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LEVEL 1 -->
+    <div class="floor-group reveal" id="floor-l1">
+      <div class="floor-label">Level 1</div>
+      <div class="stores-grid">
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Nike" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Nike</div>
+            <div class="store-floor">&#128205; Level 1 · Wing A</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80" alt="Adidas" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Adidas</div>
+            <div class="store-floor">&#128205; Level 1 · Wing A</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=600&q=80" alt="Zara" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Zara</div>
+            <div class="store-floor">&#128205; Level 1 · Wing B</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&q=80" alt="H&M" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">H&amp;M</div>
+            <div class="store-floor">&#128205; Level 1 · Wing B</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&q=80" alt="Levi's" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Levi's</div>
+            <div class="store-floor">&#128205; Level 1 · Wing C</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80" alt="Woolworths" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Woolworths</div>
+            <div class="store-floor">&#128205; Level 1 · Wing C</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&q=80" alt="The Body Shop" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Beauty</span>
+            <div class="store-name">The Body Shop</div>
+            <div class="store-floor">&#128205; Level 1 · Wing A</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="beauty">
+          <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403c3c?w=600&q=80" alt="Inglot" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Beauty</span>
+            <div class="store-name">Inglot</div>
+            <div class="store-floor">&#128205; Level 1 · Wing B</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="beauty">
+          <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600&q=80" alt="MAC Cosmetics" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Beauty</span>
+            <div class="store-name">MAC Cosmetics</div>
+            <div class="store-floor">&#128205; Level 1 · Wing B</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="electronics">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt="Samsung" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Electronics</span>
+            <div class="store-name">Samsung</div>
+            <div class="store-floor">&#128205; Level 1 · Wing D</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="electronics">
+          <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&q=80" alt="Huawei" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Electronics</span>
+            <div class="store-name">Huawei</div>
+            <div class="store-floor">&#128205; Level 1 · Wing D</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="electronics">
+          <img src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?w=600&q=80" alt="iStore" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Electronics</span>
+            <div class="store-name">iStore</div>
+            <div class="store-floor">&#128205; Level 1 · Wing D</div>
+          </div>
+          <div class="store-new">New</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LEVEL 2 -->
+    <div class="floor-group reveal" id="floor-l2">
+      <div class="floor-label">Level 2</div>
+      <div class="stores-grid">
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80" alt="Mr Price" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Mr Price</div>
+            <div class="store-floor">&#128205; Level 2 · Wing A</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Truworths" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Truworths</div>
+            <div class="store-floor">&#128205; Level 2 · Wing B</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=600&q=80" alt="Cotton On" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Cotton On</div>
+            <div class="store-floor">&#128205; Level 2 · Wing A</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="fashion">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80" alt="Ackermans" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Fashion</span>
+            <div class="store-name">Ackermans</div>
+            <div class="store-floor">&#128205; Level 2 · Wing C</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="supermarket">
+          <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=600&q=80" alt="Quickmart" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Supermarket</span>
+            <div class="store-name">Quickmart</div>
+            <div class="store-floor">&#128205; Level 2 · East Wing</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="supermarket">
+          <img src="https://images.unsplash.com/photo-1542838132-92f1f21418cd?w=600&q=80" alt="Carrefour Express" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Supermarket</span>
+            <div class="store-name">Carrefour Express</div>
+            <div class="store-floor">&#128205; Level 2 · West Wing</div>
+          </div>
+          <div class="store-new">New</div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" alt="KFC" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">KFC</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80" alt="Pizza Inn" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Pizza Inn</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1534482421-64566f976cfa?w=600&q=80" alt="Subway" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Subway</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1550317138-10000687a72b?w=600&q=80" alt="Steers" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Steers</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Nando's" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Nando's</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Debonairs Pizza" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Debonairs</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=600&q=80" alt="Burger King" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Burger King</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+          <div class="store-new">New</div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=600&q=80" alt="Cold Stone Creamery" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Cold Stone</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="food">
+          <img src="https://images.unsplash.com/photo-1497034825349-c7a0dc67f93d?w=600&q=80" alt="Creamy Inn" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Food &amp; Dining</span>
+            <div class="store-name">Creamy Inn</div>
+            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="beauty">
+          <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80" alt="Nail Bar & Spa" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Beauty</span>
+            <div class="store-name">Nail Bar &amp; Spa</div>
+            <div class="store-floor">&#128205; Level 2 · Wing B</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- LEVEL 3 -->
+    <div class="floor-group reveal" id="floor-l3">
+      <div class="floor-label">Level 3</div>
+      <div class="stores-grid">
+
+        <div class="store-card" data-category="entertainment">
+          <img src="https://images.unsplash.com/photo-1536440136297-25a519b04b36?w=600&q=80" alt="Cineplex" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Entertainment</span>
+            <div class="store-name">Cineplex</div>
+            <div class="store-floor">&#128205; Level 3 · North Wing</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="entertainment">
+          <img src="https://images.unsplash.com/photo-1511882150788-1575b98e33fe?w=600&q=80" alt="Timezone" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Entertainment</span>
+            <div class="store-name">Timezone</div>
+            <div class="store-floor">&#128205; Level 3 · Central</div>
+          </div>
+        </div>
+
+        <div class="store-card" data-category="entertainment">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Kids Zone" loading="lazy"/>
+          <div class="store-card-overlay">
+            <span class="cat-tag">Entertainment</span>
+            <div class="store-name">Kids Zone</div>
+            <div class="store-floor">&#128205; Level 3 · East Wing</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BACK BANNER -->
+<div class="back-banner">
+  <div class="back-text">BACK TO THE MALL</div>
+  <a href="rupa-mall.html" class="pill-btn">Go to Main Site <span class="pill-icon">&#8592;</span></a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-address">
+      Uganda Road<br/>Eldoret, 30100<br/>Uasin Gishu County, Kenya<br/><br/>info@rupamall.co.ke<br/>+254 53 2000 123
+    </div>
+    <div class="footer-logo-center">
+      <a href="#" class="back-to-top">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+        BACK<br/>TO TOP
+      </a>
+    </div>
+    <div class="footer-tagline">Eldoret's most vibrant retail &amp; lifestyle destination — where every visit feels like an experience worth coming back for.</div>
+  </div>
+  <div class="footer-socials">
+    <a href="#" class="social-link">Instagram</a>
+    <a href="#" class="social-link">Facebook</a>
+    <a href="#" class="social-link">TikTok</a>
+    <a href="#" class="social-link">X (Twitter)</a>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">2026. Rupa's Mall. All rights reserved.</span>
+    <span class="footer-brand">RUPA'S MALL</span>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms &amp; Conditions</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- .page -->
+
+<script>
+  /* ── Staggered Menu ── */
+  (function() {
+    var wrapper = document.querySelector('.staggered-menu-wrapper');
+    if (!wrapper || typeof gsap === 'undefined') return;
+    var position = wrapper.getAttribute('data-position') || 'right';
+    var panel = wrapper.querySelector('.staggered-menu-panel');
+    var preLayers = Array.from(wrapper.querySelectorAll('.sm-prelayer'));
+    var preContainer = wrapper.querySelector('.sm-prelayers');
+    var toggleBtn = wrapper.querySelector('.sm-toggle');
+    var icon = wrapper.querySelector('.sm-icon');
+    var plusH = wrapper.querySelector('.sm-icon-line:not(.sm-icon-line-v)');
+    var plusV = wrapper.querySelector('.sm-icon-line-v');
+    var textInner = wrapper.querySelector('.sm-toggle-textInner');
+    var itemEls = Array.from(wrapper.querySelectorAll('.sm-panel-itemLabel'));
+    var numberEls = Array.from(wrapper.querySelectorAll('.sm-panel-list[data-numbering] .sm-panel-item'));
+    var socialTitle = wrapper.querySelector('.sm-socials-title');
+    var socialLinks = Array.from(wrapper.querySelectorAll('.sm-socials-link'));
+    var offscreen = position === 'left' ? -100 : 100;
+    var open = false, busy = false, openTl = null, closeTween = null, spinTween = null, textCycleAnim = null;
+    gsap.set([panel].concat(preLayers), { xPercent: offscreen, opacity: 1 });
+    if (preContainer) gsap.set(preContainer, { xPercent: 0, opacity: 1 });
+    gsap.set(plusH, { transformOrigin: '50% 50%', rotate: 0 });
+    gsap.set(plusV, { transformOrigin: '50% 50%', rotate: 90 });
+    gsap.set(icon, { rotate: 0, transformOrigin: '50% 50%' });
+    gsap.set(textInner, { yPercent: 0 });
+    function buildOpenTimeline() {
+      if (openTl) openTl.kill();
+      if (closeTween) { closeTween.kill(); closeTween = null; }
+      gsap.set(itemEls, { yPercent: 140, rotate: 10 });
+      gsap.set(numberEls, { '--sm-num-opacity': 0 });
+      if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
+      gsap.set(socialLinks, { y: 25, opacity: 0 });
+      var tl = gsap.timeline({ paused: true });
+      preLayers.forEach(function(el, i) { tl.fromTo(el, { xPercent: offscreen }, { xPercent: 0, duration: 0.5, ease: 'power4.out' }, i * 0.07); });
+      var lastTime = preLayers.length ? (preLayers.length - 1) * 0.07 : 0;
+      var panelInsert = lastTime + (preLayers.length ? 0.08 : 0);
+      tl.fromTo(panel, { xPercent: offscreen }, { xPercent: 0, duration: 0.65, ease: 'power4.out' }, panelInsert);
+      tl.to(itemEls, { yPercent: 0, rotate: 0, duration: 1, ease: 'power4.out', stagger: { each: 0.1 } }, panelInsert + 0.1);
+      tl.to(numberEls, { duration: 0.6, ease: 'power2.out', '--sm-num-opacity': 1, stagger: { each: 0.08 } }, panelInsert + 0.2);
+      if (socialTitle) tl.to(socialTitle, { opacity: 1, duration: 0.5, ease: 'power2.out' }, panelInsert + 0.26);
+      tl.to(socialLinks, { y: 0, opacity: 1, duration: 0.55, ease: 'power3.out', stagger: { each: 0.08 } }, panelInsert + 0.3);
+      openTl = tl; return tl;
+    }
+    function playOpen() { if (busy) return; busy = true; var tl = buildOpenTimeline(); tl.eventCallback('onComplete', function() { busy = false; }); tl.play(0); }
+    function playClose() {
+      if (openTl) { openTl.kill(); openTl = null; }
+      if (closeTween) closeTween.kill();
+      closeTween = gsap.to([panel].concat(preLayers), { xPercent: offscreen, duration: 0.32, ease: 'power3.in', overwrite: 'auto', onComplete: function() { busy = false; } });
+    }
+    function animateIcon(opening) {
+      if (spinTween) spinTween.kill();
+      spinTween = gsap.to(icon, opening ? { rotate: 225, duration: 0.8, ease: 'power4.out', overwrite: 'auto' } : { rotate: 0, duration: 0.35, ease: 'power3.inOut', overwrite: 'auto' });
+    }
+    function animateText(opening) {
+      if (textCycleAnim) textCycleAnim.kill();
+      var current = opening ? 'Menu' : 'Close';
+      var target = opening ? 'Close' : 'Menu';
+      var seq = [current], last = current;
+      for (var i = 0; i < 3; i++) { last = last === 'Menu' ? 'Close' : 'Menu'; seq.push(last); }
+      if (last !== target) seq.push(target);
+      seq.push(target);
+      textInner.innerHTML = seq.map(function(l) { return '<span class="sm-toggle-line">' + l + '</span>'; }).join('');
+      gsap.set(textInner, { yPercent: 0 });
+      textCycleAnim = gsap.to(textInner, { yPercent: -((seq.length - 1) / seq.length) * 100, duration: 0.5 + seq.length * 0.07, ease: 'power4.out' });
+    }
+    function toggleMenu() {
+      open = !open;
+      toggleBtn.setAttribute('aria-expanded', String(open));
+      toggleBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      panel.setAttribute('aria-hidden', String(!open));
+      if (open) { wrapper.setAttribute('data-open', ''); playOpen(); } else { wrapper.removeAttribute('data-open'); playClose(); }
+      animateIcon(open); animateText(open);
+    }
+    toggleBtn.addEventListener('click', toggleMenu);
+    document.addEventListener('mousedown', function(e) { if (!open) return; if (!panel.contains(e.target) && !toggleBtn.contains(e.target)) toggleMenu(); });
+    wrapper.querySelectorAll('.sm-panel-item').forEach(function(a) { a.addEventListener('click', function() { if (open) setTimeout(toggleMenu, 100); }); });
+  })();
+
+  /* ── Store hours ── */
+  (function() {
+    var hoursMap = {
+      'supermarket': '08:00 – 21:00',
+      'food & dining': '08:00 – 22:00',
+      'fashion': '09:00 – 21:00',
+      'electronics': '09:00 – 21:00',
+      'beauty': '09:00 – 20:00',
+      'services': '09:00 – 16:00',
+      'entertainment': '10:00 – 23:00'
+    };
+    document.querySelectorAll('.store-card-overlay').forEach(function(overlay) {
+      var catEl = overlay.querySelector('.cat-tag');
+      if (!catEl) return;
+      var hours = hoursMap[catEl.textContent.trim().toLowerCase()] || '08:00 – 21:00';
+      var floorEl = overlay.querySelector('.store-floor');
+      if (floorEl) {
+        var el = document.createElement('div');
+        el.className = 'store-hours';
+        el.textContent = '⏰ ' + hours;
+        floorEl.insertAdjacentElement('afterend', el);
+      }
+    });
+  })();
+
+  /* ── Scroll reveal ── */
+  var reveals = document.querySelectorAll('.reveal');
+  var revealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(function (el) { revealObs.observe(el); });
+
+  /* ── Category filter ── */
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var cards       = document.querySelectorAll('.store-card');
+  var resultEl    = document.getElementById('filter-result');
+
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var cat = btn.dataset.filter;
+      filterBtns.forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      var visible = 0;
+      cards.forEach(function (card) {
+        var match = cat === 'all' || card.dataset.category === cat;
+        card.classList.toggle('is-hidden', !match);
+        if (match) visible++;
+      });
+      if (resultEl) resultEl.textContent = visible + ' store' + (visible !== 1 ? 's' : '');
+
+      /* Hide empty floor groups */
+      document.querySelectorAll('.floor-group').forEach(function (group) {
+        var anyVisible = Array.from(group.querySelectorAll('.store-card'))
+          .some(function (c) { return !c.classList.contains('is-hidden'); });
+        group.style.display = anyVisible ? '' : 'none';
+      });
+    });
+  });
+
+  /* ── CountUp ── */
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll('[data-countup-to]').forEach(function (el) {
+      var to = parseInt(el.dataset.countupTo, 10);
+      var suffix = el.dataset.countupSuffix || '';
+      el.textContent = '0' + suffix;
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          io.disconnect();
+          var start = null;
+          function step(ts) {
+            if (!start) start = ts;
+            var p = Math.min((ts - start) / 1800, 1);
+            el.textContent = Math.round(p * to) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        }
+      }, { threshold: 0.1 });
+      io.observe(el);
+    });
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rupa's Mall — Logo Kit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<style>
+  :root {
+    --bg: #f6f3ec;
+    --bg-2: #eee9dd;
+    --ink: #2a2a24;
+    --ink-2: #6b6a5e;
+    --rule: #d9d3c2;
+    --olive: #7d7d5e;
+    --olive-deep: #5d5e44;
+    --dark: #1d1d18;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 64px 32px 96px; }
+
+  /* Header */
+  header.kit-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 32px; margin-bottom: 56px;
+    gap: 32px; flex-wrap: wrap;
+  }
+  .eyebrow {
+    font-family: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px;
+    color: var(--ink-2); margin: 0 0 12px;
+  }
+  h1 {
+    font-family: "Cormorant Garamond", "Times New Roman", serif;
+    font-weight: 500; font-size: 56px; line-height: 1.05; letter-spacing: -0.01em;
+    margin: 0; max-width: 14ch;
+  }
+  h1 em { font-style: italic; color: var(--olive); }
+  .lede {
+    font-size: 15px; line-height: 1.6; color: var(--ink-2);
+    max-width: 38ch; margin: 0;
+  }
+
+  /* Section */
+  section { margin-bottom: 72px; }
+  .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 24px; gap: 16px; flex-wrap: wrap;
+  }
+  h2 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500; font-size: 28px; letter-spacing: -0.005em;
+    margin: 0;
+  }
+  .sec-note {
+    font-family: "JetBrains Mono", ui-monospace, monospace;
+    font-size: 11px; color: var(--ink-2); letter-spacing: 0.04em;
+  }
+
+  /* Size grid — real-world heights */
+  .sizes {
+    border: 1px solid var(--rule);
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .size-row {
+    display: grid;
+    grid-template-columns: 90px 1fr 110px;
+    align-items: center;
+    padding: 24px 28px;
+    border-top: 1px solid var(--rule);
+    gap: 24px;
+  }
+  .size-row:first-child { border-top: 0; }
+  .size-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px; color: var(--ink-2);
+  }
+  .size-label b { display: block; color: var(--ink); font-weight: 500; font-size: 13px; margin-bottom: 4px; }
+  .size-logo { display: flex; align-items: center; }
+  .size-logo img { display: block; height: auto; }
+  .size-use {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; color: var(--ink-2); text-align: right;
+    line-height: 1.5;
+  }
+
+  /* Background pair */
+  .bg-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .bg-card {
+    border-radius: 4px; padding: 56px 40px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 220px; position: relative;
+    border: 1px solid var(--rule);
+  }
+  .bg-card.light { background: #ffffff; }
+  .bg-card.cream { background: var(--bg-2); }
+  .bg-card.dark { background: var(--dark); border-color: var(--dark); }
+  .bg-card.olive { background: var(--olive-deep); border-color: var(--olive-deep); }
+  .bg-card img { max-width: 70%; height: auto; display: block; }
+  .bg-tag {
+    position: absolute; top: 14px; left: 16px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px; letter-spacing: 0.08em;
+    color: var(--ink-2);
+  }
+  .bg-card.dark .bg-tag, .bg-card.olive .bg-tag { color: rgba(255,255,255,0.55); }
+
+  /* Browser frame for favicon */
+  .browser {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    max-width: 540px;
+  }
+  .browser-chrome {
+    background: var(--bg-2);
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #d4ccb7; }
+  .tab {
+    background: #fff; border: 1px solid var(--rule); border-bottom: 0;
+    border-radius: 6px 6px 0 0;
+    padding: 6px 12px 8px; margin-bottom: -1px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--ink);
+    max-width: 240px;
+  }
+  .tab img { width: 16px; height: 16px; display: block; }
+  .browser-body {
+    padding: 32px; min-height: 80px;
+    display: flex; align-items: center; gap: 16px;
+    color: var(--ink-2); font-size: 13px;
+  }
+  .browser-body img { height: 28px; width: auto; }
+
+  /* Site mockup */
+  .mock {
+    border: 1px solid var(--rule);
+    border-radius: 6px; overflow: hidden; background: #fff;
+  }
+  .mock-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 32px; border-bottom: 1px solid var(--rule);
+  }
+  .mock-nav img { height: 36px; width: auto; display: block; }
+  .mock-nav .nav-links {
+    display: flex; gap: 28px; font-size: 13px; color: var(--ink-2);
+  }
+  .mock-nav .cart {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; letter-spacing: 0.08em;
+    border: 1px solid var(--rule); border-radius: 999px;
+    padding: 6px 12px; color: var(--ink);
+  }
+  .mock-hero {
+    padding: 64px 32px 72px;
+    background: var(--bg-2);
+    text-align: center;
+  }
+  .mock-hero h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500; font-size: 38px; margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .mock-hero p {
+    color: var(--ink-2); font-size: 14px; margin: 0;
+  }
+  .mock-foot {
+    padding: 22px 32px; display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid var(--rule); background: var(--dark); color: rgba(255,255,255,0.6);
+    font-size: 12px;
+  }
+  .mock-foot img { height: 24px; width: auto; filter: brightness(1.15); }
+
+  /* Social card */
+  .social {
+    border: 1px solid var(--rule); border-radius: 4px;
+    overflow: hidden; max-width: 600px;
+  }
+  .social img { display: block; width: 100%; height: auto; }
+  .social-meta {
+    padding: 12px 16px; background: #fff;
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    color: var(--ink-2); letter-spacing: 0.04em;
+    border-top: 1px solid var(--rule);
+  }
+  .social-meta b { color: var(--ink); font-weight: 500; }
+
+  /* Downloads table */
+  .downloads {
+    border: 1px solid var(--rule); border-radius: 4px;
+    background: #fff; overflow: hidden;
+  }
+  .dl-row {
+    display: grid;
+    grid-template-columns: 1fr 100px 120px;
+    align-items: center;
+    padding: 14px 20px;
+    border-top: 1px solid var(--rule);
+    font-size: 13px;
+    gap: 16px;
+  }
+  .dl-row:first-child { border-top: 0; background: var(--bg-2); font-family: "JetBrains Mono", monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); padding: 12px 20px; }
+  .dl-row .file {
+    font-family: "JetBrains Mono", monospace; font-size: 12px;
+  }
+  .dl-row .meta { color: var(--ink-2); font-family: "JetBrains Mono", monospace; font-size: 12px; }
+  .dl-row a {
+    display: inline-block;
+    text-align: center;
+    border: 1px solid var(--ink); color: var(--ink);
+    text-decoration: none;
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; letter-spacing: 0.04em;
+    transition: background 120ms, color 120ms;
+  }
+  .dl-row a:hover { background: var(--ink); color: var(--bg); }
+
+  /* Code block */
+  pre.code {
+    background: var(--dark); color: #e6e3d7;
+    padding: 22px 24px; border-radius: 6px;
+    overflow-x: auto;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px; line-height: 1.65;
+    margin: 0;
+  }
+  pre.code .tag { color: #b8c79a; }
+  pre.code .attr { color: #d4c98c; }
+  pre.code .str { color: #c9bea6; }
+  pre.code .com { color: #6e6c5f; font-style: italic; }
+
+  /* Clear-space + min-size */
+  .specs {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .spec-card {
+    background: #fff; border: 1px solid var(--rule); border-radius: 4px;
+    padding: 28px; min-height: 220px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .spec-title {
+    font-family: "JetBrains Mono", monospace; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-2);
+    margin-bottom: 14px;
+  }
+  .clear-demo {
+    position: relative; display: inline-block;
+    padding: 28px; border: 1px dashed var(--rule);
+    align-self: center;
+  }
+  .clear-demo::before, .clear-demo::after {
+    content: "x"; position: absolute;
+    font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--olive);
+  }
+  .clear-demo::before { top: 8px; left: 8px; }
+  .clear-demo::after { bottom: 8px; right: 8px; }
+  .clear-demo img { display: block; height: 64px; width: auto; }
+  .spec-foot {
+    font-size: 12px; color: var(--ink-2); line-height: 1.5; margin-top: 14px;
+  }
+  .min-row { display: flex; gap: 28px; align-items: flex-end; }
+  .min-row .min-item { text-align: center; }
+  .min-row .min-item img { display: block; margin: 0 auto 8px; }
+  .min-row .min-item span {
+    font-family: "JetBrains Mono", monospace; font-size: 10px; color: var(--ink-2);
+  }
+
+  footer.kit-foot {
+    border-top: 1px solid var(--rule);
+    padding-top: 24px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; color: var(--ink-2); letter-spacing: 0.04em;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  }
+
+  @media (max-width: 720px) {
+    h1 { font-size: 40px; }
+    .bg-pair { grid-template-columns: 1fr; }
+    .specs { grid-template-columns: 1fr; }
+    .dl-row { grid-template-columns: 1fr 100px; }
+    .dl-row .meta { display: none; }
+    .size-row { grid-template-columns: 1fr; gap: 10px; }
+    .size-use { text-align: left; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="kit-head">
+    <div>
+      <p class="eyebrow">Logo Kit · v1</p>
+      <h1>Rupa's Mall<br><em>web-ready files.</em></h1>
+    </div>
+    <p class="lede">Your logo, cropped tight and exported at every size your site will ever ask for — header, favicon, retina, Open Graph card. Drop them in.</p>
+  </header>
+
+  <!-- Real-world sizes -->
+  <section>
+    <div class="sec-head">
+      <h2>At real-world sizes</h2>
+      <span class="sec-note">heights shown 1:1 — scroll to compare</span>
+    </div>
+    <div class="sizes">
+      <div class="size-row">
+        <div class="size-label"><b>32 px</b>favicon</div>
+        <div class="size-logo"><img src="assets/rupas-mall-logo-256.png" alt="" style="height: 32px;"></div>
+        <div class="size-use">tab icon<br>tiny UI marks</div>
+      </div>
+      <div class="size-row">
+        <div class="size-label"><b>40 px</b>mobile nav</div>
+        <div class="size-logo"><img src="assets/rupas-mall-logo-256.png" alt="" style="height: 40px;"></div>
+        <div class="size-use">phone header<br>compact bars</div>
+      </div>
+      <div class="size-row">
+        <div class="size-label"><b>56 px</b>desktop nav</div>
+        <div class="size-logo"><img src="assets/rupas-mall-logo-512.png" alt="" style="height: 56px;"></div>
+        <div class="size-use">primary site<br>navigation</div>
+      </div>
+      <div class="size-row">
+        <div class="size-label"><b>96 px</b>footer mark</div>
+        <div class="size-logo"><img src="assets/rupas-mall-logo-1024.png" alt="" style="height: 96px;"></div>
+        <div class="size-use">footer brand<br>email signatures</div>
+      </div>
+      <div class="size-row">
+        <div class="size-label"><b>200 px</b>hero / splash</div>
+        <div class="size-logo"><img src="assets/rupas-mall-logo-2048.png" alt="" style="height: 200px;"></div>
+        <div class="size-use">landing pages<br>loading screen</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Backgrounds -->
+  <section>
+    <div class="sec-head">
+      <h2>On backgrounds</h2>
+      <span class="sec-note">transparent PNG — sits on any color</span>
+    </div>
+    <div class="bg-pair">
+      <div class="bg-card light">
+        <span class="bg-tag">#FFFFFF · white</span>
+        <img src="assets/rupas-mall-logo-1024.png" alt="Rupa's Mall logo on white">
+      </div>
+      <div class="bg-card cream">
+        <span class="bg-tag">#EEE9DD · cream</span>
+        <img src="assets/rupas-mall-logo-1024.png" alt="Rupa's Mall logo on cream">
+      </div>
+      <div class="bg-card dark">
+        <span class="bg-tag">#1D1D18 · dark</span>
+        <img src="assets/rupas-mall-logo-1024.png" alt="Rupa's Mall logo on dark">
+      </div>
+      <div class="bg-card olive">
+        <span class="bg-tag">#5D5E44 · olive</span>
+        <img src="assets/rupas-mall-logo-1024.png" alt="Rupa's Mall logo on olive">
+      </div>
+    </div>
+  </section>
+
+  <!-- Live mockup -->
+  <section>
+    <div class="sec-head">
+      <h2>In context</h2>
+      <span class="sec-note">how it actually shows up on the site</span>
+    </div>
+    <div class="mock">
+      <div class="mock-nav">
+        <img src="assets/rupas-mall-logo-512.png" alt="Rupa's Mall">
+        <div class="nav-links">
+          <span>Shop</span><span>Collections</span><span>Visit</span><span>About</span>
+        </div>
+        <span class="cart">CART · 0</span>
+      </div>
+      <div class="mock-hero">
+        <h3>Where everything you need lives.</h3>
+        <p>Fashion, home, gifting — all under one roof.</p>
+      </div>
+      <div class="mock-foot">
+        <img src="assets/rupas-mall-logo-512.png" alt="Rupa's Mall">
+        <span>© 2026 Rupa's Mall</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Favicon -->
+  <section>
+    <div class="sec-head">
+      <h2>As a favicon</h2>
+      <span class="sec-note">browser tab preview</span>
+    </div>
+    <div class="browser">
+      <div class="browser-chrome">
+        <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+        <div class="tab">
+          <img src="assets/favicon-32.png" alt="">
+          <span>Rupa's Mall — Home</span>
+        </div>
+      </div>
+      <div class="browser-body">
+        <img src="assets/rupas-mall-logo-512.png" alt="">
+        <span>rupasmall.com</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social card -->
+  <section>
+    <div class="sec-head">
+      <h2>Social preview</h2>
+      <span class="sec-note">1200×630 Open Graph card</span>
+    </div>
+    <div class="social">
+      <img src="assets/social-card-1200x630.png" alt="Social preview">
+      <div class="social-meta">
+        <b>RUPASMALL.COM</b><br>
+        Rupa's Mall — Where everything lives.
+      </div>
+    </div>
+  </section>
+
+  <!-- Specs -->
+  <section>
+    <div class="sec-head">
+      <h2>Usage notes</h2>
+      <span class="sec-note">keep it legible</span>
+    </div>
+    <div class="specs">
+      <div class="spec-card">
+        <span class="spec-title">Clear space</span>
+        <div class="clear-demo">
+          <img src="assets/rupas-mall-logo-512.png" alt="">
+        </div>
+        <p class="spec-foot">Leave at least the height of the "R" of breathing room on all sides. Don't crowd it.</p>
+      </div>
+      <div class="spec-card">
+        <span class="spec-title">Minimum size</span>
+        <div class="min-row">
+          <div class="min-item">
+            <img src="assets/rupas-mall-logo-256.png" alt="" style="height: 24px;">
+            <span>24 px — too small</span>
+          </div>
+          <div class="min-item">
+            <img src="assets/rupas-mall-logo-256.png" alt="" style="height: 32px;">
+            <span>32 px — minimum</span>
+          </div>
+        </div>
+        <p class="spec-foot">Below 32 px tall on screen, the "MALL" sub-label and birds start to disappear. Use the favicon files at very small sizes instead.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Downloads -->
+  <section>
+    <div class="sec-head">
+      <h2>Files</h2>
+      <span class="sec-note">right-click → save, or use the buttons</span>
+    </div>
+    <div class="downloads">
+      <div class="dl-row"><span>File</span><span>Size</span><span>Download</span></div>
+      <div class="dl-row">
+        <span class="file">rupas-mall-logo-2048.png</span>
+        <span class="meta">retina hero</span>
+        <a href="assets/rupas-mall-logo-2048.png" download>Download</a>
+      </div>
+      <div class="dl-row">
+        <span class="file">rupas-mall-logo-1024.png</span>
+        <span class="meta">general use</span>
+        <a href="assets/rupas-mall-logo-1024.png" download>Download</a>
+      </div>
+      <div class="dl-row">
+        <span class="file">rupas-mall-logo-512.png</span>
+        <span class="meta">header</span>
+        <a href="assets/rupas-mall-logo-512.png" download>Download</a>
+      </div>
+      <div class="dl-row">
+        <span class="file">rupas-mall-logo-256.png</span>
+        <span class="meta">small UI</span>
+        <a href="assets/rupas-mall-logo-256.png" download>Download</a>
+      </div>
+      <div class="dl-row">
+        <span class="file">favicon-32.png</span>
+        <span class="meta">browser tab</span>
+        <a href="assets/favicon-32.png" download>Download</a>
+      </div>
+      <div class="dl-row">
+        <span class="file">favicon-192.png</span>
+        <span class="meta">android home</span>
+        <a href="assets/favicon-192.png" download>Download</a>
+      </div>
+      <div class="dl-row">
+        <span class="file">favicon-512.png</span>
+        <span class="meta">PWA / manifest</span>
+        <a href="assets/favicon-512.png" download>Download</a>
+      </div>
+      <div class="dl-row">
+        <span class="file">apple-touch-icon.png</span>
+        <span class="meta">iOS home screen</span>
+        <a href="assets/apple-touch-icon.png" download>Download</a>
+      </div>
+      <div class="dl-row">
+        <span class="file">social-card-1200x630.png</span>
+        <span class="meta">Open Graph</span>
+        <a href="assets/social-card-1200x630.png" download>Download</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Code -->
+  <section>
+    <div class="sec-head">
+      <h2>Drop-in HTML</h2>
+      <span class="sec-note">paste into &lt;head&gt;</span>
+    </div>
+<pre class="code"><span class="com">&lt;!-- favicons --&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="str">"icon"</span> <span class="attr">type</span>=<span class="str">"image/png"</span> <span class="attr">sizes</span>=<span class="str">"32x32"</span>  <span class="attr">href</span>=<span class="str">"/assets/favicon-32.png"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="str">"icon"</span> <span class="attr">type</span>=<span class="str">"image/png"</span> <span class="attr">sizes</span>=<span class="str">"192x192"</span> <span class="attr">href</span>=<span class="str">"/assets/favicon-192.png"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="str">"apple-touch-icon"</span> <span class="attr">href</span>=<span class="str">"/assets/apple-touch-icon.png"</span><span class="tag">&gt;</span>
+
+<span class="com">&lt;!-- social / open graph --&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">property</span>=<span class="str">"og:image"</span> <span class="attr">content</span>=<span class="str">"/assets/social-card-1200x630.png"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="str">"twitter:card"</span> <span class="attr">content</span>=<span class="str">"summary_large_image"</span><span class="tag">&gt;</span>
+
+<span class="com">&lt;!-- header logo (responsive) --&gt;</span>
+<span class="tag">&lt;img</span>
+  <span class="attr">src</span>=<span class="str">"/assets/rupas-mall-logo-512.png"</span>
+  <span class="attr">srcset</span>=<span class="str">"/assets/rupas-mall-logo-512.png 1x,
+          /assets/rupas-mall-logo-1024.png 2x"</span>
+  <span class="attr">alt</span>=<span class="str">"Rupa's Mall"</span>
+  <span class="attr">width</span>=<span class="str">"220"</span> <span class="attr">height</span>=<span class="str">"112"</span><span class="tag">&gt;</span></pre>
+  </section>
+
+  <footer class="kit-foot">
+    <span>RUPA'S MALL · LOGO KIT v1</span>
+    <span>PREPARED FOR WEB · 2026</span>
+  </footer>
+</div>
+</body>
+</html>
