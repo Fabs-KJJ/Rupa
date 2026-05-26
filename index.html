@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -11,8 +11,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@600;700&family=Bebas+Neue&family=Josefin+Sans:wght@200;300;400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  a, button, [role="button"] { outline: none; }
   :root {
     --cream: #FFFFFF;
     --cream-dark: #F0F0F0;
@@ -26,13 +28,11 @@
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scrollbar-width: none; }
   body { background: #281d02; font-family: 'Montserrat', 'Josefin Sans', sans-serif; color: var(--brown); overflow-x: hidden; }
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--cream-dark); }
-  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+  ::-webkit-scrollbar { display: none; }
 
-  .page { background: var(--cream); border-radius: 24px; margin: 16px auto; max-width: 1600px; overflow: clip; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
+  .page { background: var(--cream); border-radius: 0; margin: 0; max-width: 100%; overflow: clip; position: relative; }
 
   /* PRELOADER */
   #preloader { position: fixed; inset: 0; z-index: 9999; background: #281d02; display: flex; align-items: center; justify-content: center; transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1); }
@@ -95,6 +95,8 @@
   .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
   .script-label { font-family: 'Dancing Script', cursive; font-size: 28px; color: var(--gold); display: block; text-align: center; margin-bottom: 4px; }
   .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 7vw, 88px); color: var(--gold); letter-spacing: 3px; text-align: center; line-height: 0.95; }
+  .scroll-float-line { display: block; overflow: hidden; line-height: 1.05; }
+  .scroll-float-char { display: inline-block; will-change: opacity, transform; }
 
   /* ABOUT */
   .about { background: var(--cream); padding: 48px 0 70px; }
@@ -121,7 +123,7 @@
   /* GALLERY — curved clothesline */
   .gallery { background: #FAF4E8; padding: 60px 0 110px; overflow-x: clip; position: relative; }
   .clothesline-wrap { position: relative; max-width: 1400px; margin: 0 auto; height: 540px; padding: 0 60px; }
-  .clothesline-svg { position: absolute; top: 8px; left: 60px; right: 60px; width: calc(100% - 120px); height: 200px; z-index: 1; pointer-events: none; overflow: visible; }
+  .clothesline-svg { position: absolute; top: 8px; left: 0; right: 0; width: 100%; height: 200px; z-index: 1; pointer-events: none; overflow: visible; }
   .clothesline-svg .rope-shadow { stroke: rgba(58,42,5,0.22); stroke-width: 5; fill: none; filter: blur(2.5px); }
   .clothesline-svg .rope-main { stroke: #3A2A05; stroke-width: 2.8; fill: none; stroke-linecap: round; }
   .clothesline-svg .rope-hl { stroke: rgba(255,221,140,0.45); stroke-width: 1; fill: none; }
@@ -167,9 +169,9 @@
   .timeline-thumb { width: 80px; height: 55px; object-fit: cover; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 
   /* BENEFITS */
-  .benefits { background: var(--cream); padding: 60px 0 32px; position: relative; overflow: hidden; }
+  .benefits { background: var(--cream); padding: 64px 0; position: relative; overflow: hidden; }
   #benefits .section-inner,
-  #stores .section-inner { padding: 0 24px; max-width: 1400px; }
+  #stores .section-inner { padding: 0 60px; max-width: 100%; }
   .palm-watermark { position: absolute; pointer-events: none; opacity: 0.06; right: -40px; top: 20px; font-size: 340px; line-height: 1; user-select: none; }
   .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 60px; align-items: stretch; }
   .benefits-list { padding-right: 40px; }
@@ -229,8 +231,8 @@
   .visit-chips-row:nth-child(3) .visit-chips-track { animation-duration: 28s; }
   .visit-chips:hover .visit-chips-track { animation-play-state: paused; }
   @keyframes chips-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-  .visit-chip { display: inline-flex; align-items: center; gap: 7px; background: rgba(12,8,2,0.58); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 100px; font-family: 'Josefin Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.6px; color: rgba(255,255,255,0.92); white-space: nowrap; flex-shrink: 0; }
-  .visit-chip-icon { font-size: 13px; line-height: 1; }
+  .visit-chip { display: inline-flex; align-items: center; gap: 7px; background: rgba(12,8,2,0.22); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.22); padding: 8px 16px; border-radius: 100px; font-family: 'Josefin Sans', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.6px; color: rgba(255,255,255,0.92); white-space: nowrap; flex-shrink: 0; }
+  .visit-chip-icon { font-size: 13px; line-height: 1; opacity: 0.6; filter: grayscale(1) brightness(2); }
 
   /* Opening Hours */
   .visit-card--hours { display: flex; flex-direction: column; }
@@ -243,10 +245,11 @@
 
   .visit-card-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding-top: 24px; border-top: 1px solid rgba(40,29,2,0.1); }
   .visit-card-foot .visit-address { margin-bottom: 8px; font-size: 14px; }
-  .visit-foot-link { display: inline-flex; align-items: center; gap: 4px; color: var(--gold); text-decoration: none; font-family: 'Josefin Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+  .visit-foot-link { display: inline-flex; align-items: center; gap: 4px; color: var(--brown); text-decoration: none; font-family: 'Josefin Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; transition: color 200ms; }
   .visit-foot-link span { font-size: 12px; }
-  .visit-map { width: 140px; height: 100px; border-radius: 10px; overflow: hidden; flex-shrink: 0; }
+  .visit-map { width: 200px; height: 135px; border-radius: 10px; overflow: hidden; flex-shrink: 0; position: relative; }
   .visit-map svg { width: 100%; height: 100%; display: block; }
+  .visit-map iframe { width: calc(100% + 160px); height: calc(100% + 60px); display: block; border: 0; margin-left: -80px; margin-top: -30px; }
 
   /* STORES */
   .stores { background: var(--cream); padding: 80px 0; position: relative; overflow: hidden; }
@@ -377,7 +380,7 @@
     .visit-cta:hover { background: var(--gold-light); }
     .visit-pill-btn:hover { background: var(--brown-dark); color: white; border-color: var(--brown-dark); }
     .visit-card-photo:hover img { transform: scale(1.05); }
-    .visit-foot-link:hover { color: var(--gold-light); }
+    .visit-foot-link:hover { color: var(--gold); }
   }
 
   /* ===== ACTIVE / PRESS STATES ===== */
@@ -415,7 +418,7 @@
   @media (min-width: 1400px) {
     .section-inner { padding: 0 80px; }
     #benefits .section-inner,
-    #stores .section-inner { padding: 0 32px; }
+    #stores .section-inner { padding: 0 80px; }
     .timeline-inner { padding: 0 80px; }
     .brands-showcase { padding: 72px 80px 100px; }
 
@@ -430,7 +433,7 @@
     .polaroid { width: 220px; }
     .polaroid-img { height: 210px; }
     /* Rope SVG must align with polaroids' content zone (extra 80px padding each side) */
-    .clothesline-svg { left: 140px; right: 140px; width: calc(100% - 280px); }
+    .clothesline-svg { left: 0; right: 0; width: 100%; }
 
     .benefits-grid { gap: 60px; }
     .benefits-img { height: 520px; }
@@ -444,10 +447,10 @@
 
   /* ===== TABLET (≤ 768px) ===== */
   @media (max-width: 768px) {
-    .page { margin: 10px; border-radius: 16px; }
+    .page { margin: 0; border-radius: 0; }
     .section-inner { padding: 0 36px; }
     #benefits .section-inner,
-    #stores .section-inner { padding: 0 16px; }
+    #stores .section-inner { padding: 0 40px; }
 
     nav { top: 16px; width: calc(100% - 40px); padding: 10px 22px; gap: 24px; }
     .nav-logo img { width: 150px; height: 46px; }
@@ -457,19 +460,22 @@
     .hero-aside--right, .hero-aside--left { grid-column: 1; grid-row: auto; max-width: 100%; margin: 0 auto; padding-top: 0; text-align: center; }
     .hero-eyebrow { grid-column: 1; grid-row: auto; text-align: center; font-size: clamp(32px, 8vw, 56px); }
     .hero-stat-label { margin-left: auto; margin-right: auto; }
-    .hero-photo-wrap { height: calc(1500px + 100vh); }
+    .hero-photo-wrap { height: calc(900px + 100vh); }
+    .parallax-center { background-size: cover !important; background-position: 38% 60% !important; }
+    .about { padding-top: 0; }
 
     .about-img-wrap { height: 280px; }
     .brands-showcase { padding: 40px 36px 64px; }
     .brands-tagline { font-size: 17px; margin-bottom: 36px; }
     .brand-item { padding: 28px 12px; min-height: 72px; }
+    .bl { opacity: 0.85; }
     .bl-nike { font-size: 22px; }
     .bl-zara { font-size: 24px; }
     .bl-kfc  { font-size: 28px; }
     .bl-hm   { font-size: 22px; }
 
     .clothesline-wrap { height: 460px; padding: 0 36px; }
-    .clothesline-svg { left: 36px; right: 36px; width: calc(100% - 72px); height: 160px; }
+    .clothesline-svg { left: 0; right: 0; width: 100%; height: 160px; }
     .polaroid { width: 180px; padding: 10px 10px 14px; }
     .polaroid-img { height: 200px; }
     .polaroid:nth-child(1) { --ty: 68px; --rot: -10deg; }
@@ -494,7 +500,7 @@
     .visit-card--find { padding: 0; min-height: 540px; }
     .find-content { padding: 28px 28px 0; }
     .visit-card-foot { flex-direction: column; align-items: flex-start; }
-    .visit-map { width: 100%; height: 120px; }
+    .visit-map { width: 100%; aspect-ratio: 16 / 10; height: auto; max-height: 280px; }
 
     .stores-grid { grid-template-columns: repeat(2, 1fr); }
     .featured-carousel { grid-template-columns: 1fr; gap: 18px; }
@@ -519,44 +525,35 @@
   /* ===== MOBILE (≤ 480px) ===== */
   @media (max-width: 480px) {
 
-    /* ── Root overflow fix ── */
-    html, body { overflow-x: hidden; max-width: 100%; }
+    /* ── Root overflow ── */
+    html, body { overflow-x: hidden; }
     .page { margin: 0; border-radius: 0; overflow-x: clip; }
-    *, *::before, *::after { max-width: 100%; }
-    .section-inner { padding: 0 20px; max-width: 100%; }
+    /* Target only media elements — avoid the aggressive * rule that breaks flex/grid */
+    img, video, iframe, object, embed { max-width: 100%; }
+    .section-inner { padding: 0 20px; }
     #benefits .section-inner,
-    #stores .section-inner { padding: 0 12px; }
+    #stores .section-inner { padding: 0 20px; }
 
-    /* ── Nav ── */
-    nav {
-      top: 12px; width: calc(100% - 24px); padding: 8px 16px;
-      gap: 0; border-radius: 14px; position: fixed;
-    }
-    .nav-logo img { width: 120px; height: 38px; }
-    .nav-hamburger { display: flex; }
-    .nav-links {
-      display: none; position: absolute; top: calc(100% + 10px); left: 0; right: 0;
-      flex-direction: column; background: rgba(255,255,255,0.97); backdrop-filter: blur(16px);
-      border-radius: 14px; padding: 8px 12px; gap: 0;
-      border: 1px solid rgba(216,176,69,0.2); box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-      z-index: 200;
-    }
-    .nav-links.open { display: flex; }
-    .nav-links li { display: block !important; }
-    .nav-links a {
-      font-size: 11px; padding: 14px 8px; display: block;
-      border-bottom: 1px solid rgba(216,176,69,0.12); letter-spacing: 2px;
-    }
-    .nav-links li:last-child a {
-      border-bottom: none; border-radius: 8px; margin-top: 4px; text-align: center;
-    }
-    .nav-cta { padding: 10px 20px !important; }
+    /* ── Staggered nav (overrides the 768px block) ── */
+    .staggered-menu-header { padding: 10px 16px; }
+    .sm-logo-img { height: 30px; max-width: 120px; width: auto; }
+    .sm-toggle { font-size: 17px; gap: 10px; }
+    .sm-icon { width: 17px; height: 17px; flex: 0 0 17px; }
 
     /* ── Hero ── */
-    .hero-upper { padding: 32px 20px 16px; }
-    .hero-photo-wrap { height: calc(1500px + 100vh); }
-    .hero-stat-num { font-size: 36px; }
+    .hero-upper { padding: 70px 20px 20px; }
+    .hero-title {
+      font-size: clamp(38px, 11vw, 58px);
+      white-space: normal;
+      word-break: break-word;
+    }
+    .hero-eyebrow { font-size: clamp(28px, 7vw, 44px); }
+    .hero-stat-num { font-size: 34px; }
     .hero-stat-label { font-size: 11px; }
+    /* Shorten the hero parallax well and hide the floating overlay images */
+    .hero-photo-wrap { height: calc(280px + 60vh); }
+    .parallax-center { background-size: cover !important; background-position: center 40% !important; }
+    .parallax-imgs-container { display: none; }
 
     /* ── About ── */
     .about { padding: 0 0 48px; }
@@ -578,31 +575,7 @@
     .script-label { font-size: 20px; }
     .section-title { font-size: clamp(32px, 9vw, 52px); letter-spacing: 1px; }
 
-    /* ── Gallery ── */
-    .gallery { padding: 10px 0 48px; overflow: hidden; }
-    .clothesline-wrap { height: auto; padding: 0 20px; }
-    .clothesline-svg { display: none; }
-    .pin-layer { display: none; }
-    .polaroids { flex-direction: column; gap: 32px; align-items: center; padding: 20px 0 60px; }
-    .polaroid { width: 75%; max-width: 280px; }
-    .polaroid-img { height: 220px; }
-    .polaroid { opacity: 1 !important; animation: none !important; }
-    .polaroid:nth-child(odd)  { transform: rotate(-3deg) !important; }
-    .polaroid:nth-child(even) { transform: rotate(3deg)  !important; }
-    .polaroid-label { bottom: -42px; font-size: 17px; }
-    .polaroids { padding: 0 20px; gap: 12px; }
-    .polaroid { width: 140px; padding: 8px 8px 30px; }
-    .polaroid-img { height: 100px; }
-    .polaroid-label { font-size: 10px; letter-spacing: 1px; }
-    /* Gallery tagline — prevent overflow */
-    .gallery .section-inner { text-align: center; }
-    .gallery .section-inner p { white-space: normal !important; }
-    .gallery .section-inner p:first-child {
-      font-size: 16px !important; letter-spacing: 1.5px !important; line-height: 1.4 !important;
-    }
-    .gallery .section-inner p:last-child {
-      font-size: 9px !important; letter-spacing: 2px !important;
-    }
+    /* ── Gallery — handled by @media (max-width: 767px) block below ── */
 
     /* ── Timeline — vertical layout ── */
     .timeline { padding: 40px 0; }
@@ -627,15 +600,14 @@
     .timeline-thumb { display: none; }
     .timeline-event { max-width: none; text-align: left; font-size: 9px; letter-spacing: 1px; }
 
-    /* ── Benefits ── */
-    .benefits { padding: 40px 0 56px; }
+    /* ── Benefits / Visit ── */
+    .benefits { padding: 40px 0; }
     .palm-watermark { display: none; }
     .benefits-grid { grid-template-columns: 1fr; margin-top: 28px; }
     .benefits-list { padding-right: 0; }
     .benefit-item { justify-content: space-between; padding: 16px 0; }
     .benefit-name { text-align: left; font-size: 11px; letter-spacing: 1.5px; }
     .benefits-img { height: 220px; margin-top: 28px; }
-
     .visit-hero { height: 320px; border-radius: 18px; }
     .visit-hero-content { left: 22px; max-width: calc(100% - 44px); }
     .visit-hero-desc { font-size: 13px; margin-bottom: 20px; }
@@ -681,6 +653,8 @@
     .contact-field input,
     .contact-field textarea,
     .contact-field select { font-size: 16px; } /* prevents iOS zoom on focus */
+    /* Constrain the oversized logo image in the contact section */
+    .contact-layout img { width: 100% !important; max-width: 260px; display: block; }
 
     /* ── Footer ── */
     footer { padding: 36px 0 0; }
@@ -699,6 +673,8 @@
       align-items: center; gap: 8px; text-align: center;
     }
     .footer-legal { justify-content: center; }
+    /* Scale down the giant wordmark so it doesn't blow out small screens */
+    .footer-wordmark span { font-size: clamp(72px, 19vw, 180px); }
 
     /* ── Pill button ── */
     .pill-btn { font-size: 10px; padding: 8px 8px 8px 18px; }
@@ -707,14 +683,27 @@
 
   /* ── HOC Featured Carousel ───────────────────────────────────────────── */
   .hoc-section { background: #FAF4E8; padding: 0; }
-  .hoc-wrap { background: #FAF4E8; border-radius: 0; padding: 16px 60px 56px; width: 100%; box-sizing: border-box; }
+  .hoc-wrap { background: #FAF4E8; border-radius: 0; padding: 64px 60px; width: 100%; box-sizing: border-box; }
   .hoc-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; }
   .hoc-title { font-family: 'Montserrat', sans-serif; font-size: 34px; font-weight: 800; color: #111; line-height: 1.18; letter-spacing: -0.02em; }
-  .hoc-nav { display: flex; gap: 10px; align-items: center; flex-shrink: 0; }
-  .hoc-nav-btn { width: 48px; height: 48px; border-radius: 50%; border: none; display: flex; align-items: center; justify-content: center; font-size: 18px; cursor: pointer; transition: all 200ms; flex-shrink: 0; }
-  .hoc-nav-btn--prev { background: rgba(216,176,69,0.15); color: rgba(216,176,69,0.45); cursor: not-allowed; }
-  .hoc-nav-btn--next { background: var(--gold); color: #fff; }
-  .hoc-nav-btn--next:hover { background: var(--gold-light); }
+  .hoc-nav { display: flex !important; gap: 10px; align-items: center; flex-shrink: 0; }
+  .hoc-nav-btn { width: 48px; height: 48px; border: 2px solid var(--brown); background: var(--brown); padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease; flex-shrink: 0; color: #fff; box-shadow: 0 4px 20px rgba(40,29,2,0.22); overflow: hidden; position: relative; }
+  .hoc-nav-btn svg { width: 22px; height: 22px; display: block; }
+  .hoc-nav-btn:hover { background: transparent; color: var(--brown); }
+  .hoc-nav-btn--prev:hover svg { animation: hocSwipeLeft 0.55s cubic-bezier(0.65, 0, 0.35, 1); }
+  .hoc-nav-btn--next:hover svg { animation: hocSwipeRight 0.55s cubic-bezier(0.65, 0, 0.35, 1); }
+  @keyframes hocSwipeLeft {
+    0%   { transform: translateX(0); opacity: 1; }
+    49%  { transform: translateX(-140%); opacity: 0; }
+    50%  { transform: translateX(140%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  @keyframes hocSwipeRight {
+    0%   { transform: translateX(0); opacity: 1; }
+    49%  { transform: translateX(140%); opacity: 0; }
+    50%  { transform: translateX(-140%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
   .hoc-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 14px; align-items: start; }
   .hoc-main-card { background: #1C1C1C; border-radius: 18px; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; min-height: 440px; }
   .hoc-img-wrap { position: relative; overflow: hidden; }
@@ -746,7 +735,7 @@
   .hoc-cta-icon svg { width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transform: rotate(45deg); transition: stroke 0.35s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
   .hoc-cta:hover .hoc-cta-icon svg { stroke: var(--gold); transform: rotate(90deg); }
   @media (max-width: 768px) {
-    .hoc-section { padding: 40px 24px; }
+    .hoc-section { padding: 0; }
     .hoc-grid { grid-template-columns: 1fr; }
     .hoc-main-card { grid-template-columns: 1fr; min-height: auto; }
     .hoc-img-wrap { height: 220px; }
@@ -774,22 +763,36 @@
   .promo-btn--outline.hovered .promo-label { color: #fff; transition: color 0.35s ease 0.1s; }
   .promo-btn--outline.leaving .promo-label { color: var(--brown); transition: color 0.25s ease; }
   .promo-right { display: flex; align-items: center; justify-content: center; }
-  .promo-cards-bg { background: #FAF4E8; border-radius: 24px; width: 100%; padding: 40px 28px; display: flex; align-items: center; justify-content: center; min-height: 640px; }
-  .promo-cards-wrap { position: relative; width: 380px; height: 580px; }
-  .promo-card { position: absolute; width: 300px; background: #fff; border-radius: 22px; box-shadow: 0 16px 48px rgba(40,29,2,0.16); overflow: hidden; border: 1px solid rgba(216,176,69,0.14); }
-  .promo-card--back { top: 0; right: 0; transform: rotate(7deg); transform-origin: bottom right; }
-  .promo-card--front { top: 110px; left: 0; transform: rotate(-4deg); transform-origin: bottom left; }
-  .promo-card-img { width: 100%; height: 300px; object-fit: cover; display: block; }
-  .promo-card-body { display: flex; align-items: center; gap: 10px; padding: 12px 14px 6px; }
-  .promo-card-logo { width: 36px; height: 36px; border-radius: 50%; background: var(--brown); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; font-family: 'Montserrat', sans-serif; flex-shrink: 0; letter-spacing: 0.02em; }
-  .promo-card-name { font-size: 13px; font-weight: 700; color: var(--brown); font-family: 'Montserrat', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .promo-card-loc { font-size: 11px; color: var(--text-muted); font-family: 'Montserrat', sans-serif; }
-  .promo-card-footer { border-top: 1.5px dashed rgba(216,176,69,0.35); margin: 0 14px; padding: 9px 0 12px; display: flex; align-items: center; gap: 7px; }
-  .promo-voucher-icon { font-size: 15px; flex-shrink: 0; }
-  .promo-voucher-text { font-size: 12px; color: var(--gold); font-weight: 600; font-family: 'Montserrat', sans-serif; }
+  .promo-cards-bg { background: #FAF4E8; border-radius: 24px; width: 100%; padding: 40px 28px; display: flex; align-items: center; justify-content: center; min-height: 720px; }
+  .promo-cards-wrap { position: relative; width: 420px; height: 660px; }
+  .promo-card { position: absolute; width: 320px; height: 480px; background: transparent; border-radius: 20px; box-shadow: 0 16px 48px rgba(40,29,2,0.16); overflow: visible; cursor: pointer; transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), top 0.45s ease, left 0.45s ease, right 0.45s ease; }
+  .promo-card-inner { border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.07); position: relative; height: 100%; }
+  .promo-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .promo-card--back { top: 0; right: 0; left: auto; transform: rotate(7deg); transform-origin: bottom right; z-index: 1; }
+  .promo-card--front { top: 130px; left: 0; right: auto; transform: rotate(-4deg); transform-origin: bottom left; z-index: 2; }
+  .promo-card-panel { position: absolute; bottom: 10px; left: 10px; right: 10px; background: #fff; border-radius: 14px; padding: 12px 13px; box-shadow: 0 2px 12px rgba(0,0,0,0.12); z-index: 1; -webkit-mask-image: radial-gradient(circle 10px at 0% 68px, transparent 10px, white 10.5px), radial-gradient(circle 10px at 100% 68px, transparent 10px, white 10.5px), linear-gradient(white, white); -webkit-mask-composite: destination-in, destination-in; mask-image: radial-gradient(circle 10px at 0% 68px, transparent 10px, white 10.5px), radial-gradient(circle 10px at 100% 68px, transparent 10px, white 10.5px), linear-gradient(white, white); mask-composite: intersect, intersect; }
+  .promo-card-top { display: flex; align-items: center; gap: 9px; padding: 0 0 10px; }
+  .promo-card-logo { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #E5E5E5; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 8.5px; font-weight: 800; font-style: italic; font-family: 'Arial Black', sans-serif; flex-shrink: 0; letter-spacing: -0.3px; }
+  .promo-card-info { flex: 1; min-width: 0; }
+  .promo-card-name { font-size: 13.5px; font-weight: 700; color: #111; font-family: 'Montserrat', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.3; }
+  .promo-card-loc { font-size: 11.5px; color: #999; font-family: 'Montserrat', sans-serif; margin-top: 3px; }
+  .promo-card-chevron { color: #CCC; font-size: 22px; line-height: 1; flex-shrink: 0; }
+  .promo-card-divider { position: relative; height: 20px; display: flex; align-items: center; margin: 0 -13px 10px; }
+  .promo-card-divider::before { content: ''; position: absolute; left: 13px; right: 13px; border-top: 1.5px dashed #E5E5E5; }
+  .promo-notch { display: none; }
+  .promo-notch--left { left: -10px; }
+  .promo-notch--right { right: -10px; }
+  .promo-card-bottom { display: flex; align-items: center; gap: 10px; padding: 0; }
+  .promo-voucher-icon-wrap { width: 36px; height: 36px; border-radius: 9px; background: #FFF0F3; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .promo-voucher-info { flex: 1; }
+  .promo-voucher-count { font-size: 12px; font-weight: 500; color: #333; font-family: 'Montserrat', sans-serif; }
+  .promo-voucher-remaining { font-size: 11px; color: #999; font-family: 'Montserrat', sans-serif; }
+  .promo-use-now { background: #E4002B; color: #fff; border: none; border-radius: 14px; padding: 7px 12px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: 'Montserrat', sans-serif; white-space: nowrap; flex-shrink: 0; }
   @media (max-width: 900px) {
     .promo-wrap { grid-template-columns: 1fr; margin: 0; padding: 40px 28px; gap: 40px; }
-    .promo-cards-bg { min-height: 280px; }
+    .hoc-wrap { padding: 40px 28px; }
+    #benefits .section-inner, #stores .section-inner { padding: 0 28px; }
+    .promo-cards-bg { min-height: 360px; }
   }
 
   /* ── Staggered Menu ─────────────────────────────────────────────────── */
@@ -869,6 +872,284 @@
     .sm-panel-item { font-size: clamp(36px, 9vw, 56px); }
     .sm-left-face { display: none; }
   }
+
+  /* ===== IPAD / MEDIUM TABLET (641px – 1199px) ===== */
+  @media (min-width: 641px) and (max-width: 1199px) {
+    .page { margin: 0; border-radius: 0; }
+    .section-inner { padding: 0 40px; }
+    #benefits .section-inner, #stores .section-inner { padding: 0 40px; }
+
+    /* Nav — horizontal, slightly smaller */
+    nav { width: calc(100% - 48px); padding: 10px 24px; gap: 20px; top: 20px; }
+    .nav-logo img { width: 148px; height: 46px; }
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: 10px; letter-spacing: 1.5px; }
+
+    /* Hero — restore 4-col grid and children placements */
+    .hero-upper { padding: 48px 40px 28px; grid-template-columns: 140px 1fr 1fr 160px; column-gap: 14px; row-gap: 14px; text-align: left; align-items: end; }
+    .hero-title { grid-column: 1 / 4; grid-row: 1; font-size: clamp(52px, 11vw, 120px); white-space: nowrap; }
+    .hero-aside--right { grid-column: 4; grid-row: 1; margin: 0; padding-top: 18px; text-align: left; }
+    .hero-aside--left { grid-column: 1; grid-row: 2; margin: 0; text-align: left; }
+    .hero-eyebrow { grid-column: 2 / 5; grid-row: 2; text-align: right; font-size: clamp(30px, 7vw, 72px); }
+    .hero-stat-label { margin-left: 0; margin-right: 0; }
+    .hero-photo-wrap { height: calc(900px + 100vh); }
+    .parallax-center { background-size: cover !important; background-position: 38% 60% !important; }
+
+    /* Brands */
+    .about { padding-top: 0; }
+    .brands-showcase { padding: 32px 40px 72px; }
+    .brand-item { padding: 28px 10px; }
+
+    /* Gallery — single clothesline, scaled for tablet, full rope + pin physics */
+    .gallery { padding: 40px 0 110px; }
+    .clothesline-wrap { height: 460px; padding: 0 20px; overflow: visible; }
+    .clothesline-svg { display: block; left: 0; right: 0; width: 100%; }
+    .pin-layer { display: block; }
+    .polaroids {
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-items: flex-start;
+      gap: 0;
+      padding: 0;
+      position: relative;
+    }
+    /* Reset any ::before/::after added for the old two-row design */
+    .polaroids::before, .polaroids::after { display: none; }
+    /* Cards — clamp width so all 5 always fit the viewport */
+    .polaroid {
+      width: clamp(115px, 17vw, 180px);
+      padding: 10px 10px 14px;
+      flex-shrink: 0;
+      overflow: visible;   /* clothespin overlaps top edge */
+    }
+    .polaroid-img { height: clamp(120px, 17vh, 185px); }
+    /* Labels below card — standard clothesline style */
+    .polaroid-label {
+      position: absolute;
+      bottom: -42px;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      text-align: center;
+      font-size: clamp(11px, 1.4vw, 16px);
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      background: none;
+      padding: 0;
+      pointer-events: none;
+    }
+    /* Staggered hang depths matching desktop proportions */
+    .polaroid:nth-child(1) { --ty: 58px;  --rot: -10deg; }
+    .polaroid:nth-child(2) { --ty: 92px;  --rot:   7deg; }
+    .polaroid:nth-child(3) { --ty: 108px; --rot:  -3deg; }
+    .polaroid:nth-child(4) { --ty: 92px;  --rot:   9deg; }
+    .polaroid:nth-child(5) { --ty: 58px;  --rot:  12deg; }
+
+    /* Timeline — keep horizontal */
+    .timeline-inner { padding: 0 40px; }
+    .timeline-thumb { width: 68px; height: 46px; }
+    .timeline-year { font-size: 24px; }
+    .timeline-event { font-size: 9px; }
+
+    /* Benefits */
+    .benefits-grid { grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .benefits-img { height: 360px; }
+
+    /* Visit */
+    .visit-hero { height: 400px; }
+    .visit-hero-content { left: 44px; }
+    .visit-cards { grid-template-columns: 1fr 1fr; gap: 16px; }
+    .visit-card { padding: 28px; }
+    .visit-card--find { min-height: 520px; }
+
+    /* Stores */
+    .stores-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .featured-carousel { grid-template-columns: 3fr 2fr; }
+    .store-tile { width: 155px; height: 175px; }
+
+    /* HOC */
+    .hoc-wrap { padding: 48px 40px; }
+    .hoc-header { padding: 20px 0 18px; }
+    .hoc-grid { grid-template-columns: 3fr 2fr; }
+    .hoc-title { font-size: 42px; }
+    .hoc-main-card { min-height: 400px; }
+    .hoc-thumb { height: 340px; }
+    .hoc-card-title { font-size: 26px; }
+    .hoc-card-desc { font-size: 13.5px; }
+
+    /* Promo */
+    .promo-wrap { padding: 48px 40px; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    /* Contact */
+    .contact-layout { grid-template-columns: 1fr 1fr; gap: 60px; }
+
+    /* Footer */
+    .footer-top { padding: 0 40px 48px; }
+    .footer-socials { padding: 20px 40px; }
+    .footer-bottom { padding: 16px 40px; }
+  }
+
+  /* ===== MOBILE — HOC / Promo ===== */
+  @media (max-width: 480px) {
+    /* ── HOC Featured Stores ── */
+    .hoc-wrap { padding: 36px 20px; }
+    .hoc-header { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 12px; }
+    .hoc-header .stores-subtitle { font-size: 14px !important; margin-top: 6px !important; }
+    .hoc-nav { flex-shrink: 0; align-self: flex-end; }
+    .hoc-grid { grid-template-columns: 1fr; }
+    .hoc-main-card { grid-template-columns: 1fr; min-height: auto; }
+    .hoc-img-wrap { height: 200px; }
+    .hoc-card-title { font-size: 18px; }
+    .hoc-card-desc { font-size: 12px; line-height: 1.6; }
+    .hoc-thumb { height: 150px; }
+    .hoc-thumb-row { gap: 6px; }
+
+    /* ── Offers & Promotions ── */
+    .promo-wrap { padding: 36px 20px; gap: 28px; }
+    .promo-title { font-size: clamp(22px, 6vw, 30px); word-break: break-word; }
+    .promo-features { grid-template-columns: 1fr; gap: 16px; }
+    .promo-btns { flex-wrap: wrap; gap: 10px; }
+    .promo-cards-bg { padding: 28px 12px; min-height: 320px; }
+    .promo-cards-wrap { width: 100%; height: 340px; }
+    .promo-card { width: clamp(180px, 62vw, 230px); height: 280px; }
+    .promo-card--front { top: 60px; }
+  }
+
+  /* ===== MOBILE GALLERY — vertical hanging timeline with photo labels (≤767px) =====
+     Overrides the tablet block (641–1199px) for phones.
+     Desktop clothesline (hover physics, rope, clothespins) is untouched.
+  ═══════════════════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 767px) {
+    /* ── Unlock sticky: overflow:clip on .page/.hero blocks position:sticky in Chrome ── */
+    .page { overflow: visible; }
+    .hero { overflow: visible; }
+    /* Prevent horizontal bleed now that overflow is visible */
+    html, body { overflow-x: clip; }
+
+    /* ── Hero parallax — portrait photo + clip-path polygon expansion on phones ── */
+    .parallax-center {
+      background-image: url('rupas_mall_portrait_v2.png') !important;
+      background-size: cover !important;        /* always cover — JS animates clip-path only */
+      background-position: center center !important;
+    }
+    /* Give the wrap enough height so the polygon expansion has ~900px of scroll room */
+    .hero-photo-wrap { height: calc(900px + 100vh); }
+    /* Restore floating overlay images on mobile */
+    .parallax-imgs-container { display: block; }
+    .parallax-imgs-inner { padding-top: 120px; max-width: 100%; }
+
+    .gallery { padding: 10px 0 70px; overflow: hidden; }
+    .clothesline-wrap { height: auto; min-height: 0; padding: 0 20px; overflow: visible; }
+    .clothesline-svg { display: none; }
+    .pin-layer { display: none; }
+
+    /* ── Gallery — photos taped to wall ── */
+    .polaroids {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 48px;
+      padding: 36px 0 24px;
+      position: relative;
+    }
+    /* Remove thread — tape replaces the clothesline concept */
+    .polaroids::before { display: none; }
+    .polaroids::after  { display: none; }
+
+    /* Individual card — visible overflow so tape sticks out above */
+    .polaroid {
+      width: 78%;
+      max-width: 288px;
+      padding: 10px 10px 10px;
+      margin-bottom: 0;
+      overflow: visible;
+      flex-shrink: 0;
+      opacity: 1 !important;
+      animation: none !important;
+      position: relative;
+      z-index: 1;
+      transform: translateX(var(--tx, 0px)) rotate(var(--rot, 0deg));
+    }
+
+    /* Tape strip — sticks out above each card */
+    .polaroid::before {
+      content: '';
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      width: 66px;
+      height: 21px;
+      background: var(--tape-clr, rgba(255,228,100,0.85));
+      border-radius: 2px;
+      transform: translateX(-50%) rotate(var(--tape-rot, 0deg));
+      z-index: 5;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    }
+
+    /* Per-card: rotation, x-offset, tape colour, tape angle */
+    .polaroid:nth-child(1) {
+      --rot: -5deg;  --tx: -20px;
+      --tape-clr: rgba(130, 210, 248, 0.88);   /* sky blue   */
+      --tape-rot: -8deg;
+    }
+    .polaroid:nth-child(2) {
+      --rot:  4deg;  --tx: 22px;
+      --tape-clr: rgba(255, 225, 95, 0.90);    /* yellow     */
+      --tape-rot: 10deg;
+    }
+    .polaroid:nth-child(3) {
+      --rot: -3deg;  --tx: -14px;
+      --tape-clr: rgba(255, 162, 172, 0.88);   /* coral pink */
+      --tape-rot: -11deg;
+    }
+    .polaroid:nth-child(4) {
+      --rot:  6deg;  --tx: 18px;
+      --tape-clr: rgba(140, 220, 180, 0.88);   /* mint green */
+      --tape-rot: 7deg;
+    }
+    .polaroid:nth-child(5) {
+      --rot: -4deg;  --tx: -16px;
+      --tape-clr: rgba(202, 166, 248, 0.88);   /* lavender   */
+      --tape-rot: -6deg;
+    }
+
+    .polaroid-img { height: 210px; }
+
+    /* Label: gradient overlay on the photo, inside card bounds */
+    .polaroid-label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      right: 10px;
+      transform: none;
+      white-space: normal;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 2px;
+      line-height: 1.15;
+      color: rgba(255, 248, 220, 0.96);
+      padding: 42px 10px 9px;
+      background: linear-gradient(
+        to top,
+        rgba(40,29,2,0.90) 0%,
+        rgba(40,29,2,0.50) 55%,
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Gallery tagline */
+    .gallery .section-inner { text-align: center; }
+    .gallery .section-inner p { white-space: normal !important; word-break: break-word; }
+    .gallery .section-inner p:first-child {
+      font-size: 16px !important; letter-spacing: 1.5px !important; line-height: 1.5 !important;
+    }
+    .gallery .section-inner p:last-child {
+      font-size: 9px !important; letter-spacing: 2px !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -907,7 +1188,7 @@
     <div class="sm-panel-inner">
       <ul class="sm-panel-list" role="list" data-numbering>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#top"           data-nav="home"   ><span class="sm-panel-itemLabel">Home</span></a></li>
-        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#about"         data-nav="news"   ><span class="sm-panel-itemLabel">News</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="news.html"       data-nav="news"   ><span class="sm-panel-itemLabel">News</span></a></li>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="all-stores.html" data-nav="stores"><span class="sm-panel-itemLabel">Stores</span></a></li>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#gallery"       data-nav="gallery"><span class="sm-panel-itemLabel">Gallery</span></a></li>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="#footer"        data-nav="contact"><span class="sm-panel-itemLabel">Contact</span></a></li>
@@ -1111,7 +1392,7 @@
             Eldoret 30100<br/>
             Uasin Gishu, Kenya
           </p>
-          <a href="https://maps.google.com" target="_blank" rel="noopener" class="visit-pill-btn">Directions <span>&#8599;</span></a>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=0.5140059%2C35.2909124&amp;destination_place_id=Rupa%27s+Mall&amp;travelmode=driving" target="_blank" rel="noopener" class="visit-pill-btn">Directions <span>&#8599;</span></a>
         </div>
         <div class="visit-chips">
           <!-- Row 1 -->
@@ -1188,20 +1469,14 @@
               Eldoret 30100<br/>
               Uasin Gishu, Kenya
             </p>
-            <a href="https://maps.google.com" target="_blank" rel="noopener" class="visit-foot-link">Directions <span>&#8599;</span></a>
+            <a href="https://www.google.com/maps/dir/?api=1&amp;destination=0.5140059%2C35.2909124&amp;destination_place_id=Rupa%27s+Mall&amp;travelmode=driving" target="_blank" rel="noopener" class="visit-foot-link">Directions <span>&#8599;</span></a>
           </div>
-          <div class="visit-map" aria-hidden="true">
-            <svg viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
-              <rect width="140" height="100" fill="#e8e2d3"/>
-              <path d="M0,30 L140,30" stroke="#cfc6b0" stroke-width="2"/>
-              <path d="M0,60 L140,60" stroke="#cfc6b0" stroke-width="2"/>
-              <path d="M40,0 L40,100" stroke="#cfc6b0" stroke-width="2"/>
-              <path d="M85,0 L85,100" stroke="#cfc6b0" stroke-width="2"/>
-              <path d="M0,75 L60,75 L60,100" stroke="#b8a878" stroke-width="2.5" fill="none"/>
-              <path d="M85,20 L120,20 L120,55" stroke="#b8a878" stroke-width="2.5" fill="none"/>
-              <circle cx="70" cy="50" r="6" fill="#D8B045"/>
-              <circle cx="70" cy="50" r="2.5" fill="white"/>
-            </svg>
+          <div class="visit-map">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox=35.260%2C0.507%2C35.280%2C0.527&layer=mapnik&marker=0.5167%2C35.2698"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
       </div>
@@ -1217,12 +1492,20 @@
     <div class="hoc-header" style="margin-bottom:18px;">
       <div>
         <span class="script-label" style="text-align:left; font-size:34px;">discover</span>
-        <h2 class="section-title" style="text-align:left; font-size:clamp(52px,6vw,88px); letter-spacing:3px;">FEATURED<br>STORES</h2>
+        <h2 id="featured-stores-title" class="section-title" style="text-align:left; font-size:clamp(52px,6vw,88px); letter-spacing:3px;">FEATURED<br>STORES</h2>
         <p class="stores-subtitle" style="text-align:left; margin:10px 0 0; font-size:20px;">From everyday essentials to luxury indulgences — discover brands that define the Rupa Mall experience.</p>
       </div>
       <div class="hoc-nav">
-        <button class="hoc-nav-btn hoc-nav-btn--prev" id="hoc-prev" aria-label="Previous slide">&#8592;</button>
-        <button class="hoc-nav-btn hoc-nav-btn--next" id="hoc-next" aria-label="Next slide">&#8594;</button>
+        <button class="hoc-nav-btn hoc-nav-btn--prev" id="hoc-prev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M11 6L5 12L11 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="hoc-nav-btn hoc-nav-btn--next" id="hoc-next" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
     <div class="hoc-grid" id="hoc-carousel">
@@ -1292,31 +1575,59 @@
       <div class="promo-cards-bg">
         <div class="promo-cards-wrap">
           <div class="promo-card promo-card--back">
-            <img class="promo-card-img" src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80" alt="Fashion Avenue" />
-            <div class="promo-card-body">
-              <div class="promo-card-logo">FA</div>
-              <div class="promo-card-info">
-                <div class="promo-card-name">Fashion Ave...</div>
-                <div class="promo-card-loc">Ground Floor · Wing A</div>
+            <div class="promo-card-inner">
+              <img class="promo-card-img" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Nike Plaza" />
+              <div class="promo-card-panel">
+                <div class="promo-card-top">
+                  <div class="promo-card-logo" style="color:#111;">
+                    <svg viewBox="0 0 60 24" width="22" height="9" fill="#111" xmlns="http://www.w3.org/2000/svg"><path d="M0,22 C14,14 38,5 54,1 C62,-1 65,3 61,8 C55,14 32,21 0,22Z"/></svg>
+                  </div>
+                  <div class="promo-card-info">
+                    <div class="promo-card-name">Nike Plaza</div>
+                    <div class="promo-card-loc">📍 Level 1 · Wing A</div>
+                  </div>
+                  <span class="promo-card-chevron">›</span>
+                </div>
+                <div class="promo-card-divider">
+                  <div class="promo-notch promo-notch--left"></div>
+                  <div class="promo-notch promo-notch--right"></div>
+                </div>
+                <div class="promo-card-bottom">
+                  <div class="promo-voucher-icon-wrap">🎟</div>
+                  <div class="promo-voucher-info">
+                    <div class="promo-voucher-count">12 Vouchers</div>
+                    <div class="promo-voucher-remaining">Remaining</div>
+                  </div>
+                  <button class="promo-use-now">Use Now</button>
+                </div>
               </div>
-            </div>
-            <div class="promo-card-footer">
-              <span class="promo-voucher-icon">🎟</span>
-              <span class="promo-voucher-text">8 remaining offers</span>
             </div>
           </div>
           <div class="promo-card promo-card--front">
-            <img class="promo-card-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="The Food Quarter" />
-            <div class="promo-card-body">
-              <div class="promo-card-logo" style="background:var(--gold);">TF</div>
-              <div class="promo-card-info">
-                <div class="promo-card-name">Food Quarte...</div>
-                <div class="promo-card-loc">Ground Floor · Wing B</div>
+            <div class="promo-card-inner">
+              <img class="promo-card-img" src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&q=80" alt="H&M Fashion" />
+              <div class="promo-card-panel">
+                <div class="promo-card-top">
+                  <div class="promo-card-logo" style="color:#C8001C;">H&amp;M</div>
+                  <div class="promo-card-info">
+                    <div class="promo-card-name">H&amp;M Fashion</div>
+                    <div class="promo-card-loc">📍 Level 2 · Wing B</div>
+                  </div>
+                  <span class="promo-card-chevron">›</span>
+                </div>
+                <div class="promo-card-divider">
+                  <div class="promo-notch promo-notch--left"></div>
+                  <div class="promo-notch promo-notch--right"></div>
+                </div>
+                <div class="promo-card-bottom">
+                  <div class="promo-voucher-icon-wrap">🎟</div>
+                  <div class="promo-voucher-info">
+                    <div class="promo-voucher-count">2 Vouchers</div>
+                    <div class="promo-voucher-remaining">Remaining</div>
+                  </div>
+                  <button class="promo-use-now">Use Now</button>
+                </div>
               </div>
-            </div>
-            <div class="promo-card-footer">
-              <span class="promo-voucher-icon">🎟</span>
-              <span class="promo-voucher-text">3 remaining offers</span>
             </div>
           </div>
         </div>
@@ -1427,7 +1738,7 @@
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">2026. Rupa's Mall. All rights reserved.</span>
-    <span class="footer-brand">RUPA'S MALL</span>
+    <span class="footer-brand">RUPA’S MALL</span>
     <div class="footer-legal">
       <a href="#">Privacy Policy</a>
       <a href="#">Terms &amp; Conditions</a>
@@ -1963,20 +2274,32 @@
     ];
     var current = 0;
 
-    function xfade(id, src) {
+    function xtext(id, val) {
       var el = document.getElementById(id);
-      if (!el) return;
-      el.style.transition = 'opacity 0.4s';
-      el.style.opacity = '0';
-      setTimeout(function () { el.src = src; el.style.opacity = '1'; }, 200);
+      if (el) el.textContent = val;
+    }
+
+    function xfade(id, newSrc) {
+      var img = document.getElementById(id);
+      if (!img || img.getAttribute('src') === newSrc) return;
+      var overlay = new Image();
+      overlay.src = newSrc;
+      overlay.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.55s ease;';
+      img.parentNode.insertBefore(overlay, img.nextSibling);
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { overlay.style.opacity = '1'; });
+      });
+      setTimeout(function () {
+        img.src = newSrc;
+        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      }, 600);
     }
 
     function setBtn(id, active) {
       var el = document.getElementById(id);
       if (!el) return;
-      el.style.background = active ? 'var(--gold)'                 : 'rgba(216,176,69,0.15)';
-      el.style.color      = active ? '#fff'                        : 'rgba(216,176,69,0.45)';
-      el.style.cursor     = active ? 'pointer'                     : 'not-allowed';
+      el.style.opacity = active ? '1' : '0.35';
+      el.style.cursor  = active ? 'pointer' : 'not-allowed';
     }
 
     function render() {
@@ -1985,21 +2308,21 @@
       var t2 = slides[(current + 2) % slides.length];
 
       xfade('hoc-main-img', s.img);
-      var cat = document.getElementById('hoc-main-cat');   if (cat)  cat.textContent = s.cat;
-      var dt  = document.getElementById('hoc-main-date');  if (dt)   dt.textContent  = s.date;
-      var ttl = document.getElementById('hoc-main-title'); if (ttl)  ttl.textContent = s.title;
-      var dsc = document.getElementById('hoc-main-desc');  if (dsc)  dsc.textContent = s.desc;
+      xtext('hoc-main-cat',   s.cat);
+      xtext('hoc-main-date',  s.date);
+      xtext('hoc-main-title', s.title);
+      xtext('hoc-main-desc',  s.desc);
 
       xfade('hoc-t1-img', t1.img);
-      var t1c = document.getElementById('hoc-t1-cat');  if (t1c) t1c.textContent = t1.cat;
-      var t1n = document.getElementById('hoc-t1-name'); if (t1n) t1n.textContent = t1.title;
+      xtext('hoc-t1-cat',  t1.cat);
+      xtext('hoc-t1-name', t1.title);
 
       xfade('hoc-t2-img', t2.img);
-      var t2c = document.getElementById('hoc-t2-cat');  if (t2c) t2c.textContent = t2.cat;
-      var t2n = document.getElementById('hoc-t2-name'); if (t2n) t2n.textContent = t2.title;
+      xtext('hoc-t2-cat',  t2.cat);
+      xtext('hoc-t2-name', t2.title);
 
-      setBtn('hoc-prev', current > 0);
-      setBtn('hoc-next', current < slides.length - 1);
+      setBtn('hoc-prev', true);
+      setBtn('hoc-next', true);
     }
 
     render();
@@ -2007,9 +2330,9 @@
     var prev = document.getElementById('hoc-prev');
     var next = document.getElementById('hoc-next');
     var arr  = document.getElementById('hoc-arrow');
-    if (prev) prev.addEventListener('click', function () { if (current > 0)                    { current--; render(); } });
-    if (next) next.addEventListener('click', function () { if (current < slides.length - 1)    { current++; render(); } });
-    if (arr)  arr.addEventListener('click',  function () { if (current < slides.length - 1)    { current++; render(); } });
+    if (prev) prev.addEventListener('click', function () { current = (current - 1 + slides.length) % slides.length; render(); });
+    if (next) next.addEventListener('click', function () { current = (current + 1) % slides.length; render(); });
+    if (arr)  arr.addEventListener('click',  function () { current = (current + 1) % slides.length; render(); });
   })();
 
   // Staggered Menu
@@ -2192,13 +2515,43 @@
     }
 
     function tick() {
-      var wrapTop   = center.parentElement.getBoundingClientRect().top + window.scrollY;
+      /* On phones: same polygon expansion as desktop — clip-path 25%→0%, 75%→100%.
+         background-size stays cover (CSS !important); only clip-path is animated.
+         piItems also animated the same way as desktop. */
+      if (window.innerWidth <= 767) {
+        var wrapM      = center.parentElement;
+        var maxScrollM = Math.max(1, wrapM.offsetHeight - window.innerHeight);
+        var wrapTopM   = wrapM.getBoundingClientRect().top + window.scrollY;
+        var scrollM    = clamp(window.scrollY - wrapTopM, 0, maxScrollM);
+        var c1M = mapRange(scrollM, 0, maxScrollM, 25, 0);
+        var c2M = mapRange(scrollM, 0, maxScrollM, 75, 100);
+        center.style.clipPath        = 'polygon(' + c1M + '% ' + c1M + '%, ' + c2M + '% ' + c1M + '%, ' + c2M + '% ' + c2M + '%, ' + c1M + '% ' + c2M + '%)';
+        center.style.backgroundSize  = '';
+        center.style.backgroundPosition = '';
+        /* Animate floating overlay images */
+        var vhM = window.innerHeight;
+        piItems.forEach(function (img) {
+          var start    = parseFloat(img.dataset.piStart);
+          var end      = parseFloat(img.dataset.piEnd);
+          var rect     = img.getBoundingClientRect();
+          var progress = clamp((vhM - rect.top) / (vhM + rect.height), 0, 1);
+          var y        = start + (end - start) * progress;
+          var scale    = mapRange(progress, 0.75, 1, 1, 0.85);
+          var alpha    = mapRange(progress, 0.75, 1, 1, 0);
+          img.style.transform = 'translateY(' + y + 'px) scale(' + scale + ')';
+          img.style.opacity   = String(alpha);
+        });
+        return;
+      }
+      var wrap       = center.parentElement;
+      var maxScroll  = Math.max(1, wrap.offsetHeight - window.innerHeight);
+      var wrapTop    = wrap.getBoundingClientRect().top + window.scrollY;
       var heroScroll = window.scrollY - wrapTop;
 
-      var c1 = mapRange(heroScroll, 0, 1500, 25, 0);
-      var c2 = mapRange(heroScroll, 0, 1500, 75, 100);
+      var c1 = mapRange(heroScroll, 0, maxScroll, 25, 0);
+      var c2 = mapRange(heroScroll, 0, maxScroll, 75, 100);
       center.style.clipPath    = 'polygon(' + c1 + '% ' + c1 + '%, ' + c2 + '% ' + c1 + '%, ' + c2 + '% ' + c2 + '%, ' + c1 + '% ' + c2 + '%)';
-      center.style.backgroundSize = mapRange(heroScroll, 0, 2000, 170, 100) + '%';
+      center.style.backgroundSize = mapRange(heroScroll, 0, maxScroll, 170, 100) + '%';
 
       var vh = window.innerHeight;
       piItems.forEach(function (img) {
@@ -2219,5 +2572,188 @@
   }());
 
 </script>
+
+<!-- ── PROMO CARD TOGGLE ──────────────────────────────────────────────── -->
+<script>
+(function () {
+  document.addEventListener('DOMContentLoaded', function () {
+    var cards = Array.from(document.querySelectorAll('.promo-card'));
+    cards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        cards.forEach(function (c) {
+          if (c.classList.contains('promo-card--back')) {
+            c.style.zIndex = '3';
+            c.classList.remove('promo-card--back');
+            c.classList.add('promo-card--front');
+          } else {
+            c.classList.remove('promo-card--front');
+            c.classList.add('promo-card--back');
+            setTimeout(function () { c.style.zIndex = ''; }, 450);
+          }
+        });
+      });
+    });
+  });
+}());
+</script>
+
+<!-- ── RESIZE TOOL (disabled) ─────────────────────────────────────────── -->
+<script>
+(function () {
+  return; // tool removed
+  var active = false, sel = null, hov = null;
+
+  /* ── Toggle button ── */
+  var btn = document.createElement('button');
+  btn.textContent = '✏ Edit';
+  btn.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:2147483647;background:#c8a84b;color:#fff;border:none;padding:11px 20px;border-radius:50px;font:700 13px/1 sans-serif;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,0.22);transition:background .2s;';
+  document.body.appendChild(btn);
+
+  /* ── Panel ── */
+  var panel = document.createElement('div');
+  panel.style.cssText = 'display:none;position:fixed;bottom:72px;right:24px;z-index:2147483647;background:#fff;border-radius:14px;padding:16px 18px;box-shadow:0 8px 36px rgba(0,0,0,0.18);width:300px;font:13px/1.4 sans-serif;color:#222;';
+  document.body.appendChild(panel);
+
+  /* ── Overlay ── */
+  var ov = document.createElement('div');
+  ov.style.cssText = 'display:none;position:fixed;inset:0;z-index:2147483646;cursor:crosshair;';
+  document.body.appendChild(ov);
+
+  btn.addEventListener('click', function () {
+    active = !active;
+    btn.textContent  = active ? '✕ Done' : '✏ Edit';
+    btn.style.background = active ? '#e53935' : '#c8a84b';
+    ov.style.display = active ? 'block' : 'none';
+    if (!active) { clearSel(); panel.style.display = 'none'; }
+  });
+
+  /* ── Hover highlight ── */
+  ov.addEventListener('mousemove', function (e) {
+    ov.style.pointerEvents = 'none';
+    var el = document.elementFromPoint(e.clientX, e.clientY);
+    ov.style.pointerEvents = '';
+    if (!el || el === ov || el === btn || panel.contains(el)) return;
+    if (hov && hov !== sel) hov.style.outline = '';
+    hov = el;
+    if (hov !== sel) hov.style.outline = '2px dashed #3b82f6';
+  });
+
+  /* ── Click to select ── */
+  ov.addEventListener('click', function (e) {
+    ov.style.pointerEvents = 'none';
+    var el = document.elementFromPoint(e.clientX, e.clientY);
+    ov.style.pointerEvents = '';
+    if (!el || el === ov || el === btn || panel.contains(el)) return;
+    if (sel) sel.style.outline = '';
+    sel = el;
+    sel.style.outline = '2px solid #e53935';
+    renderPanel(sel);
+  });
+
+  function clearSel() {
+    if (sel) sel.style.outline = '';
+    if (hov) hov.style.outline = '';
+    sel = hov = null;
+  }
+
+  function renderPanel(el) {
+    var cs  = getComputedStyle(el);
+    var tag = el.tagName.toLowerCase();
+    var id  = el.id ? '#' + el.id : '';
+    var cls = el.className && typeof el.className === 'string'
+      ? '.' + el.className.trim().split(/\s+/).slice(0, 2).join('.')
+      : '';
+    var label = (id || cls || tag).slice(0, 36);
+
+    var props = [
+      { label: 'Padding',       keys: ['padding-top','padding-right','padding-bottom','padding-left'], short: true },
+      { label: 'Margin',        keys: ['margin-top','margin-right','margin-bottom','margin-left'],     short: true },
+      { label: 'Gap',           keys: ['gap'],           short: false },
+      { label: 'Width',         keys: ['width'],         short: false },
+      { label: 'Height',        keys: ['height'],        short: false },
+      { label: 'Font size',     keys: ['font-size'],     short: false },
+      { label: 'Border radius', keys: ['border-radius'], short: false },
+    ];
+
+    var html = '<div style="font-weight:700;margin-bottom:14px;color:#111;font-size:12px;word-break:break-all;">' + label + '</div>';
+
+    props.forEach(function (p) {
+      if (p.short) {
+        html += '<div style="margin-bottom:10px;"><div style="color:#666;font-size:11px;margin-bottom:4px;">' + p.label + ' (T / R / B / L)</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4px;">';
+        p.keys.forEach(function (k) {
+          html += '<input data-prop="' + k + '" value="' + cs.getPropertyValue(k) + '" style="border:1px solid #ddd;border-radius:6px;padding:5px 6px;font-size:11px;width:100%;box-sizing:border-box;" />';
+        });
+        html += '</div></div>';
+      } else {
+        var val = cs.getPropertyValue(p.keys[0]);
+        html += '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">'
+          + '<span style="width:90px;color:#666;font-size:11px;">' + p.label + '</span>'
+          + '<input data-prop="' + p.keys[0] + '" value="' + val + '" style="flex:1;border:1px solid #ddd;border-radius:6px;padding:5px 8px;font-size:11px;" />'
+          + '</div>';
+      }
+    });
+
+    html += '<button id="rt-copy" style="margin-top:10px;width:100%;background:#f4f4f4;border:1px solid #ddd;border-radius:8px;padding:8px;font-size:12px;cursor:pointer;">📋 Copy CSS changes</button>';
+
+    panel.innerHTML  = html;
+    panel.style.display = 'block';
+
+    var changed = {};
+    panel.querySelectorAll('input').forEach(function (inp) {
+      inp.addEventListener('input', function () {
+        var prop = inp.dataset.prop;
+        sel.style.setProperty(prop, inp.value);
+        changed[prop] = inp.value;
+      });
+    });
+
+    document.getElementById('rt-copy').addEventListener('click', function () {
+      var lines = Object.keys(changed).map(function (k) { return '  ' + k + ': ' + changed[k] + ';'; });
+      if (!lines.length) { alert('No changes yet — edit a value first.'); return; }
+      var css = label + ' {\n' + lines.join('\n') + '\n}';
+      navigator.clipboard.writeText(css).then(function () {
+        document.getElementById('rt-copy').textContent = '✓ Copied!';
+        setTimeout(function () { document.getElementById('rt-copy').textContent = '📋 Copy CSS changes'; }, 2000);
+      });
+    });
+  }
+})();
+
+  /* ── ScrollFloat: FEATURED STORES title ── */
+  (function () {
+    gsap.registerPlugin(ScrollTrigger);
+    var el = document.getElementById('featured-stores-title');
+    if (!el) return;
+    var lines = ['FEATURED', 'STORES'];
+    el.innerHTML = lines.map(function (line) {
+      var chars = line.split('').map(function (ch) {
+        return '<span class="scroll-float-char">' + ch + '</span>';
+      }).join('');
+      return '<span class="scroll-float-line">' + chars + '</span>';
+    }).join('');
+    gsap.fromTo(el.querySelectorAll('.scroll-float-char'), {
+      opacity: 0,
+      yPercent: 120,
+      scaleY: 2.3,
+      scaleX: 0.7,
+      transformOrigin: '50% 0%'
+    }, {
+      duration: 1,
+      ease: 'back.inOut(2)',
+      opacity: 1,
+      yPercent: 0,
+      scaleY: 1,
+      scaleX: 1,
+      stagger: 0.03,
+      scrollTrigger: {
+        trigger: el,
+        start: 'center bottom+=50%',
+        end: 'bottom bottom-=40%',
+        scrub: true
+      }
+    });
+  })();
+</script>
+
 </body>
 </html>

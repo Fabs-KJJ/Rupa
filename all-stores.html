@@ -21,11 +21,9 @@
     --text-muted: #808080;
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scrollbar-width: none; }
   body { background: #281d02; font-family: 'Montserrat', sans-serif; color: var(--brown); overflow-x: hidden; }
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--cream-dark); }
-  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+  ::-webkit-scrollbar { display: none; }
   .page { background: var(--cream); border-radius: 24px; margin: 16px auto; max-width: 1600px; overflow: hidden; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
 
   /* ── Staggered Menu ── */
@@ -204,7 +202,7 @@
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html"><span class="sm-panel-itemLabel">Home</span></a></li>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html#about"><span class="sm-panel-itemLabel">Brands</span></a></li>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html#gallery"><span class="sm-panel-itemLabel">Gallery</span></a></li>
-        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html#benefits"><span class="sm-panel-itemLabel">Offerings</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="news.html"><span class="sm-panel-itemLabel">News</span></a></li>
         <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html#contact"><span class="sm-panel-itemLabel">Contact</span></a></li>
       </ul>
       <div class="sm-socials" aria-label="Social links">
@@ -228,7 +226,7 @@
     <div class="hero-left">
       <span class="hero-eyebrow">browse all our</span>
       <h1 class="hero-title">STORES</h1>
-      <p class="hero-sub">Fashion &nbsp;·&nbsp; Dining &nbsp;·&nbsp; Electronics &nbsp;·&nbsp; Entertainment &nbsp;·&nbsp; Services<br>Uganda Road, Eldoret &nbsp;·&nbsp; Open Daily 08:00 – 21:00</p>
+      <p class="hero-sub">Fashion &nbsp;·&nbsp; Dining &nbsp;·&nbsp; Electronics &nbsp;·&nbsp; Entertainment &nbsp;·&nbsp; Services</p>
     </div>
     <div class="hero-right">
       <div class="hero-stat" data-countup-to="45" data-countup-suffix="+">45+</div>
