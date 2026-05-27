@@ -129,11 +129,21 @@
   .clothesline-svg .rope-hl { stroke: rgba(255,221,140,0.45); stroke-width: 1; fill: none; }
   .polaroids { position: relative; display: flex; justify-content: space-around; align-items: flex-start; width: 100%; z-index: 2; }
   .polaroid { --ty: 0px; --rot: 0deg; position: relative; background: #FFFCF2; padding: 14px 14px 18px; box-shadow: 8px 14px 32px rgba(58,42,5,0.18), 0 4px 12px rgba(58,42,5,0.08); width: 220px; flex-shrink: 0; cursor: pointer; transform: translateY(calc(var(--ty) + 60px)) rotate(0deg) scale(0.92); opacity: 0; overflow: visible; will-change: transform; }
-  .polaroid:nth-child(1) { --ty: 80px; --rot: -10deg; }
-  .polaroid:nth-child(2) { --ty: 128px; --rot: 7deg; }
-  .polaroid:nth-child(3) { --ty: 144px; --rot: -3deg; }
-  .polaroid:nth-child(4) { --ty: 128px; --rot: 9deg; }
-  .polaroid:nth-child(5) { --ty: 80px; --rot: 12deg; }
+  /* Desktop (single rope, 5 photos) */
+  .gallery-inner--desktop .polaroid:nth-child(1) { --ty:  80px; --rot: -10deg; }
+  .gallery-inner--desktop .polaroid:nth-child(2) { --ty: 128px; --rot:   7deg; }
+  .gallery-inner--desktop .polaroid:nth-child(3) { --ty: 144px; --rot:  -3deg; }
+  .gallery-inner--desktop .polaroid:nth-child(4) { --ty: 128px; --rot:   9deg; }
+  .gallery-inner--desktop .polaroid:nth-child(5) { --ty:  80px; --rot:  12deg; }
+  /* Tablet (two ropes, 3+2 photos) — hidden by default, shown by IPAD media query */
+  .gallery-inner--tablet { display: none; }
+  /* Mobile scroll-reveal wall — hidden by default, shown ≤767px */
+  .gallery-inner--mobile { display: none; }
+  .top-line .polaroid:nth-child(1)    { --ty: 80px;  --rot: -8deg; }
+  .top-line .polaroid:nth-child(2)    { --ty: 130px; --rot:  4deg; }
+  .top-line .polaroid:nth-child(3)    { --ty: 85px;  --rot:  9deg; }
+  .bottom-line .polaroid:nth-child(1) { --ty: 95px;  --rot: -7deg; }
+  .bottom-line .polaroid:nth-child(2) { --ty: 95px;  --rot:  8deg; }
   /* Scroll-reveal: photos hang onto the rope one by one as section enters view */
   @keyframes polaroidHang {
     0%   { transform: translateY(calc(var(--ty) + 60px)) rotate(0deg)       scale(0.92); opacity: 0; }
@@ -141,11 +151,16 @@
     100% { transform: translateY(var(--ty))               rotate(var(--rot)) scale(1);    opacity: 1; }
   }
   .gallery.in-view .polaroid { animation: polaroidHang 1.1s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-  .gallery.in-view .polaroid:nth-child(1) { animation-delay:   0ms; }
-  .gallery.in-view .polaroid:nth-child(2) { animation-delay: 110ms; }
-  .gallery.in-view .polaroid:nth-child(3) { animation-delay: 220ms; }
-  .gallery.in-view .polaroid:nth-child(4) { animation-delay: 330ms; }
-  .gallery.in-view .polaroid:nth-child(5) { animation-delay: 440ms; }
+  .gallery.in-view .gallery-inner--desktop .polaroid:nth-child(1) { animation-delay:   0ms; }
+  .gallery.in-view .gallery-inner--desktop .polaroid:nth-child(2) { animation-delay: 110ms; }
+  .gallery.in-view .gallery-inner--desktop .polaroid:nth-child(3) { animation-delay: 220ms; }
+  .gallery.in-view .gallery-inner--desktop .polaroid:nth-child(4) { animation-delay: 330ms; }
+  .gallery.in-view .gallery-inner--desktop .polaroid:nth-child(5) { animation-delay: 440ms; }
+  .gallery.in-view .top-line .polaroid:nth-child(1)    { animation-delay:   0ms; }
+  .gallery.in-view .top-line .polaroid:nth-child(2)    { animation-delay: 110ms; }
+  .gallery.in-view .top-line .polaroid:nth-child(3)    { animation-delay: 220ms; }
+  .gallery.in-view .bottom-line .polaroid:nth-child(1) { animation-delay: 330ms; }
+  .gallery.in-view .bottom-line .polaroid:nth-child(2) { animation-delay: 440ms; }
   .polaroid-img { width: 100%; height: 240px; object-fit: cover; display: block; }
   .polaroid-label { position: absolute; bottom: -54px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-family: 'Big Shoulders Display', 'Bebas Neue', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: 0.02em; color: var(--gold); text-transform: uppercase; line-height: 1; margin: 0; text-align: center; }
   /* Pin layer — lives OUTSIDE polaroid stacking contexts (z:3 > rope z:1 > polaroids z:2).
@@ -476,16 +491,14 @@
 
     .clothesline-wrap { height: 460px; padding: 0 36px; }
     .clothesline-svg { left: 0; right: 0; width: 100%; height: 160px; }
-    .polaroid { width: 180px; padding: 10px 10px 14px; }
+    .polaroid { width: 190px; padding: 10px 10px 14px; }
     .polaroid-img { height: 200px; }
-    .polaroid:nth-child(1) { --ty: 68px; --rot: -10deg; }
-    .polaroid:nth-child(2) { --ty: 104px; --rot: 7deg; }
-    .polaroid:nth-child(3) { --ty: 118px; --rot: -3deg; }
-    .polaroid:nth-child(4) { --ty: 104px; --rot: 9deg; }
-    .polaroid:nth-child(5) { --ty: 68px; --rot: 12deg; }
+    .gallery-inner--desktop .polaroid:nth-child(1) { --ty:  68px; --rot: -10deg; }
+    .gallery-inner--desktop .polaroid:nth-child(2) { --ty: 104px; --rot:   7deg; }
+    .gallery-inner--desktop .polaroid:nth-child(3) { --ty: 118px; --rot:  -3deg; }
+    .gallery-inner--desktop .polaroid:nth-child(4) { --ty: 104px; --rot:   9deg; }
+    .gallery-inner--desktop .polaroid:nth-child(5) { --ty:  68px; --rot:  12deg; }
     .polaroid-label { font-size: 18px; bottom: -48px; }
-    .polaroids { padding: 0 36px; }
-    .polaroid { width: 190px; }
 
     .timeline-inner { padding: 0 36px; }
 
@@ -875,7 +888,7 @@
 
   /* ===== IPAD / MEDIUM TABLET (641px – 1199px) ===== */
   @media (min-width: 641px) and (max-width: 1199px) {
-    .page { margin: 0; border-radius: 0; }
+    .page { margin: 0; border-radius: 0; width: 100%; }
     .section-inner { padding: 0 40px; }
     #benefits .section-inner, #stores .section-inner { padding: 0 40px; }
 
@@ -900,51 +913,14 @@
     .brands-showcase { padding: 32px 40px 72px; }
     .brand-item { padding: 28px 10px; }
 
-    /* Gallery — single clothesline, scaled for tablet, full rope + pin physics */
-    .gallery { padding: 40px 0 110px; }
-    .clothesline-wrap { height: 460px; padding: 0 20px; overflow: visible; }
-    .clothesline-svg { display: block; left: 0; right: 0; width: 100%; }
-    .pin-layer { display: block; }
-    .polaroids {
-      flex-wrap: nowrap;
-      justify-content: space-around;
-      align-items: flex-start;
-      gap: 0;
-      padding: 0;
-      position: relative;
-    }
-    /* Reset any ::before/::after added for the old two-row design */
-    .polaroids::before, .polaroids::after { display: none; }
-    /* Cards — clamp width so all 5 always fit the viewport */
-    .polaroid {
-      width: clamp(115px, 17vw, 180px);
-      padding: 10px 10px 14px;
-      flex-shrink: 0;
-      overflow: visible;   /* clothespin overlaps top edge */
-    }
-    .polaroid-img { height: clamp(120px, 17vh, 185px); }
-    /* Labels below card — standard clothesline style */
-    .polaroid-label {
-      position: absolute;
-      bottom: -42px;
-      left: 50%;
-      right: auto;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      text-align: center;
-      font-size: clamp(11px, 1.4vw, 16px);
-      letter-spacing: 1.5px;
-      color: var(--gold);
-      background: none;
-      padding: 0;
-      pointer-events: none;
-    }
-    /* Staggered hang depths matching desktop proportions */
-    .polaroid:nth-child(1) { --ty: 58px;  --rot: -10deg; }
-    .polaroid:nth-child(2) { --ty: 92px;  --rot:   7deg; }
-    .polaroid:nth-child(3) { --ty: 108px; --rot:  -3deg; }
-    .polaroid:nth-child(4) { --ty: 92px;  --rot:   9deg; }
-    .polaroid:nth-child(5) { --ty: 58px;  --rot:  12deg; }
+    /* Gallery — swap to two-clothesline layout */
+    .gallery { padding: 40px 0 80px; }
+    .gallery-inner--desktop { display: none; }
+    .gallery-inner--tablet  { display: block; }
+    .clothesline-wrap { height: 460px; padding: 0 36px; }
+    .clothesline-svg { height: 200px; }
+    .polaroid { width: 220px; padding: 14px 14px 18px; }
+    .polaroid-img { height: 240px; }
 
     /* Timeline — keep horizontal */
     .timeline-inner { padding: 0 40px; }
@@ -1039,115 +1015,138 @@
     .parallax-imgs-container { display: block; }
     .parallax-imgs-inner { padding-top: 120px; max-width: 100%; }
 
-    .gallery { padding: 10px 0 70px; overflow: hidden; }
-    .clothesline-wrap { height: auto; min-height: 0; padding: 0 20px; overflow: visible; }
-    .clothesline-svg { display: none; }
-    .pin-layer { display: none; }
+    /* ── Gallery: swap to mobile scroll-reveal wall layout ── */
+    .gallery { padding: 10px 0 70px; overflow-x: clip; }
+    .gallery-inner--desktop { display: none; }
+    .gallery-inner--tablet  { display: none; }
+    .gallery-inner--mobile  { display: block; }
+    .gallery .section-inner { display: none; }
 
-    /* ── Gallery — photos taped to wall ── */
-    .polaroids {
+    .gallery-inner--mobile .gallery-container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .gallery-inner--mobile .polaroids {
+      display: flex;
       flex-direction: column;
       flex-wrap: nowrap;
       justify-content: flex-start;
       align-items: center;
-      gap: 48px;
-      padding: 36px 0 24px;
+      gap: 56px;
+      padding: 36px 0 60px;
       position: relative;
     }
-    /* Remove thread — tape replaces the clothesline concept */
-    .polaroids::before { display: none; }
-    .polaroids::after  { display: none; }
 
-    /* Individual card — visible overflow so tape sticks out above */
-    .polaroid {
-      width: 78%;
-      max-width: 288px;
-      padding: 10px 10px 10px;
-      margin-bottom: 0;
+    /* Scroll-reveal: starts invisible + shifted down, transitions to final position */
+    .gallery-inner--mobile .polaroid {
+      width: 85%;
+      max-width: 290px;
+      background: #FFFCF2;
+      padding: 12px 12px 16px;
+      box-shadow: 0 12px 30px rgba(58,42,5,0.16), 0 4px 10px rgba(58,42,5,0.06);
+      border-radius: 2px;
       overflow: visible;
       flex-shrink: 0;
-      opacity: 1 !important;
-      animation: none !important;
       position: relative;
       z-index: 1;
-      transform: translateX(var(--tx, 0px)) rotate(var(--rot, 0deg));
+      cursor: pointer;
+      opacity: 0;
+      transform: translate(var(--tx, 0px), 40px) rotate(0deg) scale(0.95);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1.05),
+                  transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1.05),
+                  box-shadow 0.3s ease;
+      will-change: transform, opacity;
+      animation: none !important;
+    }
+    .gallery-inner--mobile .polaroid.visible {
+      opacity: 1;
+      transform: translate(var(--tx, 0px), 0px) rotate(var(--rot, 0deg)) scale(1);
+    }
+    .gallery-inner--mobile .polaroid:active {
+      transform: translate(var(--tx, 0px), -8px) rotate(calc(var(--rot) * 1.3)) scale(1.04);
+      box-shadow: 0 20px 40px rgba(58,42,5,0.25), 0 8px 16px rgba(58,42,5,0.12);
+      z-index: 10;
     }
 
-    /* Tape strip — sticks out above each card */
-    .polaroid::before {
+    /* Tape strip — fades in after card appears */
+    .gallery-inner--mobile .polaroid::before {
       content: '';
       position: absolute;
       top: -14px;
       left: 50%;
-      width: 66px;
-      height: 21px;
+      width: 70px;
+      height: 22px;
       background: var(--tape-clr, rgba(255,228,100,0.85));
-      border-radius: 2px;
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.12) 0%, rgba(0,0,0,0.04) 50%, rgba(255,255,255,0.12) 100%);
+      border-radius: 1px;
       transform: translateX(-50%) rotate(var(--tape-rot, 0deg));
       z-index: 5;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.12);
+      opacity: 0;
+      transition: opacity 0.4s ease 0.3s;
+    }
+    .gallery-inner--mobile .polaroid.visible::before { opacity: 1; }
+
+    /* Per-card vars */
+    .gallery-inner--mobile .polaroid:nth-child(1) { --rot: -5deg; --tx: -20px; --tape-clr: rgba(130,210,248,0.82); --tape-rot: -8deg; }
+    .gallery-inner--mobile .polaroid:nth-child(2) { --rot:  4deg; --tx:  22px; --tape-clr: rgba(255,225,95,0.85);  --tape-rot: 10deg; }
+    .gallery-inner--mobile .polaroid:nth-child(3) { --rot: -3deg; --tx: -14px; --tape-clr: rgba(255,162,172,0.82); --tape-rot: -11deg; }
+    .gallery-inner--mobile .polaroid:nth-child(4) { --rot:  6deg; --tx:  18px; --tape-clr: rgba(140,220,180,0.82); --tape-rot: 7deg; }
+    .gallery-inner--mobile .polaroid:nth-child(5) { --rot: -4deg; --tx: -16px; --tape-clr: rgba(202,166,248,0.82); --tape-rot: -6deg; }
+
+    .gallery-inner--mobile .polaroid-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      border-radius: 1px;
     }
 
-    /* Per-card: rotation, x-offset, tape colour, tape angle */
-    .polaroid:nth-child(1) {
-      --rot: -5deg;  --tx: -20px;
-      --tape-clr: rgba(130, 210, 248, 0.88);   /* sky blue   */
-      --tape-rot: -8deg;
-    }
-    .polaroid:nth-child(2) {
-      --rot:  4deg;  --tx: 22px;
-      --tape-clr: rgba(255, 225, 95, 0.90);    /* yellow     */
-      --tape-rot: 10deg;
-    }
-    .polaroid:nth-child(3) {
-      --rot: -3deg;  --tx: -14px;
-      --tape-clr: rgba(255, 162, 172, 0.88);   /* coral pink */
-      --tape-rot: -11deg;
-    }
-    .polaroid:nth-child(4) {
-      --rot:  6deg;  --tx: 18px;
-      --tape-clr: rgba(140, 220, 180, 0.88);   /* mint green */
-      --tape-rot: 7deg;
-    }
-    .polaroid:nth-child(5) {
-      --rot: -4deg;  --tx: -16px;
-      --tape-clr: rgba(202, 166, 248, 0.88);   /* lavender   */
-      --tape-rot: -6deg;
-    }
-
-    .polaroid-img { height: 210px; }
-
-    /* Label: gradient overlay on the photo, inside card bounds */
-    .polaroid-label {
+    /* Label: gradient overlay on photo */
+    .gallery-inner--mobile .polaroid-label {
       position: absolute;
-      bottom: 10px;
-      left: 10px;
-      right: 10px;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
       transform: none;
       white-space: normal;
       text-align: center;
-      font-size: 13px;
+      font-family: 'Big Shoulders Display', 'Bebas Neue', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
       letter-spacing: 2px;
       line-height: 1.15;
-      color: rgba(255, 248, 220, 0.96);
-      padding: 42px 10px 9px;
-      background: linear-gradient(
-        to top,
-        rgba(40,29,2,0.90) 0%,
-        rgba(40,29,2,0.50) 55%,
-        transparent 100%
-      );
+      color: rgba(255,248,220,0.98);
+      padding: 48px 10px 10px;
+      background: linear-gradient(to top, rgba(40,29,2,0.92) 0%, rgba(40,29,2,0.50) 65%, transparent 100%);
       pointer-events: none;
+      border-radius: 0 0 1px 1px;
     }
 
-    /* Gallery tagline */
-    .gallery .section-inner { text-align: center; }
-    .gallery .section-inner p { white-space: normal !important; word-break: break-word; }
-    .gallery .section-inner p:first-child {
-      font-size: 16px !important; letter-spacing: 1.5px !important; line-height: 1.5 !important;
+    /* Caption */
+    .gallery-caption {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      margin-top: 36px;
+      padding: 0 24px;
     }
-    .gallery .section-inner p:last-child {
-      font-size: 9px !important; letter-spacing: 2px !important;
+    .gallery-caption p { white-space: normal; word-break: break-word; }
+    .gallery-caption p:first-child {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px;
+      letter-spacing: 1.5px;
+      line-height: 1.4;
+      color: var(--gold);
+    }
+    .gallery-caption p:last-child {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(58,42,5,0.55);
+      margin-top: 8px;
     }
   }
 </style>
@@ -1284,42 +1283,124 @@
 
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
-  <div class="clothesline-wrap">
-    <svg class="clothesline-svg" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path class="rope-shadow" d="M0,8 Q50,108 100,8" transform="translate(0,3)"/>
-      <path class="rope-main" d="M0,8 Q50,108 100,8"/>
-      <path class="rope-hl" d="M0,8 Q50,108 100,8" transform="translate(0,-0.8)"/>
-    </svg>
-    <div class="polaroids">
-      <div class="polaroid">
-        <img class="polaroid-img" src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400&q=80" alt="Fashion"/>
-        <div class="polaroid-label">FASHION FLOOR</div>
+  <!-- Desktop: single clothesline (5 photos) -->
+  <div class="gallery-inner gallery-inner--desktop">
+    <div class="clothesline-wrap">
+      <svg class="clothesline-svg" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="rope-shadow" d="M0,8 Q50,108 100,8" transform="translate(0,3)"/>
+        <path class="rope-main" d="M0,8 Q50,108 100,8"/>
+        <path class="rope-hl" d="M0,8 Q50,108 100,8" transform="translate(0,-0.8)"/>
+      </svg>
+      <div class="polaroids">
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400&q=80" alt="Fashion"/>
+          <div class="polaroid-label">FASHION FLOOR</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80" alt="Dining"/>
+          <div class="polaroid-label">FOOD COURT</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&q=80" alt="Tech"/>
+          <div class="polaroid-label">TECH &amp; GADGETS</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&q=80" alt="Events"/>
+          <div class="polaroid-label">EVENTS HALL</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80" alt="Kids"/>
+          <div class="polaroid-label">KIDS &amp; PLAY</div>
+        </div>
       </div>
-      <div class="polaroid">
-        <img class="polaroid-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80" alt="Dining"/>
-        <div class="polaroid-label">FOOD COURT</div>
-      </div>
-      <div class="polaroid">
-        <img class="polaroid-img" src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&q=80" alt="Tech"/>
-        <div class="polaroid-label">TECH &amp; GADGETS</div>
-      </div>
-      <div class="polaroid">
-        <img class="polaroid-img" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&q=80" alt="Events"/>
-        <div class="polaroid-label">EVENTS HALL</div>
-      </div>
-      <div class="polaroid">
-        <img class="polaroid-img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80" alt="Kids"/>
-        <div class="polaroid-label">KIDS &amp; PLAY</div>
+      <div class="pin-layer" aria-hidden="true">
+        <div class="clothespin"></div>
+        <div class="clothespin"></div>
+        <div class="clothespin"></div>
+        <div class="clothespin"></div>
+        <div class="clothespin"></div>
       </div>
     </div>
-    <!-- Pins live here — outside every polaroid stacking context — so they sit at z:3
-         above rope (z:1) and above polaroids (z:2). JS positions them on load/resize. -->
-    <div class="pin-layer" aria-hidden="true">
-      <div class="clothespin"></div>
-      <div class="clothespin"></div>
-      <div class="clothespin"></div>
-      <div class="clothespin"></div>
-      <div class="clothespin"></div>
+  </div>
+  <!-- Tablet: two clotheslines (3+2 photos) -->
+  <div class="gallery-inner gallery-inner--tablet">
+    <div class="clothesline-wrap top-line">
+      <svg class="clothesline-svg" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="rope-shadow" d="M0,8 Q50,108 100,8" transform="translate(0,3)"/>
+        <path class="rope-main" d="M0,8 Q50,108 100,8"/>
+        <path class="rope-hl" d="M0,8 Q50,108 100,8" transform="translate(0,-0.8)"/>
+      </svg>
+      <div class="polaroids">
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400&q=80" alt="Fashion"/>
+          <div class="polaroid-label">FASHION FLOOR</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80" alt="Dining"/>
+          <div class="polaroid-label">FOOD COURT</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&q=80" alt="Tech"/>
+          <div class="polaroid-label">TECH &amp; GADGETS</div>
+        </div>
+      </div>
+      <div class="pin-layer" aria-hidden="true">
+        <div class="clothespin"></div>
+        <div class="clothespin"></div>
+        <div class="clothespin"></div>
+      </div>
+    </div>
+    <div class="clothesline-wrap bottom-line">
+      <svg class="clothesline-svg" viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="rope-shadow" d="M0,8 Q50,108 100,8" transform="translate(0,3)"/>
+        <path class="rope-main" d="M0,8 Q50,108 100,8"/>
+        <path class="rope-hl" d="M0,8 Q50,108 100,8" transform="translate(0,-0.8)"/>
+      </svg>
+      <div class="polaroids">
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&q=80" alt="Events"/>
+          <div class="polaroid-label">EVENTS HALL</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80" alt="Kids"/>
+          <div class="polaroid-label">KIDS &amp; PLAY</div>
+        </div>
+      </div>
+      <div class="pin-layer" aria-hidden="true">
+        <div class="clothespin"></div>
+        <div class="clothespin"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Mobile: scroll-reveal taped-wall layout (5 photos, no rope) -->
+  <div class="gallery-inner gallery-inner--mobile">
+    <div class="gallery-container">
+      <div class="polaroids">
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=400&q=80" alt="Fashion"/>
+          <div class="polaroid-label">FASHION FLOOR</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80" alt="Dining"/>
+          <div class="polaroid-label">FOOD COURT</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&q=80" alt="Tech"/>
+          <div class="polaroid-label">TECH &amp; GADGETS</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&q=80" alt="Events"/>
+          <div class="polaroid-label">EVENTS HALL</div>
+        </div>
+        <div class="polaroid">
+          <img class="polaroid-img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80" alt="Kids"/>
+          <div class="polaroid-label">KIDS &amp; PLAY</div>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-caption">
+      <p>WE BRING TOGETHER FASHION, FOOD, ENTERTAINMENT,</p>
+      <p>AND EVERYTHING THAT MAKES A DAY WORTH CELEBRATING.</p>
     </div>
   </div>
   <div class="section-inner reveal" style="margin-top:24px;text-align:center;">
@@ -1994,6 +2075,23 @@
     if (side2)    side2.addEventListener('click',    function () { go(2);  });
   })();
 
+  /* ── Mobile gallery: IntersectionObserver scroll-reveal ── */
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+      var polaroids = document.querySelectorAll('.gallery-inner--mobile .polaroid');
+      if (!polaroids.length) return;
+      var obs = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+      polaroids.forEach(function (pol) { obs.observe(pol); });
+    });
+  })();
+
   /* ── Gallery scroll-reveal ──────────────────────────────────────────────
      Adds .in-view to .gallery when it enters the viewport, triggering the
      staggered @keyframes polaroidHang animation on each .polaroid.
@@ -2010,256 +2108,190 @@
     io.observe(gallery);
   })();
 
-  /* ── Clothespin positioning ─────────────────────────────────────────────
-     Each .clothespin must sit above the rope at its polaroid's exact x.
-     They live in .pin-layer (z:3), outside polaroid stacking contexts, so
-     they genuinely layer above both the rope SVG (z:1) and the polaroids (z:2).
-     JS measures actual rendered positions so this works at any viewport width.
-  ─────────────────────────────────────────────────────────────────────── */
+  /* ── Gallery clothesline physics (generalized — handles multiple wraps) ── */
   (function () {
-    function positionClothespins() {
-      var pins     = document.querySelectorAll('.clothespin');
-      var polaroids = document.querySelectorAll('.polaroid');
-      var wrap     = document.querySelector('.clothesline-wrap');
-      var svg      = wrap && wrap.querySelector('.clothesline-svg');
-      var layer    = wrap && wrap.querySelector('.pin-layer');
-      if (!wrap || !svg || !layer || !pins.length || !polaroids.length) return;
+    function initClothesline(wrap) {
+      var svg      = wrap.querySelector('.clothesline-svg');
+      var layer    = wrap.querySelector('.pin-layer');
+      var polaroids = wrap.querySelectorAll('.polaroid');
+      var pins     = wrap.querySelectorAll('.clothespin');
+      var ropePaths = svg ? svg.querySelectorAll('path') : null;
+      if (!svg || !layer || !polaroids.length || !pins.length || !ropePaths) return;
 
-      /* Hide on mobile where the rope itself is display:none */
-      if (getComputedStyle(svg).display === 'none') {
-        layer.style.visibility = 'hidden';
-        return;
-      }
-      layer.style.visibility = '';
-
-      var wrapRect = wrap.getBoundingClientRect();
-      var svgRect  = svg.getBoundingClientRect();
-      var svgX0    = svgRect.left  - wrapRect.left;   /* SVG left edge in wrap coords */
-      var svgY0    = svgRect.top   - wrapRect.top;    /* SVG top  edge in wrap coords */
-      var svgW     = svgRect.width;
-      var svgH     = svgRect.height;
-
-      /* Rope curve: M0,8 Q50,108 100,8  (viewBox 0 0 100 100)
-         x(t) = 100t  →  t = x_viewbox/100
-         y(t) = 8 + 200·t·(1−t)  in viewBox units */
-      function ropeYpx(cx) {
-        var t   = Math.max(0, Math.min(1, (cx - svgX0) / svgW));
-        var cY  = (typeof window._ropeCtrlY === 'number') ? window._ropeCtrlY : 108;
-        var vy  = 8 + 2 * t * (1 - t) * (cY - 8);  /* follows live control-point */
-        return svgY0 + (vy / 100) * svgH;
-      }
-
-      polaroids.forEach(function (pol, i) {
-        var pin = pins[i];
-        if (!pin) return;
-        var r  = pol.getBoundingClientRect();
-        /* getBoundingClientRect center = transform-origin = element center
-           (rotation is around the element's own center by default) */
-        var cx = r.left - wrapRect.left + r.width / 2;
-        var ry = ropeYpx(cx);
-        /* Place pin so rope passes ~32% from pin top (14px above, 30px below) */
-        pin.style.left = cx + 'px';
-        pin.style.top  = (ry - 14) + 'px';
-      });
-    }
-
-    window.positionClothespins = positionClothespins;  /* expose for rope-deform */
-    document.addEventListener('DOMContentLoaded', positionClothespins);
-    window.addEventListener('load',   positionClothespins);
-    window.addEventListener('resize', positionClothespins);
-  })();
-
-
-  /* ── Polaroid interactive physics (vanilla JS, no dependencies) ──────────
-     Mirrors index.html behaviours with spring integration + rAF:
-     · Hover      → polaroid drops 18px + scales up; underdamped elastic return
-     · Mouse-move → each polaroid swings by horizontal proximity to cursor
-     · Mouse-move → rope bezier control-point follows cursor Y
-     · Clothespins→ tilt toward cursor
-     · 150ms idle → everything spring-returns to resting state
-     Activates 1.65s after .gallery gets .in-view (last anim: 440+1100ms).
-  ─────────────────────────────────────────────────────────────────────── */
-  (function () {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (window.matchMedia('(max-width: 480px)').matches) return;   /* below 480, CSS uses !important transforms */
-
-    var polaroids  = document.querySelectorAll('.gallery .polaroid');
-    var pins       = document.querySelectorAll('.pin-layer .clothespin');
-    var ropePaths  = document.querySelectorAll('.clothesline-svg path');
-    var gallery    = document.querySelector('.gallery');
-    if (!gallery || !polaroids.length || !ropePaths.length) return;
-
-    /* ── Euler spring step ── */
-    function spr(v, target, vel, K, D, dt) {
-      var acc = K * (target - v) - D * vel;
-      vel += acc * dt;
-      v   += vel * dt;
-      return [v, vel];
-    }
-
-    var CTRL_REST    = 108;
-    var rope         = { v: CTRL_REST, vel: 0, target: CTRL_REST };
-    var baseStates   = [];
-    var pols         = [];
-    var pinSt        = [];
-    var interactable = false;
-    var galleryVisible = false;
-    var anyHovered   = false;
-    var mouseTimer;
-    var mouse        = { nx: 0, ny: 0 };
-
-    /* ── Activation: read CSS vars, init spring state ── */
-    function activate() {
-      if (interactable) return;
-      /* Force-trigger entrance animation if it never ran (IO never fired) */
-      if (!gallery.classList.contains('in-view')) gallery.classList.add('in-view');
-      polaroids.forEach(function (pol, i) {
-        var cs  = getComputedStyle(pol);
-        var ty  = parseFloat(cs.getPropertyValue('--ty'))  || 0;
-        var rot = parseFloat(cs.getPropertyValue('--rot')) || 0;
-        baseStates[i] = { ty: ty, rot: rot };
-        pols[i] = { y: ty,  yV: 0,  yT: ty,
-                    rot: rot, rotV: 0, rotT: rot,
-                    x: 0,    xV: 0,  xT: 0,
-                    sc: 1,   scV: 0, scT: 1,
-                    hover: false };
-        /* Critical: disable the CSS animation BEFORE writing inline styles.
-           Per CSS spec, running/forwards-filled animations override normal
-           inline styles — so unless we kill the animation, our transforms
-           are ignored entirely. */
-        pol.style.animation = 'none';
-        pol.style.opacity   = '1';
-        pol.style.transform = 'translate(0px,' + ty + 'px) rotate(' + rot + 'deg) scale(1)';
-      });
-      pins.forEach(function (_, i) { pinSt[i] = { v: 0, vel: 0, target: 0 }; });
-      interactable = true;
-    }
-
-    function scheduleActivate() { setTimeout(activate, 1650); }
-    if (gallery.classList.contains('in-view')) {
-      scheduleActivate();
-    } else {
-      var mo = new MutationObserver(function (muts) {
-        muts.forEach(function (m) {
-          if (m.attributeName === 'class' && gallery.classList.contains('in-view')) {
-            mo.disconnect();
-            scheduleActivate();
-          }
-        });
-      });
-      mo.observe(gallery, { attributes: true });
-    }
-    /* Hard fallback: activate after 3s no matter what */
-    setTimeout(activate, 3000);
-
-    /* ── Gallery visibility — any pixel is enough ── */
-    new IntersectionObserver(function (entries) {
-      galleryVisible = entries[0].isIntersecting;
-    }, { threshold: 0 }).observe(gallery);
-
-    /* expose for debugging */
-    window.__pol = { get interactable() { return interactable; },
-                     get galleryVisible() { return galleryVisible; },
-                     get pols() { return pols; },
-                     get baseStates() { return baseStates; } };
-
-    /* ── Hover ── */
-    polaroids.forEach(function (pol, i) {
-      pol.addEventListener('mouseenter', function () {
-        if (!interactable) return;
-        pols[i].hover = true;
-        anyHovered    = true;
-        pols[i].yT    = baseStates[i].ty + 18;
-        pols[i].scT   = 1.07;
-      });
-      pol.addEventListener('mouseleave', function () {
-        if (!interactable) return;
-        pols[i].hover = false;
-        anyHovered    = pols.some(function (s) { return s.hover; });
-        pols[i].yT    = baseStates[i].ty;
-        pols[i].rotT  = baseStates[i].rot;
-        pols[i].scT   = 1;
-        pols[i].xT    = 0;
-      });
-    });
-
-    /* ── Mouse-move: swing + rope deform ── */
-    window.addEventListener('mousemove', function (e) {
-      if (!interactable) return;
-      mouse.nx    = e.clientX / window.innerWidth  - 0.5;
-      mouse.ny    = e.clientY / window.innerHeight - 0.5;
-      rope.target = CTRL_REST + mouse.ny * 40;
-
-      if (!anyHovered) {
+      function positionClothespins() {
+        if (getComputedStyle(svg).display === 'none') {
+          layer.style.visibility = 'hidden';
+          return;
+        }
+        layer.style.visibility = '';
+        var wrapRect = wrap.getBoundingClientRect();
+        var svgRect  = svg.getBoundingClientRect();
+        var svgX0    = svgRect.left - wrapRect.left;
+        var svgY0    = svgRect.top  - wrapRect.top;
+        var svgW     = svgRect.width;
+        var svgH     = svgRect.height;
+        function ropeYpx(cx) {
+          var t  = Math.max(0, Math.min(1, (cx - svgX0) / svgW));
+          var cY = (typeof wrap._ropeCtrlY === 'number') ? wrap._ropeCtrlY : 108;
+          var vy = 8 + 2 * t * (1 - t) * (cY - 8);
+          return svgY0 + (vy / 100) * svgH;
+        }
         polaroids.forEach(function (pol, i) {
-          var rect = pol.getBoundingClientRect();
-          var dist = (e.clientX - (rect.left + rect.width / 2)) / window.innerWidth;
-          pols[i].rotT = baseStates[i].rot + dist * 22 + mouse.nx * 6;
-          pols[i].xT   = mouse.nx * 14;
-          if (pinSt[i]) pinSt[i].target = dist * 10;
+          var pin = pins[i];
+          if (!pin) return;
+          var r  = pol.getBoundingClientRect();
+          var cx = r.left - wrapRect.left + r.width / 2;
+          var ry = ropeYpx(cx);
+          pin.style.left = cx + 'px';
+          pin.style.top  = (ry - 14) + 'px';
         });
       }
 
-      clearTimeout(mouseTimer);
-      mouseTimer = setTimeout(function () {
-        if (anyHovered) return;
-        rope.target = CTRL_REST;
-        pols.forEach(function (s, i) { s.rotT = baseStates[i].rot; s.xT = 0; });
-        pinSt.forEach(function (p) { p.target = 0; });
-      }, 150);
-    });
+      wrap.positionClothespins = positionClothespins;
+      window.addEventListener('resize', positionClothespins);
 
-    /* ── Rope DOM update ── */
-    function setRope(ctrlY) {
-      window._ropeCtrlY = ctrlY;
-      var d = 'M0,8 Q50,' + ctrlY.toFixed(2) + ' 100,8';
-      ropePaths.forEach(function (p) { p.setAttribute('d', d); });
-      if (typeof window.positionClothespins === 'function') window.positionClothespins();
-    }
+      positionClothespins();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      /* If the rope SVG is hidden (mobile taped-wall layout), skip all physics */
+      if (getComputedStyle(svg).display === 'none') return;
 
-    /* ── Animation loop ── */
-    var prevT = null;
-    function tick(now) {
-      if (!prevT) { prevT = now; requestAnimationFrame(tick); return; }
-      var dt = Math.min((now - prevT) / 1000, 0.064);
-      prevT  = now;
-
-      if (interactable) {
-        /* Rope — smooth follow */
-        var rr = spr(rope.v, rope.target, rope.vel, 80, 17, dt);
-        rope.v = rr[0]; rope.vel = rr[1];
-        setRope(rope.v);
-
-        /* Polaroids */
-        pols.forEach(function (s, i) {
-          /* Snappy spring on hover-in; underdamped elastic on hover-out */
-          var Ky = s.hover ? 320 : 110,  Dy = s.hover ? 36 : 11;
-          var Ks = s.hover ? 320 : 110,  Ds = s.hover ? 36 : 11;
-          var yr  = spr(s.y,   s.yT,   s.yV,   Ky,  Dy,  dt);
-          var rx  = spr(s.rot, s.rotT, s.rotV, 100, 17,  dt);
-          var xr  = spr(s.x,   s.xT,   s.xV,  100, 17,  dt);
-          var scr = spr(s.sc,  s.scT,  s.scV,  Ks,  Ds,  dt);
-          s.y   = yr[0];  s.yV   = yr[1];
-          s.rot = rx[0];  s.rotV = rx[1];
-          s.x   = xr[0];  s.xV   = xr[1];
-          s.sc  = scr[0]; s.scV  = scr[1];
-          polaroids[i].style.transform =
-            'translate(' + s.x.toFixed(2) + 'px,' + s.y.toFixed(2) + 'px) ' +
-            'rotate('    + s.rot.toFixed(3) + 'deg) ' +
-            'scale('     + s.sc.toFixed(4) + ')';
-        });
-
-        /* Clothespins */
-        pinSt.forEach(function (p, i) {
-          var pr = spr(p.v, p.target, p.vel, 100, 17, dt);
-          p.v = pr[0]; p.vel = pr[1];
-          if (pins[i]) pins[i].style.transform = 'rotate(' + p.v.toFixed(3) + 'deg)';
-        });
+      function spr(v, target, vel, K, D, dt) {
+        var acc = K * (target - v) - D * vel;
+        vel += acc * dt;
+        v   += vel * dt;
+        return [v, vel];
       }
 
+      var CTRL_REST  = 108;
+      var rope       = { v: CTRL_REST, vel: 0, target: CTRL_REST };
+      var baseStates = [], pols = [], pinSt = [];
+      var interactable = false, anyHovered = false, mouseTimer;
+      var mouse = { nx: 0, ny: 0 };
+
+      function activate() {
+        if (interactable) return;
+        polaroids.forEach(function (pol, i) {
+          var cs  = getComputedStyle(pol);
+          var ty  = parseFloat(cs.getPropertyValue('--ty'))  || 0;
+          var rot = parseFloat(cs.getPropertyValue('--rot')) || 0;
+          baseStates[i] = { ty: ty, rot: rot };
+          pols[i] = { y: ty, yV: 0, yT: ty, rot: rot, rotV: 0, rotT: rot,
+                      x: 0,  xV: 0, xT: 0,  sc: 1,   scV: 0,  scT: 1, hover: false };
+          pol.style.animation = 'none';
+          pol.style.opacity   = '1';
+          pol.style.transform = 'translate(0px,' + ty + 'px) rotate(' + rot + 'deg) scale(1)';
+        });
+        pins.forEach(function (_, i) { pinSt[i] = { v: 0, vel: 0, target: 0 }; });
+        interactable = true;
+        positionClothespins();
+      }
+
+      var gallery = wrap.closest('.gallery');
+      function scheduleActivate() { setTimeout(activate, 1650); }
+      if (gallery && gallery.classList.contains('in-view')) {
+        scheduleActivate();
+      } else if (gallery) {
+        var mo = new MutationObserver(function (muts) {
+          muts.forEach(function (m) {
+            if (m.attributeName === 'class' && gallery.classList.contains('in-view')) {
+              mo.disconnect(); scheduleActivate();
+            }
+          });
+        });
+        mo.observe(gallery, { attributes: true });
+      }
+      setTimeout(activate, 3000);
+
+      polaroids.forEach(function (pol, i) {
+        pol.addEventListener('mouseenter', function () {
+          if (!interactable) return;
+          pols[i].hover = true; anyHovered = true;
+          pols[i].yT = baseStates[i].ty + 18; pols[i].scT = 1.07;
+        });
+        pol.addEventListener('mouseleave', function () {
+          if (!interactable) return;
+          pols[i].hover = false;
+          anyHovered = pols.some(function (s) { return s.hover; });
+          pols[i].yT = baseStates[i].ty; pols[i].rotT = baseStates[i].rot;
+          pols[i].scT = 1; pols[i].xT = 0;
+        });
+      });
+
+      window.addEventListener('mousemove', function (e) {
+        if (!interactable) return;
+        mouse.nx = e.clientX / window.innerWidth  - 0.5;
+        mouse.ny = e.clientY / window.innerHeight - 0.5;
+        rope.target = CTRL_REST + mouse.ny * 40;
+        if (!anyHovered) {
+          polaroids.forEach(function (pol, i) {
+            var rect = pol.getBoundingClientRect();
+            var dist = (e.clientX - (rect.left + rect.width / 2)) / window.innerWidth;
+            pols[i].rotT = baseStates[i].rot + dist * 22 + mouse.nx * 6;
+            pols[i].xT   = mouse.nx * 14;
+            if (pinSt[i]) pinSt[i].target = dist * 10;
+          });
+        }
+        clearTimeout(mouseTimer);
+        mouseTimer = setTimeout(function () {
+          if (anyHovered) return;
+          rope.target = CTRL_REST;
+          pols.forEach(function (s, i) { s.rotT = baseStates[i].rot; s.xT = 0; });
+          pinSt.forEach(function (p) { p.target = 0; });
+        }, 150);
+      });
+
+      function setRope(ctrlY) {
+        wrap._ropeCtrlY = ctrlY;
+        var d = 'M0,8 Q50,' + ctrlY.toFixed(2) + ' 100,8';
+        ropePaths.forEach(function (p) { p.setAttribute('d', d); });
+        positionClothespins();
+      }
+
+      var prevT = null;
+      function tick(now) {
+        if (!prevT) { prevT = now; requestAnimationFrame(tick); return; }
+        var dt = Math.min((now - prevT) / 1000, 0.064);
+        prevT  = now;
+        if (interactable) {
+          var rr = spr(rope.v, rope.target, rope.vel, 80, 17, dt);
+          rope.v = rr[0]; rope.vel = rr[1];
+          setRope(rope.v);
+          pols.forEach(function (s, i) {
+            var Ky = s.hover ? 320 : 110, Dy = s.hover ? 36 : 11;
+            var Ks = s.hover ? 320 : 110, Ds = s.hover ? 36 : 11;
+            var yr  = spr(s.y,   s.yT,   s.yV,   Ky, Dy, dt);
+            var rx  = spr(s.rot, s.rotT, s.rotV, 100, 17, dt);
+            var xr  = spr(s.x,   s.xT,   s.xV,  100, 17, dt);
+            var scr = spr(s.sc,  s.scT,  s.scV,  Ks, Ds, dt);
+            s.y   = yr[0];  s.yV  = yr[1];
+            s.rot = rx[0];  s.rotV = rx[1];
+            s.x   = xr[0];  s.xV  = xr[1];
+            s.sc  = scr[0]; s.scV = scr[1];
+            polaroids[i].style.transform =
+              'translate(' + s.x.toFixed(2) + 'px,' + s.y.toFixed(2) + 'px) ' +
+              'rotate('    + s.rot.toFixed(3) + 'deg) ' +
+              'scale('     + s.sc.toFixed(4)  + ')';
+          });
+          pinSt.forEach(function (p, i) {
+            var pr = spr(p.v, p.target, p.vel, 100, 17, dt);
+            p.v = pr[0]; p.vel = pr[1];
+            if (pins[i]) pins[i].style.transform = 'translateX(-50%) rotate(' + p.v.toFixed(3) + 'deg)';
+          });
+        }
+        requestAnimationFrame(tick);
+      }
       requestAnimationFrame(tick);
     }
-    requestAnimationFrame(tick);
+
+    function setupAll() {
+      document.querySelectorAll('.clothesline-wrap').forEach(initClothesline);
+    }
+    document.addEventListener('DOMContentLoaded', setupAll);
+    window.addEventListener('load', function () {
+      document.querySelectorAll('.clothesline-wrap').forEach(function (wrap) {
+        if (typeof wrap.positionClothespins === 'function') wrap.positionClothespins();
+      });
+    });
   })();
 
 
