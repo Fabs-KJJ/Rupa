@@ -343,8 +343,9 @@
   .footer-logo-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .back-to-top { width: 80px; height: 80px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; cursor: pointer; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: white; text-align: center; line-height: 1.4; text-decoration: none; transition: transform 200ms var(--ease-out), background 200ms var(--ease-out); }
   .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: var(--text-muted); text-align: right; line-height: 1.6; max-width: 260px; margin-left: auto; }
-  .footer-socials { max-width: 1200px; margin: 0 auto; padding: 24px 60px; border-top: 1px solid rgba(200,131,10,0.2); display: flex; justify-content: space-between; align-items: center; }
-  .social-link { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 200ms var(--ease-out); }
+  .footer-socials { max-width: 1200px; margin: 0 auto; padding: 24px 60px; border-top: 1px solid rgba(200,131,10,0.2); display: flex; justify-content: center; align-items: center; gap: 32px; }
+  .social-link { display: inline-flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: color 200ms var(--ease-out); }
+  .social-link svg { width: 17px; height: 17px; display: block; }
   .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 20px 60px; border-top: 1px solid rgba(200,131,10,0.15); display: flex; align-items: center; justify-content: space-between; }
   .footer-copy { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
   .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; color: var(--gold); }
@@ -456,7 +457,7 @@
     .stores-grid { grid-template-columns: repeat(3, 1fr); gap: 28px; }
 
     .footer-top { padding: 0 80px 56px; }
-    .footer-socials { padding: 28px 80px; }
+    .footer-socials { padding: 28px 80px; gap: 56px; }
     .footer-bottom { padding: 24px 80px; }
   }
 
@@ -512,8 +513,8 @@
     .visit-card { padding: 28px; }
     .visit-card--find { padding: 0; min-height: 540px; }
     .find-content { padding: 28px 28px 0; }
-    .visit-card-foot { flex-direction: column; align-items: flex-start; }
-    .visit-map { width: 100%; aspect-ratio: 16 / 10; height: auto; max-height: 280px; }
+    .visit-map { width: 140px; height: 110px; flex-shrink: 0; clip-path: inset(0 0 0 0 round 10px); }
+    .visit-map iframe { width: 300px; }
 
     .stores-grid { grid-template-columns: repeat(2, 1fr); }
     .featured-carousel { grid-template-columns: 1fr; gap: 18px; }
@@ -531,12 +532,14 @@
 
     .footer-top { padding: 0 36px 40px; grid-template-columns: 1fr auto; gap: 24px; }
     .footer-tagline { display: none; }
-    .footer-socials { padding: 20px 36px; flex-wrap: wrap; gap: 16px; }
+    .footer-socials { padding: 20px 36px; flex-wrap: wrap; gap: 44px; }
     .footer-bottom { padding: 16px 36px; flex-wrap: wrap; gap: 10px; }
   }
 
   /* ===== MOBILE (≤ 480px) ===== */
   @media (max-width: 480px) {
+
+
 
     /* ── Root overflow ── */
     html, body { overflow-x: hidden; }
@@ -633,6 +636,8 @@
     .visit-hours-block { margin: 12px 0 18px; gap: 16px; }
     .visit-hours-day { font-size: 16px; }
     .visit-hours-time { font-size: 26px; }
+    .visit-map { width: 160px; height: 140px; clip-path: none; }
+    .visit-map iframe { width: 100%; height: 100%; margin-left: 0; margin-top: 0; }
 
     /* ── Stores ── */
     .stores { padding: 48px 0; }
@@ -679,7 +684,7 @@
     .footer-tagline { display: none; }
     .footer-address { text-align: center; }
     .footer-socials {
-      padding: 16px 20px; flex-wrap: wrap; gap: 12px; justify-content: center;
+      padding: 16px 20px; flex-wrap: wrap; gap: 32px; justify-content: center;
     }
     .footer-bottom {
       padding: 14px 20px; flex-direction: column;
@@ -837,7 +842,8 @@
   .sm-socials { margin-top: auto; padding-top: 32px; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(40,29,2,0.12); }
   .sm-socials-title { margin: 0; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sm-accent); }
   .sm-socials-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .sm-socials-link { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 500; color: var(--brown); text-decoration: none; transition: color 0.3s ease, opacity 0.3s ease; }
+  .sm-socials-link { display: inline-flex; align-items: center; justify-content: center; color: var(--brown); text-decoration: none; transition: color 0.3s ease, opacity 0.3s ease; }
+  .sm-socials-link svg { width: 22px; height: 22px; display: block; }
   .sm-socials-list:hover .sm-socials-link:not(:hover) { opacity: 0.35; }
   .sm-socials-link:hover { color: var(--sm-accent); }
   .sm-left-face {
@@ -1151,6 +1157,7 @@
     }
   }
 </style>
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
 </head>
 <body>
 
@@ -1196,10 +1203,10 @@
       <div class="sm-socials" aria-label="Social links">
         <h3 class="sm-socials-title">Socials</h3>
         <ul class="sm-socials-list" role="list">
-          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Instagram</a></li>
-          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Facebook</a></li>
-          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">TikTok</a></li>
-          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Twitter</a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link" aria-label="Instagram"><lord-icon src="https://cdn.lordicon.com/tgyvxauj.json" trigger="hover" stroke="bold" state="hover-rotate" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link" aria-label="Facebook"><lord-icon src="https://cdn.lordicon.com/bfoumeno.json" trigger="hover" stroke="bold" state="hover-draw" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link" aria-label="TikTok"><lord-icon src="https://cdn.lordicon.com/zmvgugmh.json" trigger="hover" stroke="bold" state="hover-dots" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link" aria-label="Twitter / X"><lord-icon src="https://cdn.lordicon.com/yizwahhw.json" trigger="hover" stroke="bold" style="width:22px;height:22px"></lord-icon></a></li>
         </ul>
       </div>
     </div>
@@ -1554,11 +1561,7 @@
             <a href="https://www.google.com/maps/dir/?api=1&amp;destination=0.5140059%2C35.2909124&amp;destination_place_id=Rupa%27s+Mall&amp;travelmode=driving" target="_blank" rel="noopener" class="visit-foot-link">Directions <span>&#8599;</span></a>
           </div>
           <div class="visit-map">
-            <iframe
-              src="https://www.openstreetmap.org/export/embed.html?bbox=35.260%2C0.507%2C35.280%2C0.527&layer=mapnik&marker=0.5167%2C35.2698"
-              allowfullscreen
-              loading="lazy"
-            ></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.657770031011!2d35.28833747496475!3d0.5140058994809666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1781019aa602f0ad%3A0x2f21c7ce53681e0!2sRupa's%20Mall!5e0!3m2!1sen!2ske!4v1780053804029!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
@@ -1813,10 +1816,10 @@
     </div>
   </div>
   <div class="footer-socials">
-    <a href="#" class="social-link">Instagram</a>
-    <a href="#" class="social-link">Facebook</a>
-    <a href="#" class="social-link">TikTok</a>
-    <a href="#" class="social-link">X (Twitter)</a>
+    <a href="#" class="social-link" aria-label="Instagram"><lord-icon src="https://cdn.lordicon.com/tgyvxauj.json" trigger="hover" stroke="bold" state="hover-rotate" style="width:20px;height:20px"></lord-icon></a>
+    <a href="#" class="social-link" aria-label="Facebook"><lord-icon src="https://cdn.lordicon.com/bfoumeno.json" trigger="hover" stroke="bold" state="hover-draw" style="width:20px;height:20px"></lord-icon></a>
+    <a href="#" class="social-link" aria-label="TikTok"><lord-icon src="https://cdn.lordicon.com/zmvgugmh.json" trigger="hover" stroke="bold" state="hover-dots" style="width:20px;height:20px"></lord-icon></a>
+    <a href="#" class="social-link" aria-label="X (Twitter)"><lord-icon src="https://cdn.lordicon.com/yizwahhw.json" trigger="hover" stroke="bold" style="width:20px;height:20px"></lord-icon></a>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">2026. Rupa's Mall. All rights reserved.</span>

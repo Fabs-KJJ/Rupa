@@ -53,7 +53,8 @@
   .sm-socials { margin-top: auto; padding-top: 32px; display: flex; flex-direction: column; gap: 14px; border-top: 1px solid rgba(40,29,2,0.12); }
   .sm-socials-title { margin: 0; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sm-accent); }
   .sm-socials-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .sm-socials-link { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 500; color: var(--brown); text-decoration: none; transition: color 0.3s ease, opacity 0.3s ease; }
+  .sm-socials-link { display: inline-flex; align-items: center; justify-content: center; color: var(--brown); text-decoration: none; transition: color 0.3s ease, opacity 0.3s ease; }
+  .sm-socials-link svg { width: 22px; height: 22px; display: block; }
   .sm-socials-list:hover .sm-socials-link:not(:hover) { opacity: 0.35; }
   .sm-socials-link:hover { color: var(--sm-accent); }
   @media (max-width: 768px) {
@@ -122,8 +123,9 @@
   .footer-logo-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .back-to-top { width: 80px; height: 80px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; cursor: pointer; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: white; text-align: center; line-height: 1.4; text-decoration: none; transition: transform 200ms var(--ease-out); }
   .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: var(--text-muted); text-align: right; line-height: 1.6; max-width: 260px; margin-left: auto; }
-  .footer-socials { max-width: 1200px; margin: 0 auto; padding: 24px 60px; border-top: 1px solid rgba(200,131,10,0.2); display: flex; justify-content: space-between; align-items: center; }
-  .social-link { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 200ms var(--ease-out); }
+  .footer-socials { max-width: 1200px; margin: 0 auto; padding: 24px 60px; border-top: 1px solid rgba(200,131,10,0.2); display: flex; justify-content: center; align-items: center; gap: 32px; }
+  .social-link { display: inline-flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: color 200ms var(--ease-out); }
+  .social-link svg { width: 17px; height: 17px; display: block; }
   .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 20px 60px; border-top: 1px solid rgba(200,131,10,0.15); display: flex; align-items: center; justify-content: space-between; }
   .footer-copy { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
   .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; color: var(--gold); }
@@ -171,6 +173,7 @@
   }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
 </head>
 <body>
 
@@ -208,10 +211,10 @@
       <div class="sm-socials" aria-label="Social links">
         <h3 class="sm-socials-title">Socials</h3>
         <ul class="sm-socials-list" role="list">
-          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Instagram</a></li>
-          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Facebook</a></li>
-          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">TikTok</a></li>
-          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link">Twitter</a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link" aria-label="Instagram"><lord-icon src="https://cdn.lordicon.com/tgyvxauj.json" trigger="hover" stroke="bold" state="hover-rotate" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link" aria-label="Facebook"><lord-icon src="https://cdn.lordicon.com/bfoumeno.json" trigger="hover" stroke="bold" state="hover-draw" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link" aria-label="TikTok"><lord-icon src="https://cdn.lordicon.com/zmvgugmh.json" trigger="hover" stroke="bold" state="hover-dots" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" target="_blank" rel="noopener" class="sm-socials-link" aria-label="Twitter / X"><lord-icon src="https://cdn.lordicon.com/yizwahhw.json" trigger="hover" stroke="bold" style="width:22px;height:22px"></lord-icon></a></li>
         </ul>
       </div>
     </div>
@@ -680,10 +683,10 @@
     <div class="footer-tagline">Eldoret's most vibrant retail &amp; lifestyle destination — where every visit feels like an experience worth coming back for.</div>
   </div>
   <div class="footer-socials">
-    <a href="#" class="social-link">Instagram</a>
-    <a href="#" class="social-link">Facebook</a>
-    <a href="#" class="social-link">TikTok</a>
-    <a href="#" class="social-link">X (Twitter)</a>
+    <a href="#" class="social-link" aria-label="Instagram"><lord-icon src="https://cdn.lordicon.com/tgyvxauj.json" trigger="hover" stroke="bold" state="hover-rotate" style="width:20px;height:20px"></lord-icon></a>
+    <a href="#" class="social-link" aria-label="Facebook"><lord-icon src="https://cdn.lordicon.com/bfoumeno.json" trigger="hover" stroke="bold" state="hover-draw" style="width:20px;height:20px"></lord-icon></a>
+    <a href="#" class="social-link" aria-label="TikTok"><lord-icon src="https://cdn.lordicon.com/zmvgugmh.json" trigger="hover" stroke="bold" state="hover-dots" style="width:20px;height:20px"></lord-icon></a>
+    <a href="#" class="social-link" aria-label="X (Twitter)"><lord-icon src="https://cdn.lordicon.com/yizwahhw.json" trigger="hover" stroke="bold" style="width:20px;height:20px"></lord-icon></a>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">2026. Rupa's Mall. All rights reserved.</span>
