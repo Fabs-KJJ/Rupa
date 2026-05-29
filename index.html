@@ -778,11 +778,11 @@
   .promo-right { display: flex; align-items: center; justify-content: center; }
   .promo-cards-bg { background: #FAF4E8; border-radius: 24px; width: 100%; padding: 40px 28px; display: flex; align-items: center; justify-content: center; min-height: 720px; }
   .promo-cards-wrap { position: relative; width: 420px; height: 660px; }
-  .promo-card { position: absolute; width: 320px; height: 480px; background: transparent; border-radius: 20px; box-shadow: 0 16px 48px rgba(40,29,2,0.16); overflow: visible; cursor: pointer; transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), top 0.45s ease, left 0.45s ease, right 0.45s ease; }
+  .promo-card { position: absolute; top: 0; left: 0; right: auto; width: 320px; height: 480px; background: transparent; border-radius: 20px; box-shadow: 0 16px 48px rgba(40,29,2,0.16); overflow: visible; cursor: pointer; transform-origin: center center; will-change: transform; transition: transform 0.45s cubic-bezier(0.65,0,0.35,1), top 0.45s cubic-bezier(0.65,0,0.35,1), left 0.45s cubic-bezier(0.65,0,0.35,1), box-shadow 0.45s ease; }
   .promo-card-inner { border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.07); position: relative; height: 100%; }
   .promo-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-  .promo-card--back { top: 0; right: 0; left: auto; transform: rotate(7deg); transform-origin: bottom right; z-index: 1; }
-  .promo-card--front { top: 130px; left: 0; right: auto; transform: rotate(-4deg); transform-origin: bottom left; z-index: 2; }
+  .promo-card--back { transform: translate(130px, -18px) rotate(7deg); z-index: 1; }
+  .promo-card--front { transform: translate(-16px, 120px) rotate(-4deg); z-index: 2; }
   .promo-card-panel { position: absolute; bottom: 10px; left: 10px; right: 10px; background: #fff; border-radius: 14px; padding: 12px 13px; box-shadow: 0 2px 12px rgba(0,0,0,0.12); z-index: 1; -webkit-mask-image: radial-gradient(circle 10px at 0% 68px, transparent 10px, white 10.5px), radial-gradient(circle 10px at 100% 68px, transparent 10px, white 10.5px), linear-gradient(white, white); -webkit-mask-composite: destination-in, destination-in; mask-image: radial-gradient(circle 10px at 0% 68px, transparent 10px, white 10.5px), radial-gradient(circle 10px at 100% 68px, transparent 10px, white 10.5px), linear-gradient(white, white); mask-composite: intersect, intersect; }
   .promo-card-top { display: flex; align-items: center; gap: 9px; padding: 0 0 10px; }
   .promo-card-logo { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid #E5E5E5; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 8.5px; font-weight: 800; font-style: italic; font-family: 'Arial Black', sans-serif; flex-shrink: 0; letter-spacing: -0.3px; }
@@ -989,7 +989,8 @@
     .promo-cards-bg { padding: 28px 12px; min-height: 320px; }
     .promo-cards-wrap { width: 100%; height: 340px; }
     .promo-card { width: clamp(180px, 62vw, 230px); height: 280px; }
-    .promo-card--front { top: 60px; }
+    .promo-card--back  { top: 0; left: 0; right: auto; transform: translate(26vw, -8px) rotate(6deg); }
+    .promo-card--front { top: 0; left: 0; right: auto; transform: translate(2vw, 32px) rotate(-4deg); }
   }
 
   /* ===== MOBILE GALLERY — vertical hanging timeline with photo labels (≤767px) =====
@@ -2608,24 +2609,93 @@
 <!-- ── PROMO CARD TOGGLE ──────────────────────────────────────────────── -->
 <script>
 (function () {
-  document.addEventListener('DOMContentLoaded', function () {
-    var cards = Array.from(document.querySelectorAll('.promo-card'));
-    cards.forEach(function (card) {
-      card.addEventListener('click', function () {
-        cards.forEach(function (c) {
-          if (c.classList.contains('promo-card--back')) {
-            c.style.zIndex = '3';
-            c.classList.remove('promo-card--back');
-            c.classList.add('promo-card--front');
-          } else {
-            c.classList.remove('promo-card--front');
-            c.classList.add('promo-card--back');
-            setTimeout(function () { c.style.zIndex = ''; }, 450);
-          }
-        });
-      });
+  const front = document.querySelector('.promo-card--front');
+  const back  = document.querySelector('.promo-card--back');
+
+  function getPos() {
+    const mobile = window.matchMedia('(max-width: 480px)').matches;
+    if (mobile) {
+      const vw = window.innerWidth;
+      const bx = Math.round(vw * 0.26);
+      const fx = Math.round(vw * 0.02);
+      const mx = Math.round(vw * 0.14);
+      return {
+        front:    `translate(${fx}px, 32px) rotate(-4deg) scale(1)`,
+        back:     `translate(${bx}px, -8px) rotate(6deg)  scale(1)`,
+        mid:      `translate(${mx}px, 14px) rotate(0deg)  scale(1.05)`,
+        reactMid: `translate(${bx + 4}px, 6px) rotate(4deg) scale(0.96)`
+      };
+    }
+    return {
+      front:    'translate(-16px, 120px) rotate(-4deg) scale(1)',
+      back:     'translate(130px, -18px) rotate(7deg)  scale(1)',
+      mid:      'translate(55px,  45px)  rotate(0deg)  scale(1.06)',
+      reactMid: 'translate(-4px, 132px)  rotate(-2deg) scale(0.96)'
+    };
+  }
+
+  let frontCard = front;
+  let backCard  = back;
+  let animating = false;
+
+  function setTransform(el, transform, z) {
+    el.style.transition = 'none';
+    el.style.transform  = transform;
+    if (z !== undefined) el.style.zIndex = z;
+  }
+
+  function animateTo(el, from, mid, to, duration, onDone) {
+    el.getAnimations().forEach(a => a.cancel());
+    const anim = el.animate(
+      [
+        { transform: from, easing: 'cubic-bezier(0.65,0,0.35,1)' },
+        { transform: mid,  easing: 'cubic-bezier(0.65,0,0.35,1)' },
+        { transform: to }
+      ],
+      { duration, fill: 'none' }
+    );
+    anim.onfinish = () => {
+      setTransform(el, to);
+      if (onDone) onDone();
+    };
+  }
+
+  function swap() {
+    if (animating) return;
+    animating = true;
+
+    const pos = getPos();
+    const movingCard   = frontCard;
+    const reactingCard = backCard;
+
+    reactingCard.style.zIndex = '1';
+    movingCard.style.zIndex   = '5';
+
+    animateTo(movingCard, pos.front, pos.mid, pos.back, 900, () => {
+      movingCard.style.zIndex = '1';
     });
+
+    animateTo(reactingCard, pos.back, pos.reactMid, pos.front, 900, () => {
+      reactingCard.style.zIndex = '2';
+      frontCard = reactingCard;
+      backCard  = movingCard;
+      animating = false;
+    });
+  }
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    if (animating) return;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      const pos = getPos();
+      setTransform(frontCard, pos.front, 2);
+      setTransform(backCard,  pos.back,  1);
+    }, 150);
   });
+
+  front.addEventListener('click', swap);
+  back.addEventListener('click',  swap);
 }());
 </script>
 
