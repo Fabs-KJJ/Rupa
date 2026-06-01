@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="page-title">Article — Rupa's Mall</title>
+<link rel="shortcut icon" href="Logos/assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="Logos/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="Logos/assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="Logos/assets/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="Logos/assets/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="Logos/assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@600;700&family=Bebas+Neue&family=Josefin+Sans:wght@200;300;400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FFFFFF;
+    --cream-warm: #FAF4E8;
+    --cream-dark: #F0F0F0;
+    --gold: #D8B045;
+    --gold-light: #E5C55A;
+    --gold-pale: #F2E4A8;
+    --brown: #281d02;
+    --brown-light: #4d3a14;
+    --text-muted: #808080;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  html { scroll-behavior: smooth; scrollbar-width: none; }
+  body { background: #281d02; font-family: 'Montserrat', sans-serif; color: var(--brown); overflow-x: hidden; }
+  ::-webkit-scrollbar { display: none; }
+  .page { background: var(--cream); border-radius: 24px; margin: 16px auto; max-width: 1600px; overflow: hidden; position: relative; box-shadow: 0 40px 120px rgba(0,0,0,0.6); }
+
+  /* ── Staggered Menu ── */
+  .staggered-menu-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 200; pointer-events: none; overflow: hidden; --sm-accent: var(--gold); }
+  .staggered-menu-header { position: absolute; top: 0; left: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 24px 40px; pointer-events: none; z-index: 220; }
+  .staggered-menu-header > * { pointer-events: auto; }
+  .sm-logo { display: flex; align-items: center; user-select: none; }
+  .sm-logo-img { display: block; height: 40px; width: auto; object-fit: contain; }
+  .sm-toggle { position: relative; display: inline-flex; align-items: center; gap: 14px; background: var(--gold); border: none; cursor: pointer; color: var(--brown); font-weight: 700; line-height: 1; padding: 8px 18px 8px 14px; border-radius: 100px; font-family: 'Montserrat', sans-serif; font-size: 16px; letter-spacing: 0.02em; transition: background 200ms, color 200ms; }
+  .sm-toggle:hover { background: var(--gold-light); }
+  .sm-toggle-textWrap { position: relative; display: inline-block; height: 1em; overflow: hidden; white-space: nowrap; }
+  .sm-toggle-textInner { display: flex; flex-direction: column; line-height: 1; }
+  .sm-toggle-line { display: block; height: 1em; line-height: 1; }
+  .sm-icon { position: relative; width: 20px; height: 20px; flex: 0 0 20px; display: inline-flex; align-items: center; justify-content: center; will-change: transform; }
+  .sm-icon-line { position: absolute; left: 50%; top: 50%; width: 100%; height: 3px; background: currentColor; border-radius: 3px; transform: translate(-50%,-50%); will-change: transform; }
+  .staggered-menu-panel { position: absolute; top: 0; right: 0; width: clamp(280px, 38vw, 440px); height: 100%; background: #FAF4E8; display: flex; flex-direction: column; padding: 110px 48px 40px; overflow-y: auto; z-index: 210; pointer-events: auto; opacity: 0; }
+  .sm-prelayers { position: absolute; top: 0; right: 0; bottom: 0; width: clamp(280px, 38vw, 440px); pointer-events: none; z-index: 205; opacity: 0; }
+  .sm-prelayer { position: absolute; top: 0; right: 0; height: 100%; width: 100%; transform: translateX(0); opacity: 0; }
+  .sm-panel-list { list-style: none; display: flex; flex-direction: column; gap: 4px; margin-bottom: 48px; }
+  .sm-panel-itemWrap { overflow: hidden; }
+  .sm-panel-item { display: block; font-family: 'Big Shoulders Display', sans-serif; font-size: clamp(32px, 4.5vw, 52px); font-weight: 700; letter-spacing: 1px; color: var(--brown); text-decoration: none; padding: 4px 0; line-height: 1.1; transition: color 200ms; transform: translateY(100%); will-change: transform; }
+  .sm-panel-item:hover { color: var(--gold); }
+  .sm-socials-title { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .sm-socials-list { list-style: none; display: flex; gap: 20px; }
+  .sm-socials-link { color: var(--brown); text-decoration: none; display: inline-flex; transition: color 200ms; }
+  .sm-socials-link:hover { color: var(--gold); }
+
+  /* ── ARTICLE HERO ── */
+  .article-hero { position: relative; height: 520px; overflow: hidden; }
+  .article-hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .article-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(40,29,2,0.1) 0%, rgba(40,29,2,0.65) 100%); }
+  .article-hero-meta { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 80px; }
+  .article-cat { display: inline-block; font-family: 'Josefin Sans', sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; background: var(--gold); color: white; padding: 5px 14px; border-radius: 100px; margin-bottom: 16px; }
+  .article-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 58px); font-weight: 600; color: white; line-height: 1.1; max-width: 800px; }
+  .article-date { font-family: 'Josefin Sans', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 14px; }
+
+  /* ── ARTICLE BODY ── */
+  .article-wrap { max-width: 760px; margin: 0 auto; padding: 64px 40px 80px; }
+  .article-back { display: inline-flex; align-items: center; gap: 8px; font-family: 'Josefin Sans', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 48px; transition: color 200ms; }
+  .article-back:hover { color: var(--gold); }
+  .article-back svg { width: 14px; height: 14px; }
+  .article-lead { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; line-height: 1.6; color: var(--brown); margin-bottom: 32px; }
+  .article-body p { font-size: 15px; font-weight: 400; line-height: 1.85; color: #444; margin-bottom: 24px; }
+  .article-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 600; color: var(--brown); margin: 40px 0 16px; }
+  .article-divider { border: none; border-top: 1px solid rgba(216,176,69,0.3); margin: 40px 0; }
+
+  /* ── NOT FOUND ── */
+  .not-found { text-align: center; padding: 120px 40px; }
+  .not-found h2 { font-family: 'Cormorant Garamond', serif; font-size: 40px; color: var(--brown); margin-bottom: 16px; }
+  .not-found p { color: var(--text-muted); margin-bottom: 32px; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--cream-dark); padding: 48px 0 0; }
+  .footer-top { max-width: 1200px; margin: 0 auto; padding: 0 60px 48px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 40px; }
+  .footer-address { font-size: 10px; letter-spacing: 1.5px; line-height: 2; text-transform: uppercase; color: var(--text-muted); }
+  .footer-logo-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+  .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: var(--text-muted); text-align: right; line-height: 1.6; max-width: 260px; margin-left: auto; }
+  .footer-socials { max-width: 1200px; margin: 0 auto; padding: 24px 60px; border-top: 1px solid rgba(200,131,10,0.2); display: flex; justify-content: center; align-items: center; gap: 32px; }
+  .social-link { display: inline-flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: color 200ms var(--ease-out); }
+  .social-link:hover { color: var(--gold); }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; padding: 20px 60px; border-top: 1px solid rgba(200,131,10,0.15); display: flex; align-items: center; justify-content: space-between; }
+  .footer-copy { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; color: var(--gold); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .article-hero { height: 380px; }
+    .article-hero-meta { padding: 28px 40px; }
+    .article-wrap { padding: 48px 40px 64px; }
+    .footer-top { padding: 0 40px 40px; }
+    .footer-socials { padding: 20px 40px; }
+    .footer-bottom { padding: 16px 40px; }
+  }
+  @media (max-width: 640px) {
+    .article-hero { height: 280px; }
+    .article-hero-meta { padding: 20px 24px; }
+    .article-wrap { padding: 36px 24px 56px; }
+    .page { margin: 0; border-radius: 0; }
+    .footer-top { padding: 0 20px 28px; grid-template-columns: 1fr auto; gap: 20px; }
+    .footer-tagline { display: none; }
+    .footer-socials { padding: 16px 20px; flex-wrap: wrap; gap: 14px; }
+    .footer-bottom { padding: 14px 20px; flex-wrap: wrap; gap: 8px; }
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdn.lordicon.com/lordicon.js"></script>
+</head>
+<body>
+
+<!-- STAGGERED MENU -->
+<div class="staggered-menu-wrapper" data-position="right">
+  <div class="sm-prelayers" aria-hidden="true">
+    <div class="sm-prelayer" style="background: var(--gold);"></div>
+    <div class="sm-prelayer" style="background: var(--brown);"></div>
+  </div>
+  <header class="staggered-menu-header" aria-label="Main navigation">
+    <a href="index.html" class="sm-logo" aria-label="Rupa's Mall">
+      <img src="Logos/assets/rupas-mall-logo-master.png" alt="Rupa's Mall" class="sm-logo-img" draggable="false" />
+    </a>
+    <button class="sm-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="staggered-menu-panel">
+      <span class="sm-toggle-textWrap" aria-hidden="true">
+        <span class="sm-toggle-textInner">
+          <span class="sm-toggle-line">Menu</span>
+        </span>
+      </span>
+      <span class="sm-icon" aria-hidden="true">
+        <span class="sm-icon-line"></span>
+        <span class="sm-icon-line sm-icon-line-v" style="transform:translate(-50%,-50%) rotate(90deg);"></span>
+      </span>
+    </button>
+  </header>
+  <aside id="staggered-menu-panel" class="staggered-menu-panel" aria-hidden="true">
+    <div class="sm-panel-inner">
+      <ul class="sm-panel-list" role="list" data-numbering>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html#top"     data-nav="home"   ><span class="sm-panel-itemLabel">Home</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="news.html"          data-nav="news"   ><span class="sm-panel-itemLabel">News</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="all-stores.html"    data-nav="stores" ><span class="sm-panel-itemLabel">Stores</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html#gallery" data-nav="gallery"><span class="sm-panel-itemLabel">Gallery</span></a></li>
+        <li class="sm-panel-itemWrap"><a class="sm-panel-item" href="index.html#footer"  data-nav="contact"><span class="sm-panel-itemLabel">Contact</span></a></li>
+      </ul>
+      <div class="sm-socials" aria-label="Social links">
+        <h3 class="sm-socials-title">Socials</h3>
+        <ul class="sm-socials-list">
+          <li><a href="#" class="sm-socials-link" aria-label="Instagram"><lord-icon src="https://cdn.lordicon.com/tgyvxauj.json" trigger="hover" stroke="bold" state="hover-rotate" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" class="sm-socials-link" aria-label="Facebook"><lord-icon src="https://cdn.lordicon.com/bfoumeno.json" trigger="hover" stroke="bold" state="hover-draw" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" class="sm-socials-link" aria-label="TikTok"><lord-icon src="https://cdn.lordicon.com/zmvgugmh.json" trigger="hover" stroke="bold" state="hover-dots" style="width:22px;height:22px"></lord-icon></a></li>
+          <li><a href="#" class="sm-socials-link" aria-label="Twitter / X"><lord-icon src="https://cdn.lordicon.com/yizwahhw.json" trigger="hover" stroke="bold" style="width:22px;height:22px"></lord-icon></a></li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+</div>
+<!-- /STAGGERED MENU -->
+
+<div class="page">
+  <div id="article-root"></div>
+
+  <footer>
+    <div class="footer-top">
+      <address class="footer-address" style="font-style:normal;">
+        Uganda Road<br>
+        Eldoret, Kenya<br>
+        +254 700 000 000<br>
+        info@rupasmall.com
+      </address>
+      <div class="footer-logo-center">
+<img src="Logos/assets/rupas-mall-logo-master.png" alt="Rupa's Mall" style="height:48px;margin-top:16px;object-fit:contain;" />
+      </div>
+      <p class="footer-tagline">Eldoret's premier destination for fashion, dining &amp; entertainment — all on Uganda Road.</p>
+    </div>
+    <div class="footer-socials">
+      <a href="#" class="social-link" aria-label="Instagram"><lord-icon src="https://cdn.lordicon.com/tgyvxauj.json" trigger="hover" stroke="bold" state="hover-rotate" style="width:20px;height:20px"></lord-icon></a>
+      <a href="#" class="social-link" aria-label="Facebook"><lord-icon src="https://cdn.lordicon.com/bfoumeno.json" trigger="hover" stroke="bold" state="hover-draw" style="width:20px;height:20px"></lord-icon></a>
+      <a href="#" class="social-link" aria-label="Twitter / X"><lord-icon src="https://cdn.lordicon.com/yizwahhw.json" trigger="hover" stroke="bold" style="width:20px;height:20px"></lord-icon></a>
+      <a href="#" class="social-link" aria-label="TikTok"><lord-icon src="https://cdn.lordicon.com/zmvgugmh.json" trigger="hover" stroke="bold" state="hover-dots" style="width:20px;height:20px"></lord-icon></a>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2025 Rupa's Mall. All rights reserved.</span>
+      <span class="footer-brand">RUPA'S</span>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+</div><!-- /page -->
+
+<script>
+/* ── Article data ── */
+var ARTICLES = {
+  'food-festival': {
+    cat: 'Events',
+    headline: "Rupa's Grand Food Festival",
+    date: 'June 6 – 22, 2025',
+    img: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80',
+    imgAlt: 'Grand Food Festival',
+    lead: "Three weekends of live cooking demos, tastings, and exclusive menus from every restaurant in our Food Court. Don't miss your favourite chefs live on stage.",
+    body: `
+      <p>Rupa's Mall is proud to announce its biggest culinary celebration yet — the Grand Food Festival, running across three full weekends from June 6th through June 22nd, 2025. Every restaurant in our vibrant Food Court will be participating, offering specially curated tasting menus, live cooking demonstrations, and behind-the-scenes access to the kitchens that feed Eldoret every day.</p>
+      <h3>What to Expect</h3>
+      <p>Each weekend will have its own theme: the opening weekend celebrates East African cuisine, with participating chefs preparing traditional dishes with a contemporary twist. The second weekend spotlights international flavours — from Korean BBQ to Italian wood-fired pizza — while the final weekend is a grand finale feast with a communal long-table dinner on Level 2.</p>
+      <p>Live stage performances will run every Saturday afternoon, featuring local musicians and food personalities. Children's cooking workshops are scheduled for Sunday mornings, giving young food lovers the chance to learn simple recipes under the guidance of our chefs.</p>
+      <h3>How to Join</h3>
+      <p>Entry to the festival grounds is completely free. Individual tasting sessions and workshop tickets are available at the Information Desk on Level 1 or directly from each restaurant. We recommend arriving early on weekends as spaces for popular sessions tend to fill up quickly.</p>
+      <p>Whether you're a seasoned foodie or simply looking for a great family day out, the Grand Food Festival promises something for everyone. We'll see you at the Food Court.</p>
+    `
+  },
+  'istore-level-3': {
+    cat: 'New Opening',
+    headline: 'iStore Now Open on Level 3',
+    date: 'May 1, 2025',
+    img: 'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=1200&q=80',
+    imgAlt: 'iStore Opening',
+    lead: "Eldoret's first dedicated Apple Premium Reseller has officially opened its doors. Experience the full Apple ecosystem — demos, workshops, and same-day repair service.",
+    body: `
+      <p>Eldoret has a new technology landmark. iStore, Kenya's leading Apple Premium Reseller, has officially opened its doors on Level 3 of Rupa's Mall — bringing the full Apple experience to the North Rift region for the very first time.</p>
+      <h3>Everything Apple, Under One Roof</h3>
+      <p>The store spans over 2,000 square feet of beautifully appointed retail space, designed to Apple's exacting global standards. Visitors will find the complete range of Apple products on display and available for purchase: iPhone, iPad, Mac, Apple Watch, AirPods, and all official accessories. Every device is available to try before you buy, with knowledgeable Genius-trained staff on hand to guide you.</p>
+      <p>One of the most anticipated features is the in-store repair centre. With Apple-certified technicians available six days a week, iStore offers same-day screen repairs and battery replacements for most iPhone and iPad models. No more sending your device to Nairobi — fast, professional Apple repairs are now available right here in Eldoret.</p>
+      <h3>Workshops & Business Support</h3>
+      <p>iStore will be running free Today at Apple-style workshops every Saturday morning, covering topics from iPhone photography to getting started with MacBook. Business customers can also book one-on-one consultations to explore how Apple devices can transform their workflows.</p>
+      <p>To celebrate the opening, iStore is offering complimentary screen protector fitting with every iPhone purchase throughout May. Visit them on Level 3, directly opposite the escalators.</p>
+    `
+  },
+  'art-culture-night': {
+    cat: 'Events',
+    headline: "Rupa's Mall Art & Culture Night",
+    date: 'June 28, 2025',
+    img: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1200&q=80',
+    imgAlt: 'Art & Culture Night',
+    lead: 'A free evening of live performances, local art installations, and poetry in the Events Hall. Celebrating the creative talent of Eldoret — open to all ages.',
+    body: `
+      <p>On Saturday 28th June, Rupa's Mall transforms into Eldoret's largest open gallery and performance venue. Art & Culture Night is a free-entry evening celebration of the extraordinary creative talent that calls the North Rift home — and everyone is invited.</p>
+      <h3>A Night of Live Art</h3>
+      <p>The Events Hall on Level 2 will host over twenty local visual artists, showcasing original paintings, photography, sculpture, and mixed-media installations. Works will be available to purchase directly from the artists, with a portion of proceeds going to the Uasin Gishu County Arts Education Fund.</p>
+      <p>The main stage will feature a carefully curated lineup of live performances throughout the evening — from spoken word poets and acoustic musicians to a headline set by one of Eldoret's most celebrated afro-fusion bands. The programme runs from 5 PM through to 10 PM, with performances beginning every forty-five minutes.</p>
+      <h3>For All Ages</h3>
+      <p>A dedicated Children's Art Corner will be open from 5 PM to 8 PM, where young visitors can create their own artwork with guidance from local art teachers. Families are warmly encouraged to attend the earlier part of the evening.</p>
+      <p>Food and drinks will be available from our Food Court outlets, which will remain open until 10:30 PM. Art & Culture Night is our way of giving back to the community that has made Rupa's Mall what it is today. We hope to see you there.</p>
+    `
+  },
+  'kids-family-weekend': {
+    cat: 'Events',
+    headline: 'Kids & Family Fun Weekend',
+    date: 'Every Saturday, June 2025',
+    img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=80',
+    imgAlt: 'Kids & Family Fun Weekend',
+    lead: "Every Saturday in June, the Kids & Play zone hosts face painting, bouncy castles, craft workshops, and live mascot appearances. Free entry for children under 12.",
+    body: `
+      <p>June at Rupa's Mall is all about families. Every Saturday throughout the month, our Kids & Play zone on Level 1 comes alive with a full day of activities designed to delight children of all ages — and keep parents smiling too.</p>
+      <h3>What's On Each Saturday</h3>
+      <p>The fun begins at 10 AM with face painting sessions run by professional face artists. From superheroes to safari animals, the designs change each week to keep things fresh. Alongside this, the bouncy castle and soft play area will be in full operation from opening until 6 PM, with dedicated time slots for toddlers (10 AM – 12 PM) and older children (12 PM – 6 PM).</p>
+      <p>Craft workshops run at 11 AM and 2 PM, each lasting approximately one hour. Children will make take-home creations — from decorated picture frames to hand-painted tote bags — guided by experienced workshop facilitators. Materials are provided and there's no need to book in advance.</p>
+      <h3>Mascot Appearances</h3>
+      <p>Each Saturday features a surprise mascot visit at 1 PM and 4 PM — a favourite moment for younger visitors. Photo opportunities with the mascot are free of charge.</p>
+      <p>Entry to all Kids & Family Fun Weekend activities is completely free for children under 12, accompanied by a paying adult. No tickets are required — simply make your way to the Kids & Play zone on Level 1 and join the fun. We look forward to welcoming your family every Saturday in June.</p>
+    `
+  },
+  'extended-hours': {
+    cat: 'Announcement',
+    headline: 'Extended Hours — Holiday Season',
+    date: 'June 1 – July 31, 2025',
+    img: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1200&q=80',
+    imgAlt: 'Extended Shopping Hours',
+    lead: "Rupa's Mall will remain open until 10 PM daily from June 1 through July 31. More time to shop, dine, and enjoy everything Eldoret's premier destination has to offer.",
+    body: `
+      <p>We know how valuable your time is — and we want to give you more of it. Starting June 1st and running through to July 31st, Rupa's Mall will extend its daily closing time to 10 PM. That's an extra hour every single day across two full months.</p>
+      <h3>New Opening Hours</h3>
+      <p>Monday through Saturday, the mall will be open from 9 AM to 10 PM. Sunday hours will be 10 AM to 9 PM. All stores, the Food Court, the Cinema, and the Events Hall will operate on these extended schedules throughout the holiday season period.</p>
+      <p>The extra hour in the evenings is particularly well-suited to after-work shopping, leisurely family dinners at the Food Court, or catching a late showing at the Cineplex. Parking remains free for all visitors, and our security team will be on duty throughout.</p>
+      <h3>Why Now?</h3>
+      <p>June and July mark the school holiday period, and we expect significantly higher footfall as families make the most of their time together. The extended hours ensure that whether you visit at lunchtime or in the early evening, you'll have ample time to explore everything Rupa's Mall has to offer without feeling rushed.</p>
+      <p>We'd like to thank every shopper, tenant, and member of our community for the continued support that makes expansions like this possible. See you soon — and stay a little longer.</p>
+    `
+  },
+  'miniso-opens': {
+    cat: 'New Opening',
+    headline: 'MINISO Opens — Level 1',
+    date: 'April 20, 2025',
+    img: 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=1200&q=80',
+    imgAlt: 'MINISO Store Opening',
+    lead: 'The globally loved lifestyle brand MINISO is now welcoming shoppers at Rupa\'s Mall. Discover playful, design-led products from homeware to beauty, toys and accessories.',
+    body: `
+      <p>One of the world's most beloved lifestyle brands has arrived in Eldoret. MINISO, the Japanese-inspired design retailer with over 5,000 stores in 100 countries, officially opened its doors at Rupa's Mall on Level 1 on April 20th — and the response from shoppers has been overwhelming.</p>
+      <h3>A Store Built for Discovery</h3>
+      <p>MINISO's retail philosophy is rooted in the joy of discovery. The store is laid out so that every visit surfaces something new — a quirky stationery set, a collaboratively designed plush toy, a beautifully packaged skincare line, or a clever kitchen gadget that somehow costs far less than you'd expect. The Eldoret store carries the brand's full range, including their popular IP collaboration collections featuring characters from globally recognised franchises.</p>
+      <p>The homeware section is particularly well-stocked, with storage solutions, aromatherapy diffusers, LED lighting, and kitchenware that combine thoughtful Japanese design aesthetics with everyday functionality. The beauty and personal care range is equally comprehensive, offering skincare, fragrance, and accessories at accessible price points.</p>
+      <h3>New Arrivals Every Week</h3>
+      <p>True to its global format, the Eldoret MINISO store will receive new product lines on a rolling weekly basis. Regulars will always find something fresh to explore. The store team has also confirmed that limited-edition collaboration collections — some of the brand's most sought-after products globally — will be stocked at the Rupa's Mall location.</p>
+      <p>MINISO is open daily during standard mall hours and is located on Level 1, near the main entrance. Whether you're shopping for a gift, treating yourself, or simply browsing, it's well worth a visit.</p>
+    `
+  }
+};
+
+/* ── Render ── */
+(function () {
+  var slug = new URLSearchParams(window.location.search).get('slug');
+  var root = document.getElementById('article-root');
+  var article = ARTICLES[slug];
+
+  if (!article) {
+    root.innerHTML = '<div class="not-found"><h2>Article not found.</h2><p>The page you\'re looking for doesn\'t exist.</p><a href="news.html" style="color:var(--gold)">← Back to News</a></div>';
+    return;
+  }
+
+  document.title = article.headline + " — Rupa's Mall";
+
+  root.innerHTML = `
+    <div id="top"></div>
+    <section class="article-hero">
+      <img class="article-hero-img" src="${article.img}" alt="${article.imgAlt}" />
+      <div class="article-hero-overlay"></div>
+      <div class="article-hero-meta">
+        <span class="article-cat">${article.cat}</span>
+        <h1 class="article-headline">${article.headline}</h1>
+        <p class="article-date">${article.date}</p>
+      </div>
+    </section>
+    <div class="article-wrap">
+      <a href="news.html" class="article-back">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3L5 8l5 5"/></svg>
+        Back to News
+      </a>
+      <p class="article-lead">${article.lead}</p>
+      <hr class="article-divider">
+      <div class="article-body">${article.body}</div>
+    </div>
+  `;
+}());
+</script>
+
+<script>
+/* ── Staggered menu ── */
+(function() {
+  const wrapper = document.querySelector('.staggered-menu-wrapper');
+  if (!wrapper || typeof gsap === 'undefined') return;
+  const position = wrapper.getAttribute('data-position') || 'right';
+  const panel = wrapper.querySelector('.staggered-menu-panel');
+  const preLayers = Array.from(wrapper.querySelectorAll('.sm-prelayer'));
+  const preContainer = wrapper.querySelector('.sm-prelayers');
+  const toggleBtn = wrapper.querySelector('.sm-toggle');
+  const icon = wrapper.querySelector('.sm-icon');
+  const plusH = wrapper.querySelector('.sm-icon-line:not(.sm-icon-line-v)');
+  const plusV = wrapper.querySelector('.sm-icon-line-v');
+  const textInner = wrapper.querySelector('.sm-toggle-textInner');
+  const itemEls = Array.from(wrapper.querySelectorAll('.sm-panel-itemLabel'));
+  const offscreen = position === 'left' ? -100 : 100;
+  let open = false, busy = false;
+
+  gsap.set(panel, { xPercent: offscreen, opacity: 1 });
+  gsap.set(preContainer, { opacity: 1 });
+  preLayers.forEach(l => gsap.set(l, { xPercent: offscreen, opacity: 1 }));
+  itemEls.forEach(el => gsap.set(el.parentElement, { y: '100%' }));
+
+  function openMenu() {
+    if (busy) return; busy = true; open = true;
+    wrapper.style.pointerEvents = 'auto';
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    panel.setAttribute('aria-hidden', 'false');
+    const tl = gsap.timeline({ onComplete: () => { busy = false; } });
+    preLayers.forEach((l, i) => {
+      tl.to(l, { xPercent: 0, duration: 0.32, ease: 'power3.out' }, i * 0.06);
+    });
+    tl.to(panel, { xPercent: 0, duration: 0.4, ease: 'power3.out' }, 0.08);
+    tl.to(itemEls.map(el => el.parentElement), { y: '0%', duration: 0.45, ease: 'power3.out', stagger: 0.055 }, 0.22);
+    gsap.to(plusV, { rotation: 45, transformOrigin: '50% 50%', duration: 0.3, ease: 'power2.out' });
+    gsap.to(plusH, { rotation: 45, transformOrigin: '50% 50%', duration: 0.3, ease: 'power2.out' });
+  }
+  function closeMenu() {
+    if (busy) return; busy = true; open = false;
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('aria-hidden', 'true');
+    const tl = gsap.timeline({ onComplete: () => { busy = false; wrapper.style.pointerEvents = 'none'; } });
+    tl.to(itemEls.map(el => el.parentElement), { y: '100%', duration: 0.3, ease: 'power2.in', stagger: 0.03 }, 0);
+    tl.to(panel, { xPercent: offscreen, duration: 0.38, ease: 'power3.in' }, 0.1);
+    preLayers.slice().reverse().forEach((l, i) => {
+      tl.to(l, { xPercent: offscreen, duration: 0.28, ease: 'power3.in' }, 0.15 + i * 0.05);
+    });
+    gsap.to(plusV, { rotation: 90, transformOrigin: '50% 50%', duration: 0.3, ease: 'power2.out' });
+    gsap.to(plusH, { rotation: 0, transformOrigin: '50% 50%', duration: 0.3, ease: 'power2.out' });
+  }
+  toggleBtn.addEventListener('click', () => open ? closeMenu() : openMenu());
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && open) closeMenu(); });
+}());
+</script>
+</body>
+</html>

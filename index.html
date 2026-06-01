@@ -347,7 +347,7 @@
   .footer-top { max-width: 1200px; margin: 0 auto; padding: 0 60px 48px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 40px; }
   .footer-address { font-size: 10px; letter-spacing: 1.5px; line-height: 2; text-transform: uppercase; color: var(--text-muted); }
   .footer-logo-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-  .back-to-top { width: 80px; height: 80px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column; cursor: pointer; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: white; text-align: center; line-height: 1.4; text-decoration: none; transition: transform 200ms var(--ease-out), background 200ms var(--ease-out); }
+
   .footer-tagline { font-family: 'Cormorant Garamond', serif; font-size: 13px; font-style: italic; color: var(--text-muted); text-align: right; line-height: 1.6; max-width: 260px; margin-left: auto; }
   .footer-socials { max-width: 1200px; margin: 0 auto; padding: 24px 60px; border-top: 1px solid rgba(200,131,10,0.2); display: flex; justify-content: center; align-items: center; gap: 32px; }
   .social-link { display: inline-flex; align-items: center; justify-content: center; color: var(--text-muted); text-decoration: none; transition: color 200ms var(--ease-out); }
@@ -391,7 +391,7 @@
     .store-card:hover img { transform: scale(1.05); }
     .brand-item:hover .bl { opacity: 0.85; }
     /* hover on polaroids removed — scroll-based animation instead */
-    .back-to-top:hover { background: var(--gold-light); transform: translateY(-4px); }
+
     .social-link:hover { color: var(--gold); }
     .footer-legal a:hover { color: var(--gold); }
     .store-tile:hover img { filter: brightness(0.45); transform: scale(1.04); }
@@ -407,7 +407,7 @@
 
   /* ===== ACTIVE / PRESS STATES ===== */
   .pill-btn:active { transform: scale(0.97); }
-  .back-to-top:active { transform: scale(0.95); }
+
   .store-card:active { transform: scale(0.98); }
   .benefit-item:active { transform: scale(0.99); }
   .nav-hamburger:active span { opacity: 0.6; }
@@ -430,8 +430,8 @@
     .visit-chips-row:nth-child(2) .visit-chips-track,
     .visit-chips-row:nth-child(3) .visit-chips-track { animation: none; }
     .store-tile img { transition: opacity 200ms ease; }
-    .pill-btn, .benefit-item, .store-card, .back-to-top { transition: opacity 200ms ease; }
-    .pill-btn:active, .back-to-top:active, .store-card:active { transform: none; }
+    .pill-btn, .benefit-item, .store-card { transition: opacity 200ms ease; }
+    .pill-btn:active, .store-card:active { transform: none; }
     .nav-links.open li { animation: none; opacity: 1; }
     .nav-hamburger span { transition: opacity 200ms ease; }
   }
