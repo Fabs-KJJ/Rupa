@@ -10,3 +10,10 @@ desktop.ini
 
 # Logs
 *.log
+
+# Database — contains live user data, never commit
+enquiries.db
+
+# Python
+__pycache__/
+*.pyc

@@ -7,6 +7,12 @@
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 <title>Rupa's Mall — Eldoret's Premier Destination</title>
+<link rel="shortcut icon" href="Logos/assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="Logos/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="Logos/assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="Logos/assets/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="Logos/assets/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="Logos/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@600;700&family=Bebas+Neue&family=Josefin+Sans:wght@200;300;400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -764,10 +770,10 @@
   .promo-section { padding: 0; background: transparent; }
   .promo-wrap { background: #FAF4E8; border-radius: 0; margin: 0; padding: 64px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
   .promo-title { font-family: 'Big Shoulders Display', sans-serif; font-size: clamp(30px,3.8vw,52px); font-weight: 800; color: var(--brown); line-height: 1.1; margin-bottom: 20px; }
-  .promo-sub { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 36px; font-family: 'Montserrat', sans-serif; max-width: 420px; }
+  .promo-sub { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 36px; font-family: 'Montserrat', sans-serif; max-width: 420px; font-weight: 500; }
   .promo-features { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 40px; }
   .promo-feature-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px; color: var(--brown); margin-bottom: 8px; }
-  .promo-feature-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; font-family: 'Montserrat', sans-serif; }
+  .promo-feature-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; font-family: 'Montserrat', sans-serif; font-weight: 500; }
   .promo-btns { display: flex; gap: 12px; }
   .promo-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; padding: 13px 32px; font-size: 14px; font-weight: 600; font-family: 'Montserrat', sans-serif; cursor: pointer; text-decoration: none; overflow: hidden; outline: none; -webkit-tap-highlight-color: transparent; }
   .promo-btn--primary { background: var(--gold); color: #fff; border: 2px solid var(--gold); }
@@ -1765,18 +1771,18 @@
         </div>
       </div>
       <div class="reveal reveal-delay-1">
-        <div class="contact-fields">
+        <div class="contact-fields" id="contact-form">
           <div class="contact-field">
             <label>Your Name</label>
-            <input type="text" placeholder="e.g. Jane Wanjiku" />
+            <input id="cf-name" type="text" placeholder="e.g. Jane Wanjiku" />
           </div>
           <div class="contact-field">
             <label>Email Address</label>
-            <input type="email" placeholder="jane@email.com" />
+            <input id="cf-email" type="email" placeholder="jane@email.com" />
           </div>
           <div class="contact-field">
             <label>Enquiry Type</label>
-            <select>
+            <select id="cf-type">
               <option>General Enquiry</option>
               <option>Leasing / Business</option>
               <option>Events &amp; Activations</option>
@@ -1785,13 +1791,17 @@
           </div>
           <div class="contact-field">
             <label>Message</label>
-            <textarea placeholder="Tell us how we can help&#8230;"></textarea>
+            <textarea id="cf-message" placeholder="Tell us how we can help&#8230;"></textarea>
           </div>
+          <div id="cf-error" style="font-size:12px;color:#c0392b;display:none;margin-top:-8px"></div>
           <div class="contact-form-footer">
             <label class="checkbox-label">
-              <input type="checkbox" /> I agree with the privacy policy
+              <input id="cf-agree" type="checkbox" /> I agree with the privacy policy
             </label>
-            <a href="#" class="pill-btn">Send Message <span class="pill-icon">&#8599;</span></a>
+            <button id="cf-submit" type="button" class="pill-btn" style="border:none;cursor:pointer">Send Message <span class="pill-icon">&#8599;</span></button>
+          </div>
+          <div id="cf-success" style="display:none;padding:16px;background:#f0faf0;border-radius:8px;font-family:'Josefin Sans',sans-serif;font-size:12px;letter-spacing:1px;color:#2d7a2d;text-align:center">
+            MESSAGE SENT — WE'LL BE IN TOUCH SOON.
           </div>
         </div>
       </div>
@@ -2858,6 +2868,59 @@
       }
     });
   })();
+</script>
+
+<script>
+(function () {
+  var btn = document.getElementById('cf-submit');
+  if (!btn) return;
+  btn.addEventListener('click', async function () {
+    var name    = document.getElementById('cf-name').value.trim();
+    var email   = document.getElementById('cf-email').value.trim();
+    var type    = document.getElementById('cf-type').value;
+    var message = document.getElementById('cf-message').value.trim();
+    var agree   = document.getElementById('cf-agree').checked;
+    var err     = document.getElementById('cf-error');
+
+    err.style.display = 'none';
+    if (!name || !email || !message) {
+      err.textContent = 'Please fill in all fields.';
+      err.style.display = 'block';
+      return;
+    }
+    if (!agree) {
+      err.textContent = 'Please agree to the privacy policy.';
+      err.style.display = 'block';
+      return;
+    }
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      var res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, email: email, enquiry_type: type, message: message })
+      });
+      var data = await res.json();
+      if (data.success) {
+        document.getElementById('contact-form').style.opacity = '0.4';
+        document.getElementById('cf-success').style.display = 'block';
+      } else {
+        err.textContent = data.error || 'Something went wrong. Please try again.';
+        err.style.display = 'block';
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+      }
+    } catch (e) {
+      err.textContent = 'Could not send message. Please try again.';
+      err.style.display = 'block';
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+    }
+  });
+})();
 </script>
 
 </body>

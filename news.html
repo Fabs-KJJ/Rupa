@@ -4,6 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>News &amp; Events — Rupa's Mall · Eldoret</title>
+<link rel="shortcut icon" href="Logos/assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="Logos/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="Logos/assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="Logos/assets/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="Logos/assets/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="Logos/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@600;700&family=Bebas+Neue&family=Josefin+Sans:wght@200;300;400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -107,7 +113,7 @@
   .news-card:hover .news-card-img img { transform: scale(1.06); }
   .news-card-body { padding: 28px 28px 32px; }
   .news-card-headline { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--brown); line-height: 1.25; margin: 12px 0 10px; }
-  .news-card-excerpt { font-size: 12px; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+  .news-card-excerpt { font-size: 12px; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; font-weight: 500; }
   .news-card-meta { display: flex; align-items: center; justify-content: space-between; }
   .news-card-date { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
   .news-card-arrow { width: 32px; height: 32px; border-radius: 50%; background: var(--gold-pale); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--gold); transition: background 200ms var(--ease-out); }
@@ -379,10 +385,11 @@
       <span class="newsletter-eyebrow">Stay in the loop</span>
       <div class="newsletter-title">Get the latest news<br>straight to your inbox.</div>
     </div>
-    <form class="newsletter-form" onsubmit="return false;">
-      <input class="newsletter-input" type="email" placeholder="Your email address" />
-      <button class="newsletter-submit" type="submit">Subscribe</button>
+    <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
+      <input class="newsletter-input" id="nl-email" type="email" placeholder="Your email address" />
+      <button class="newsletter-submit" id="nl-submit" type="submit">Subscribe</button>
     </form>
+    <div id="nl-msg" style="display:none;margin-top:12px;font-family:'Josefin Sans',sans-serif;font-size:11px;letter-spacing:1.5px"></div>
   </div>
 
   <!-- FOOTER -->
@@ -563,6 +570,55 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   els.forEach(el => io.observe(el));
+}());
+</script>
+
+<script>
+(function () {
+  var form = document.getElementById('newsletter-form');
+  if (!form) return;
+  form.addEventListener('submit', async function () {
+    var email = document.getElementById('nl-email').value.trim();
+    var btn   = document.getElementById('nl-submit');
+    var msg   = document.getElementById('nl-msg');
+
+    msg.style.display = 'none';
+    if (!email) return;
+
+    btn.textContent = '…';
+    btn.disabled = true;
+
+    try {
+      var res  = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      });
+      var data = await res.json();
+      if (data.success) {
+        msg.style.color = '#d8b045';
+        msg.textContent = 'YOU\'RE SUBSCRIBED — THANK YOU!';
+        form.style.display = 'none';
+      } else if (data.already) {
+        msg.style.color = 'rgba(255,255,255,0.5)';
+        msg.textContent = 'ALREADY SUBSCRIBED.';
+        btn.textContent = 'Subscribe';
+        btn.disabled = false;
+      } else {
+        msg.style.color = '#e07a7a';
+        msg.textContent = data.error || 'SOMETHING WENT WRONG. TRY AGAIN.';
+        btn.textContent = 'Subscribe';
+        btn.disabled = false;
+      }
+      msg.style.display = 'block';
+    } catch (e) {
+      msg.style.color = '#e07a7a';
+      msg.textContent = 'COULD NOT SUBSCRIBE. PLEASE TRY AGAIN.';
+      msg.style.display = 'block';
+      btn.textContent = 'Subscribe';
+      btn.disabled = false;
+    }
+  });
 }());
 </script>
 </body>
