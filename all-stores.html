@@ -1,9 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>All Stores — Rupa's Mall · Eldoret</title>
+<link rel="shortcut icon" href="Logos/assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="32x32" href="Logos/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="Logos/assets/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="Logos/assets/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="Logos/assets/favicon-512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="Logos/assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@600;700&family=Bebas+Neue&family=Josefin+Sans:wght@200;300;400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -65,7 +71,7 @@
     .sm-panel-item { font-size: clamp(36px, 9vw, 56px); }
   }
   /* ── Store hours ── */
-  .store-hours { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-top: 4px; }
+  .store-hours { font-family: 'Josefin Sans', sans-serif; font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-top: 3px; }
 
   /* ── HERO ── */
   .hero { background: var(--brown); padding: 160px 60px 0; overflow: hidden; position: relative; }
@@ -97,17 +103,18 @@
   .floor-label { font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 5px; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 16px; }
   .floor-label::after { content: ''; flex: 1; height: 1px; background: rgba(200,131,10,0.15); }
   .stores-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  .store-card { border-radius: 16px; overflow: hidden; position: relative; aspect-ratio: 3/4; cursor: pointer; }
-  .store-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 380ms var(--ease-out); }
-  .store-card-overlay { position: absolute; inset: 0; background: linear-gradient(160deg, transparent 45%, rgba(40,29,2,0.86) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 24px 20px 20px; }
-  .cat-tag { font-family: 'Josefin Sans', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; background: var(--gold); color: white; padding: 4px 10px; border-radius: 100px; display: inline-block; margin-bottom: 10px; width: fit-content; }
-  .store-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: white; line-height: 1.1; margin-bottom: 6px; }
-  .store-floor { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 5px; }
+  .store-card { border-radius: 10px; overflow: hidden; position: relative; aspect-ratio: 3/4; cursor: pointer; }
+  .store-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 500ms var(--ease-out); }
+  .store-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, oklch(12% 0.03 55 / 0.96) 0%, oklch(12% 0.03 55 / 0.52) 38%, transparent 62%); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 18px 20px; }
+  .cat-tag { font-family: 'Josefin Sans', sans-serif; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); background: none; border-radius: 0; padding: 0 0 9px; margin-bottom: 9px; border-bottom: 1px solid oklch(75% 0.12 68 / 0.28); display: block; width: 100%; }
+  .store-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; font-style: italic; color: white; line-height: 1.05; margin-bottom: 7px; letter-spacing: 0.01em; }
+  .store-floor { font-family: 'Josefin Sans', sans-serif; font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.52); }
+  .cat-tag, .store-name, .store-floor, .store-hours { transform: translateY(0); transition: transform 440ms var(--ease-out); }
   /* new badge */
-  .store-new { position: absolute; top: 14px; right: 14px; background: var(--gold); color: white; font-family: 'Josefin Sans', sans-serif; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
+  .store-new { position: absolute; top: 12px; right: 12px; background: var(--gold); color: white; font-family: 'Josefin Sans', sans-serif; font-size: 8px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; }
   /* hidden state */
   .store-card.is-hidden { display: none; }
-  @media (hover: hover) { .store-card:hover img { transform: scale(1.06); } }
+  @media (hover: hover) { .store-card:hover img { transform: scale(1.05); } .store-card:hover .cat-tag, .store-card:hover .store-name, .store-card:hover .store-floor { transform: translateY(-5px); } }
 
   /* ── BACK BANNER ── */
   .back-banner { background: var(--brown); padding: 64px 60px; display: flex; align-items: center; justify-content: space-between; gap: 32px; }
@@ -274,7 +281,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Supermarket</span>
             <div class="store-name">Naivas</div>
-            <div class="store-floor">&#128205; Ground Floor · Main Entrance</div>
+            <div class="store-floor">Ground Floor · Main Entrance</div>
           </div>
         </div>
 
@@ -283,7 +290,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Java House</div>
-            <div class="store-floor">&#128205; Ground Floor · Atrium</div>
+            <div class="store-floor">Ground Floor · Atrium</div>
           </div>
         </div>
 
@@ -292,7 +299,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Artcaffe</div>
-            <div class="store-floor">&#128205; Ground Floor · East Wing</div>
+            <div class="store-floor">Ground Floor · East Wing</div>
           </div>
         </div>
 
@@ -301,7 +308,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Electronics</span>
             <div class="store-name">Safaricom</div>
-            <div class="store-floor">&#128205; Ground Floor · Wing A</div>
+            <div class="store-floor">Ground Floor · Wing A</div>
           </div>
         </div>
 
@@ -310,7 +317,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Electronics</span>
             <div class="store-name">Phone House</div>
-            <div class="store-floor">&#128205; Ground Floor · Wing B</div>
+            <div class="store-floor">Ground Floor · Wing B</div>
           </div>
         </div>
 
@@ -319,7 +326,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Services</span>
             <div class="store-name">Equity Bank</div>
-            <div class="store-floor">&#128205; Ground Floor · South Wing</div>
+            <div class="store-floor">Ground Floor · South Wing</div>
           </div>
         </div>
 
@@ -328,7 +335,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Services</span>
             <div class="store-name">KCB Bank</div>
-            <div class="store-floor">&#128205; Ground Floor · South Wing</div>
+            <div class="store-floor">Ground Floor · South Wing</div>
           </div>
         </div>
 
@@ -337,7 +344,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Services</span>
             <div class="store-name">NCBA Bank</div>
-            <div class="store-floor">&#128205; Ground Floor · South Wing</div>
+            <div class="store-floor">Ground Floor · South Wing</div>
           </div>
         </div>
 
@@ -346,7 +353,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Services</span>
             <div class="store-name">Co-op Bank</div>
-            <div class="store-floor">&#128205; Ground Floor · West Wing</div>
+            <div class="store-floor">Ground Floor · West Wing</div>
           </div>
         </div>
 
@@ -363,7 +370,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Nike</div>
-            <div class="store-floor">&#128205; Level 1 · Wing A</div>
+            <div class="store-floor">Level 1 · Wing A</div>
           </div>
         </div>
 
@@ -372,7 +379,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Adidas</div>
-            <div class="store-floor">&#128205; Level 1 · Wing A</div>
+            <div class="store-floor">Level 1 · Wing A</div>
           </div>
         </div>
 
@@ -381,7 +388,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Zara</div>
-            <div class="store-floor">&#128205; Level 1 · Wing B</div>
+            <div class="store-floor">Level 1 · Wing B</div>
           </div>
         </div>
 
@@ -390,7 +397,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">H&amp;M</div>
-            <div class="store-floor">&#128205; Level 1 · Wing B</div>
+            <div class="store-floor">Level 1 · Wing B</div>
           </div>
         </div>
 
@@ -399,7 +406,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Levi's</div>
-            <div class="store-floor">&#128205; Level 1 · Wing C</div>
+            <div class="store-floor">Level 1 · Wing C</div>
           </div>
         </div>
 
@@ -408,7 +415,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Woolworths</div>
-            <div class="store-floor">&#128205; Level 1 · Wing C</div>
+            <div class="store-floor">Level 1 · Wing C</div>
           </div>
         </div>
 
@@ -417,7 +424,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Beauty</span>
             <div class="store-name">The Body Shop</div>
-            <div class="store-floor">&#128205; Level 1 · Wing A</div>
+            <div class="store-floor">Level 1 · Wing A</div>
           </div>
         </div>
 
@@ -426,7 +433,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Beauty</span>
             <div class="store-name">Inglot</div>
-            <div class="store-floor">&#128205; Level 1 · Wing B</div>
+            <div class="store-floor">Level 1 · Wing B</div>
           </div>
         </div>
 
@@ -435,7 +442,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Beauty</span>
             <div class="store-name">MAC Cosmetics</div>
-            <div class="store-floor">&#128205; Level 1 · Wing B</div>
+            <div class="store-floor">Level 1 · Wing B</div>
           </div>
         </div>
 
@@ -444,7 +451,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Electronics</span>
             <div class="store-name">Samsung</div>
-            <div class="store-floor">&#128205; Level 1 · Wing D</div>
+            <div class="store-floor">Level 1 · Wing D</div>
           </div>
         </div>
 
@@ -453,7 +460,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Electronics</span>
             <div class="store-name">Huawei</div>
-            <div class="store-floor">&#128205; Level 1 · Wing D</div>
+            <div class="store-floor">Level 1 · Wing D</div>
           </div>
         </div>
 
@@ -462,7 +469,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Electronics</span>
             <div class="store-name">iStore</div>
-            <div class="store-floor">&#128205; Level 1 · Wing D</div>
+            <div class="store-floor">Level 1 · Wing D</div>
           </div>
           <div class="store-new">New</div>
         </div>
@@ -480,7 +487,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Mr Price</div>
-            <div class="store-floor">&#128205; Level 2 · Wing A</div>
+            <div class="store-floor">Level 2 · Wing A</div>
           </div>
         </div>
 
@@ -489,7 +496,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Truworths</div>
-            <div class="store-floor">&#128205; Level 2 · Wing B</div>
+            <div class="store-floor">Level 2 · Wing B</div>
           </div>
         </div>
 
@@ -498,7 +505,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Cotton On</div>
-            <div class="store-floor">&#128205; Level 2 · Wing A</div>
+            <div class="store-floor">Level 2 · Wing A</div>
           </div>
         </div>
 
@@ -507,7 +514,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Fashion</span>
             <div class="store-name">Ackermans</div>
-            <div class="store-floor">&#128205; Level 2 · Wing C</div>
+            <div class="store-floor">Level 2 · Wing C</div>
           </div>
         </div>
 
@@ -516,7 +523,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Supermarket</span>
             <div class="store-name">Quickmart</div>
-            <div class="store-floor">&#128205; Level 2 · East Wing</div>
+            <div class="store-floor">Level 2 · East Wing</div>
           </div>
         </div>
 
@@ -525,7 +532,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Supermarket</span>
             <div class="store-name">Carrefour Express</div>
-            <div class="store-floor">&#128205; Level 2 · West Wing</div>
+            <div class="store-floor">Level 2 · West Wing</div>
           </div>
           <div class="store-new">New</div>
         </div>
@@ -535,7 +542,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">KFC</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
         </div>
 
@@ -544,7 +551,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Pizza Inn</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
         </div>
 
@@ -553,7 +560,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Subway</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
         </div>
 
@@ -562,7 +569,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Steers</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
         </div>
 
@@ -571,7 +578,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Nando's</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
         </div>
 
@@ -580,7 +587,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Debonairs</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
         </div>
 
@@ -589,7 +596,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Burger King</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
           <div class="store-new">New</div>
         </div>
@@ -599,7 +606,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Cold Stone</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
         </div>
 
@@ -608,7 +615,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Food &amp; Dining</span>
             <div class="store-name">Creamy Inn</div>
-            <div class="store-floor">&#128205; Level 2 · Food Court</div>
+            <div class="store-floor">Level 2 · Food Court</div>
           </div>
         </div>
 
@@ -617,7 +624,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Beauty</span>
             <div class="store-name">Nail Bar &amp; Spa</div>
-            <div class="store-floor">&#128205; Level 2 · Wing B</div>
+            <div class="store-floor">Level 2 · Wing B</div>
           </div>
         </div>
 
@@ -634,7 +641,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Entertainment</span>
             <div class="store-name">Cineplex</div>
-            <div class="store-floor">&#128205; Level 3 · North Wing</div>
+            <div class="store-floor">Level 3 · North Wing</div>
           </div>
         </div>
 
@@ -643,7 +650,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Entertainment</span>
             <div class="store-name">Timezone</div>
-            <div class="store-floor">&#128205; Level 3 · Central</div>
+            <div class="store-floor">Level 3 · Central</div>
           </div>
         </div>
 
@@ -652,7 +659,7 @@
           <div class="store-card-overlay">
             <span class="cat-tag">Entertainment</span>
             <div class="store-name">Kids Zone</div>
-            <div class="store-floor">&#128205; Level 3 · East Wing</div>
+            <div class="store-floor">Level 3 · East Wing</div>
           </div>
         </div>
 
@@ -798,7 +805,7 @@
       if (floorEl) {
         var el = document.createElement('div');
         el.className = 'store-hours';
-        el.textContent = '⏰ ' + hours;
+        el.textContent = hours;
         floorEl.insertAdjacentElement('afterend', el);
       }
     });
