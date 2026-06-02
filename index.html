@@ -2844,11 +2844,13 @@
   }
 })();
 
-  /* ── ScrollFloat: FEATURED STORES title ── */
+  /* ── SplitText entrance (vanilla port of React Bits <SplitText/>) — FEATURED STORES title ── */
   (function () {
     gsap.registerPlugin(ScrollTrigger);
     var el = document.getElementById('featured-stores-title');
     if (!el) return;
+
+    // Split into lines + chars (keeps the two-line FEATURED / STORES layout)
     var lines = ['FEATURED', 'STORES'];
     el.innerHTML = lines.map(function (line) {
       var chars = line.split('').map(function (ch) {
@@ -2856,27 +2858,54 @@
       }).join('');
       return '<span class="scroll-float-line">' + chars + '</span>';
     }).join('');
-    gsap.fromTo(el.querySelectorAll('.scroll-float-char'), {
-      opacity: 0,
-      yPercent: 120,
-      scaleY: 2.3,
-      scaleX: 0.7,
-      transformOrigin: '50% 0%'
-    }, {
-      duration: 1,
-      ease: 'back.inOut(2)',
-      opacity: 1,
-      yPercent: 0,
-      scaleY: 1,
-      scaleX: 1,
-      stagger: 0.03,
-      scrollTrigger: {
-        trigger: el,
-        start: 'center bottom+=50%',
-        end: 'bottom bottom-=40%',
-        scrub: true
-      }
-    });
+    var charEls = el.querySelectorAll('.scroll-float-char');
+
+    // SplitText defaults (matches the React component's props)
+    var from = { opacity: 0, y: 40 };
+    var to = { opacity: 1, y: 0 };
+    var duration = 1.25;
+    var ease = 'power3.out';
+    var delay = 50;            // ms between each char (stagger)
+    var threshold = 0.1;
+    var rootMargin = '-100px';
+
+    // Respect reduced-motion: show the text, skip the animation
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(charEls, to);
+      return;
+    }
+
+    // Build ScrollTrigger start from threshold + rootMargin (same math as the component)
+    var startPct = (1 - threshold) * 100;
+    var m = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
+    var mv = m ? parseFloat(m[1]) : 0;
+    var mu = m ? (m[2] || 'px') : 'px';
+    var sign = mv === 0 ? '' : (mv < 0 ? '-=' + Math.abs(mv) + mu : '+=' + mv + mu);
+    var start = 'top ' + startPct + '%' + sign;
+
+    function run() {
+      gsap.fromTo(charEls, from, {
+        opacity: to.opacity,
+        y: to.y,
+        duration: duration,
+        ease: ease,
+        stagger: delay / 1000,
+        force3D: true,
+        scrollTrigger: {
+          trigger: el,
+          start: start,
+          once: true,
+          fastScrollEnd: true
+        }
+      });
+    }
+
+    // Wait for fonts so the split measures at final widths (avoids a reflow jump)
+    if (document.fonts && document.fonts.status !== 'loaded') {
+      document.fonts.ready.then(run);
+    } else {
+      run();
+    }
   })();
 </script>
 
